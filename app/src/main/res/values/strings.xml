@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AgentTagging</string>
+    <string name="loginonly">Agents Login only</string>
+    <string name="username">USERNAME</string>
+    <string name="password">PASSWORD</string>
+    <string name="passwordRem">Remember Password</string>
+    <string name="login">Login</string>
+    <string name="passwordForget">Forget Password?</string>
+</resources>
