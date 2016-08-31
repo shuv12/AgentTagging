@@ -6,4 +6,13 @@
     <string name="passwordRem">Remember Password</string>
     <string name="login">Login</string>
     <string name="passwordForget">Forget Password?</string>
+    <string name="property_headline">55 Strathmore Avenue</string>
+    <string name="property_address">30 Kelatan Road</string>
+    <string name="property_type">Apartment</string>
+    <string name="property_owner">SumanJung</string>
+    <string name="quicksearch">Quick Search</string>
+    <string name="searchHint">Search by agent,property,location etc</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

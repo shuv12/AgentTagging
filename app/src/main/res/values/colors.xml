@@ -3,5 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="light_grey">#e0e0e0</color>
+    <color name="editbox">#d3dce3</color>
+    <color name="listingback">#f1feff</color>
+    <color name="editboxtext">#72777a</color>
+    <color name="green_back">#3ec6bf</color>
+    <color name="green_back1">#83c450</color>
+    <color name="textmain">#475767</color>
+    <color name="primary">#3e4959</color>
+    <color name="location">#72777a</color>
+    <color name="cancelbuttoncolor">#89fafafa</color>
+    <color name="dark_blue">#3ec6bf</color>
 </resources>
