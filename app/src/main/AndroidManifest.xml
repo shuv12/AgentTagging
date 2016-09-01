@@ -30,7 +30,6 @@
         <activity
             android:name=".Home"
             android:theme="@style/AppTheme.noTheme" />
-        <activity android:name=".Quick"></activity>
     </application>
 
 </manifest>

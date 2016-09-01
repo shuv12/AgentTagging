@@ -1,7 +1,7 @@
 package app.com.example.android.agenttagging;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +16,7 @@ import app.com.example.android.agenttagging.model.PropertyModel;
 
 public class Home extends AppCompatActivity {
 
+    private boolean quickopen = false;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyModel> propertyModelList;
@@ -49,26 +50,100 @@ public class Home extends AppCompatActivity {
         final PropertyAdapter propertyAdapter = new PropertyAdapter(getApplicationContext(), this.propertyModelList);
         recyclerView.setAdapter(propertyAdapter);
         recyclerView.setLayoutManager(layoutManager);
+        //FrameLayout recycleFrame = (FrameLayout) findViewById(R.id.recycleframe);
 
 
-        LinearLayout quick = (LinearLayout) findViewById(R.id.quicksearch);
+
+        //final Fragment QuickSearchFragment = getSupportFragmentManager().findFragmentById(R.id.fragent_quick_search);
+
+        /*recycleFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quickopen == true){
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    QuickSearch obj = (QuickSearch)getSupportFragmentManager().findFragmentById(R.id.quicksearch_placeholder);
+                    ft.hide(obj);
+                    ft.commit();
+                    quickopen = false;
+                }
+            }
+        });*/
+
+
+
+        final LinearLayout quick = (LinearLayout) findViewById(R.id.quicksearch);
         quick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Quick.class);
-                startActivity(intent);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                if (quickopen == false){
+                    ft.replace(R.id.quicksearch_placeholder, new QuickSearch(),"tag");
+                    ft.commit();
+                    quickopen = true;
+                }
+                else{
+                    QuickSearch obj = (QuickSearch)getSupportFragmentManager().findFragmentById(R.id.quicksearch_placeholder);
+                    ft.hide(obj);
+                    ft.commit();
+                    quickopen = false;
+                }
+
             }
         });
 
-       /* LinearLayout quick = (LinearLayout) findViewById(R.id.quicksearch);
-        quick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.quicksearchfrag, new QuickSearch()).commit();
-            }
-        });
-    */
     }
+
+    /*public static void expand(final View v) {
+        v.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        final int targetHeight = v.getMeasuredHeight();
+
+        // Older versions of android (pre API 21) cancel animations for views with a height of 0.
+        v.getLayoutParams().height = 1;
+        v.setVisibility(View.VISIBLE);
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                v.getLayoutParams().height = interpolatedTime == 1
+                        ? LinearLayout.LayoutParams.WRAP_CONTENT
+                        : (int)(targetHeight * interpolatedTime);
+                v.requestLayout();
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // 1dp/ms
+        a.setDuration((int)(targetHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
+
+    public static void collapse(final View v) {
+        final int initialHeight = v.getMeasuredHeight();
+
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if(interpolatedTime == 1){
+                    v.setVisibility(View.GONE);
+                }else{
+                    v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // 1dp/ms
+        a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }*/
 }

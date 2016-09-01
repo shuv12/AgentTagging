@@ -55,16 +55,17 @@
             android:text="@string/quicksearch"
             android:textColor="@android:color/white"/>
     </LinearLayout>
-
-    <!--<fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/quicksearchfrag"
-        android:name="app.com.example.android.agenttagging.QuickSearch"/>-->
+    
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/quicksearch_placeholder"></FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycleframe">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

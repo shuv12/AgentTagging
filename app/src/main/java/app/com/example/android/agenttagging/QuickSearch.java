@@ -1,7 +1,5 @@
 package app.com.example.android.agenttagging;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,13 +10,13 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link QuickSearch.OnFragmentInteractionListener} interface
+ * {@link //QuickSearch.//OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link QuickSearch#newInstance} factory method to
+ * Use the {@link QuickSearch#//newInstance} factory method to
  * create an instance of this fragment.
  */
 public class QuickSearch extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+   /* // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -42,7 +40,7 @@ public class QuickSearch extends Fragment {
      * @return A new instance of fragment QuickSearch.
      */
     // TODO: Rename and change types and number of parameters
-    public static QuickSearch newInstance(String param1, String param2) {
+    /*public static QuickSearch newInstance(String param1, String param2) {
         QuickSearch fragment = new QuickSearch();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -58,7 +56,7 @@ public class QuickSearch extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +65,22 @@ public class QuickSearch extends Fragment {
         return inflater.inflate(R.layout.fragment_quick_search, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+       /* Button quickCancel = (Button) view.findViewById(R.id.quickcancel);
+        quickCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //FragmentTransaction ft = getFragmentManager().beginTransaction();
+                //QuickSearch obj = (QuickSearch)getFragmentManager().findFragmentById(R.id.quicksearch_placeholder);
+                //ft.hide(obj);
+                //ft.commit();
+            }
+        });*/
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+   /* public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
@@ -101,8 +113,8 @@ public class QuickSearch extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    /*public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
+    }*/
 }
