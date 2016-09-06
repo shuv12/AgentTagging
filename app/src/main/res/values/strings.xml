@@ -12,6 +12,8 @@
     <string name="property_owner">SumanJung</string>
     <string name="quicksearch">Quick Search</string>
     <string name="searchHint">Search by agent,property,location etc</string>
+    <string name="userprofilename">John Doe</string>
+    <string name="propertylist">Property Lists</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
