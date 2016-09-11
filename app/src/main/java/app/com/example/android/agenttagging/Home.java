@@ -1,5 +1,6 @@
 package app.com.example.android.agenttagging;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,11 +27,12 @@ import app.com.example.android.agenttagging.model.PropertyModel;
 public class Home extends AppCompatActivity {
     private boolean mSlideState = false;
     private DrawerLayout mDrawerLayout;
-    //private boolean quickopen = false;
     public LinearLayout quick,quicksearchlayout;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyModel> propertyModelList;
+    private NavigationView nvDrawer;
+    private Button createListing;
 
     String[] propertyAddress = new String[]{"22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street"};
     String[] propertyHeadline = new String[]{"5th Avenue", "6th Avenue", "7th Avenue", "8th Avenue", "9th Avenue", "57th Avenue", "59th Avenue", "52th Avenue", "54th Avenue"};
@@ -46,17 +48,18 @@ public class Home extends AppCompatActivity {
 
 
 
-        SearchView mSearchView = (SearchView) findViewById(R.id.search_bar);
+        final SearchView mSearchView = (SearchView) findViewById(R.id.search_bar);
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchView.setIconified(false);
+            }
+        });
         try
         {
             Field searchField = SearchView.class.getDeclaredField("mSearchButton");
-            //searchField.setAccessible(true);
-            //ImageView searchBtn = (ImageView)searchField.get(mSearchView);
-            //searchBtn.setImageResource(R.drawable.search_icon);
             searchField = SearchView.class.getDeclaredField("mSearchPlate");
-            //searchField.setAccessible(true);
             LinearLayout searchPlate = (LinearLayout)searchField.get(mSearchView);
-            //((ImageView)searchPlate.getChildAt(0)).setImageResource(R.drawable.searchviewbg);
             searchPlate.setBackgroundResource(R.drawable.searchviewbg);
         }
         catch (NoSuchFieldException e)
@@ -85,7 +88,15 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        final NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
+
+        /*@Override
+        public void onDrawerSlide(View drawerView, float offset) {
+            View container = findViewById(R.id.container);
+            container.setTranslationX(offset * drawerView.getWidth());
+        }*/
+
+        createListing = (Button) findViewById(R.id.createlisting);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
         View header = nvDrawer.getHeaderView(0);
@@ -95,6 +106,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 nvDrawer.getHeaderView(0).setVisibility(View.GONE);
                 View headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
+                createListing.setVisibility(View.VISIBLE);
             }
         });
 
@@ -115,9 +127,7 @@ public class Home extends AppCompatActivity {
         final PropertyAdapter propertyAdapter = new PropertyAdapter(getApplicationContext(), this.propertyModelList);
         recyclerView.setAdapter(propertyAdapter);
         recyclerView.setLayoutManager(layoutManager);
-        //recyclerView.setLayoutManager(new WrappingLinearLayoutManager(getApplicationContext()));
-        //recyclerView.setNestedScrollingEnabled(false);
-        //recyclerView.setHasFixedSize(false);
+        final RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
 
 
 
@@ -125,21 +135,9 @@ public class Home extends AppCompatActivity {
         quick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // quicksearchlayout.animate().translationY(quicksearchlayout.getHeight());
                 quicksearchlayout.setVisibility(View.VISIBLE);
                 quick.setVisibility(View.GONE);
-                //final LinearLayout searchlay = (LinearLayout) findViewById(R.id.openedquicksearchlayout);
-              //  if (quickopen == false) {
-                    //quicksearchlayout.animate().translationY(quicksearchlayout.getHeight());
-                    //quicksearchlayout.setVisibility(View.VISIBLE);
-                   // quickopen = true;
-               // } else {
-                    //quicksearchlayout.animate().translationY(0);
-                   // quicksearchlayout.setVisibility(View.GONE);
-                  //  quickopen = false;
-
-               // }
-
+                recyclerView.addOnItemTouchListener(disabler);
             }
         });
 
@@ -148,10 +146,19 @@ public class Home extends AppCompatActivity {
         quickcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //quicksearchlayout.animate().translationY(0);
                 quicksearchlayout.setVisibility(View.GONE);
                 quick.setVisibility(View.VISIBLE);
-                //quickopen = false;
+                recyclerView.removeOnItemTouchListener(disabler);
+            }
+        });
+
+
+        ImageView notibtn = (ImageView) findViewById(R.id.notificationbtn);
+        notibtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, Notify.class);
+                startActivity(intent);
             }
         });
 
@@ -163,6 +170,28 @@ public class Home extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        int id = menuItem.getItemId();
+
+                        if (id == R.id.property){
+                        }
+
+                        if (id == R.id.groupteam){
+
+                        }
+
+                        if (id == R.id.upcoming){
+
+                        }
+
+                        if (id == R.id.setting){
+
+                        }
+
+                        if (id == R.id.agents){
+                            Intent intent = new Intent(Home.this,Agent.class);
+                            startActivity(intent);
+                        }
+                        mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                     }
                 });

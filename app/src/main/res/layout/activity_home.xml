@@ -48,7 +48,8 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/notification" />
+                    android:src="@drawable/notification"
+                    android:id="@+id/notificationbtn"/>
 
             </LinearLayout>
 
@@ -97,54 +98,6 @@
                     android:background="@drawable/searchviewbg"
                     />
 
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/box_padding"
-                    android:layout_marginBottom="@dimen/box_padding">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:gravity="center">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FOR SALE"
-                            android:paddingLeft="@dimen/image_margin"
-                            android:textColor="@android:color/white"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:gravity="center">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FOR RENT"
-                            android:paddingLeft="@dimen/image_margin"
-                            android:textColor="@android:color/white"/>
-                    </LinearLayout>
-
-                </LinearLayout>-->
-
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -161,6 +114,8 @@
                         android:layout_height="wrap_content"
                         android:button="?android:attr/listChoiceIndicatorMultiple"
                         android:text="FOR RENT"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
                         android:layout_weight="1"/>
 
                     <RadioButton
@@ -169,10 +124,10 @@
                         android:layout_height="wrap_content"
                         android:button="?android:attr/listChoiceIndicatorMultiple"
                         android:text="FOR SALE"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
                         android:layout_weight="1"/>
                 </RadioGroup>
-
-
 
 
 
@@ -322,6 +277,7 @@
                         android:textColor="@android:color/white"
                         android:background="@color/cancelbuttoncolor"
                         android:layout_weight="1"
+                        android:outlineProvider="bounds"
                         android:elevation="@dimen/card_margin"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginRight="@dimen/card_margin"/>
@@ -331,8 +287,10 @@
                         android:textColor="@android:color/white"
                         android:text="SEARCH"
                         android:elevation="@dimen/card_margin"
+                        android:id="@+id/search_btn"
                         android:background="@color/green_back"
                         android:layout_weight="1"
+                        android:outlineProvider="bounds"
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginLeft="@dimen/card_margin"/>
                 </LinearLayout>
@@ -342,20 +300,12 @@
         </android.support.design.widget.AppBarLayout>
 
 
-        <FrameLayout
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recycleframe"
-            android:background="@color/listingback"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recycleviewpost"
-                />
-
-        </FrameLayout>
+            android:id="@+id/recycleviewpost"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
     </android.support.design.widget.CoordinatorLayout>
 
@@ -365,8 +315,24 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/bg"
-        app:menu="@menu/drawer_items"
+        app:headerLayout="@layout/logindrawerheader"
         app:itemTextColor="@android:color/white"
-        app:headerLayout="@layout/logindrawerheader"/>
+        app:menu="@menu/drawer_items">
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/createlisting"
+            android:textColor="@android:color/white"
+            android:text="@string/createlisting"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/green_back"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
+
+    </android.support.design.widget.NavigationView>
+        <!--app:menu="@menu/drawer_items"
+        app:itemTextColor="@android:color/white"
+        app:headerLayout="@layout/logindrawerheader"-->
 
 </android.support.v4.widget.DrawerLayout>

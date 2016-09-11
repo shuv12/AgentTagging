@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.com.example.android.agenttagging">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,11 +31,12 @@
         </activity>
         <activity
             android:name=".Home"
-            android:theme="@style/AppTheme.noTheme"/>
-        <activity
-            android:name=".StartMain"
             android:theme="@style/AppTheme.noTheme" />
-        <activity android:name=".Sliding"></activity>
+        <activity
+            android:name=".Agent"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity android:name=".Notify"
+            android:theme="@style/AppTheme.noTheme"></activity>
     </application>
 
 </manifest>

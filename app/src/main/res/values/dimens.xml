@@ -6,6 +6,7 @@
     <dimen name="top_margin">42dp</dimen>
     <dimen name="image_margin">5dp</dimen>
     <dimen name="marginlow">3dp</dimen>
+    <dimen name="buttonheight">32dp</dimen>
     <dimen name="design_navigation_icon_size" tools:override="true">120dp</dimen>
     <dimen name="navigation_icon_size">48dp</dimen>
     <dimen name="card_margin">9dp</dimen>

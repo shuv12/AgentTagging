@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/agentpic"
+        android:id="@+id/agentpic" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/agentname"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/card_margin"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:id="@+id/agentname"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/agentnum"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/card_margin"
+        android:id="@+id/agentnum"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/buttonheight"
+        android:text="@string/viewprofile"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/card_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:elevation="@dimen/activity_horizontal_margin"
+        android:background="@color/green_back"
+        android:textColor="@android:color/white"/>
+
+
+</LinearLayout>
