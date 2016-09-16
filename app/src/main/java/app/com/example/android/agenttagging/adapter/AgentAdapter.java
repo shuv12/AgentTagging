@@ -1,10 +1,12 @@
 package app.com.example.android.agenttagging.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import app.com.example.android.agenttagging.R;
+import app.com.example.android.agenttagging.ViewProfile;
 import app.com.example.android.agenttagging.model.AgentModel;
 
 /**
@@ -25,12 +28,25 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.ViewHolder> 
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder{
         TextView agentName,agentNumber;
         ImageView agentPic;
+        Button viewAgentProfile;
+        private final Context context;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(final View itemView){
             super(itemView);
+            context = itemView.getContext();
             this.agentName = (TextView) itemView.findViewById(R.id.agentname);
             this.agentNumber = (TextView) itemView.findViewById(R.id.agentnum);
             this.agentPic = (ImageView) itemView.findViewById(R.id.agentpic);
+            this.viewAgentProfile = (Button) itemView.findViewById(R.id.viewagentprofile);
+            viewAgentProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Intent intent;
+                    intent = new Intent(context,ViewProfile.class);
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 

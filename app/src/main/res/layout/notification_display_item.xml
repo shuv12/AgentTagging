@@ -64,6 +64,31 @@
                     android:id="@+id/btntag"
                     android:layout_marginTop="12dp"
                     android:textColor="@android:color/white"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/requested">
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_checked"
+                        android:tint="@color/green_back"
+                        android:id="@+id/checkaccept"
+                        android:background="@android:color/transparent"
+                        android:paddingRight="@dimen/text_margin"
+                        />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cross"
+                        android:tint="@color/textmain"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/crossdenied"/>
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

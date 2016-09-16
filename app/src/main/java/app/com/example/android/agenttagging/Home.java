@@ -27,12 +27,13 @@ import app.com.example.android.agenttagging.model.PropertyModel;
 public class Home extends AppCompatActivity {
     private boolean mSlideState = false;
     private DrawerLayout mDrawerLayout;
-    public LinearLayout quick,quicksearchlayout;
+    public LinearLayout quick,quicksearchlayout,viewmyprofile;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyModel> propertyModelList;
     private NavigationView nvDrawer;
     private Button createListing;
+    private View header,headerlayout;
 
     String[] propertyAddress = new String[]{"22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street"};
     String[] propertyHeadline = new String[]{"5th Avenue", "6th Avenue", "7th Avenue", "8th Avenue", "9th Avenue", "57th Avenue", "59th Avenue", "52th Avenue", "54th Avenue"};
@@ -99,16 +100,36 @@ public class Home extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
-        View header = nvDrawer.getHeaderView(0);
+        header = nvDrawer.getHeaderView(0);
         TextView textView = (TextView) header.findViewById(R.id.logintext);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nvDrawer.getHeaderView(0).setVisibility(View.GONE);
-                View headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
+                headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
                 createListing.setVisibility(View.VISIBLE);
+                viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
+                viewmyprofile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Home.this, ViewProfile.class);
+                        intent.putExtra("myprofile",true);
+                        startActivity(intent);
+                    }
+                });
+                createListing.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent1 = new Intent(Home.this, NewListingPageOne.class);
+                        startActivity(intent1);
+                    }
+                });
             }
         });
+
+
+
+
 
 
         this.propertyModelList = new ArrayList<>();

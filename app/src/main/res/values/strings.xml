@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AgentTagging</string>
     <string name="loginonly">Agents Login only</string>
-    <string name="username">USERNAME</string>
+    <string name="username">EMAIL</string>
     <string name="password">PASSWORD</string>
     <string name="passwordRem">Remember Password</string>
     <string name="login">Login</string>
@@ -23,8 +23,151 @@
     <string name="status">Pending</string>
     <string name="notification">Notifications</string>
     <string name="createlisting">Create Listing</string>
+    <string name="agentnumber">+65 839993999</string>
+    <string name="agentprofilename">Jennifer Lim</string>
+    <string name="messageme">Message me</string>
+    <string name="updateprofile">Update</string>
+    <string name="mypro">My Profile</string>
+    <string name="agentpro">Agent Profile</string>
+    <string name="selectlt">Select Listing Type</string>
+    <string name="step1">Step 1/3</string>
+    <string name="step2">Step 2/3</string>
+    <string name="step3">Step 3/3</string>
+    <string name="forr">For Rent</string>
+    <string name="fors">For Sale</string>
+    <string name="selectpt">Select Property Type</string>
+    <string name="hbd">HBD</string>
+    <string name="condo">Condo</string>
+    <string name="landed">Landed</string>
+    <string name="banksale">Bank Sale</string>
+    <string name="bi">Basic Info</string>
+    <string name="district">District</string>
+    <string name="pname">Name</string>
+    <string name="bno">Block No.</string>
+    <string name="sn">Street Name</string>
+    <string name="pc">PostCode</string>
+    <string name="unit">Unit #</string>
+    <string name="ap">Asking Price S$</string>
+    <string name="obv">Official bank valuation S$</string>
+    <string name="tagginglimit">Tagging Limit</string>
+    <string name="fpi">Floor Plan Info</string>
+    <string name="nob">No. of Bedrooms</string>
+    <string name="fa">Floor Area</string>
+    <string name="sqft">sqft</string>
+    <string name="addes">Add Description</string>
+    <string name="next">Next</string>
+    <string name="ud">Unit Details</string>
+    <string name="furnished">Furnished</string>
+    <string name="floor">Floor</string>
+    <string name="noofbathroom">No. of Bathrooms</string>
+    <string name="splf">Special Features</string>
+    <string name="fnf">Fixtures &amp; Fittings</string>
+    <string name="outins">Outdoor/Indoor Space</string>
+    <string name="facilities">Facilities</string>
+    <string name="tenure">Tenure</string>
+    <string name="pd">Property Details</string>
+    <string name="topyr">Top Year</string>
+    <string name="tou">Total # of Units</string>
+    <string name="tof">Total # of Floors</string>
+    <string name="videourl">Video Url</string>
+    <string name="preview">Preview</string>
+    <string name="post">Post</string>
+    <string name="choose">Choose</string>
+    <string name="btwen">&#009;:&#009;</string>
+    <string name="units">Unit</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <array name="listing_type_array">
+        <item>For sale</item>
+        <item>For rent</item>
+        <item>Room rental</item>
+    </array>
+
+    <string-array name="unit_area">
+        <item>sqft</item>
+        <item>sqm</item>
+    </string-array>
+
+    <array name="furnishedarray">
+        <item>Unfurnished</item>
+        <item>Partially Furnished</item>
+        <item>Fully Furnished</item>
+    </array>
+    
+    <array name="floorarray">
+        <item>Ground Floor</item>
+        <item>Low Floor</item>
+        <item>Middle Floor</item>
+        <item>High Floor</item>
+        <item>Penthouse</item>
+    </array>
+    
+    <array name="splarray">
+        <item>Penthouse</item>
+        <item>Corner Unit</item>
+        <item>Sea View</item>
+        <item>City View</item>
+        <item>Park/Greenery View</item>
+        <item>Swimming Pool View</item>
+        <item>Renovated</item>
+        <item>Original Condition</item>
+        <item>Ground Floor</item>
+        <item>Low Floor</item>
+        <item>High Floor</item>
+        <item>Colonial Building</item>
+    </array>
+    
+    <array name="fnfarray">
+        <item>Air conditioning</item>
+        <item>Bathtub</item>
+        <item>Cooker Hob/Hood</item>
+        <item>Hairdryer</item>
+        <item>Intercom</item>
+        <item>Jacuzzi</item>
+        <item>Private Pool</item>
+        <item>Water Heater</item>
+    </array>
+    
+    <array name="oispacearray">
+        <item>Balcony</item>
+        <item>Bombshelter</item>
+        <item>Garage</item>
+        <item>Maidsroom</item>
+        <item>Outdoor Patio</item>
+        <item>Private Garden</item>
+        <item>Roof Terrace</item>
+        <item>Terrace</item>
+        <item>Walk-in-wardrobe</item>
+    </array>
+    
+    <array name="facilitiesarray">
+        <item>Penthouse</item>
+        <item>Corner Unit</item>
+        <item>Sea View</item>
+        <item>City View</item>
+        <item>Park/Greenery View</item>
+        <item>Swimming Pool View</item>
+        <item>Renovated</item>
+        <item>Original Condition</item>
+        <item>Ground Floor</item>
+        <item>Low Floor</item>
+        <item>High Floor</item>
+        <item>Colonial Building</item>
+        <item>Air conditioning</item>
+        <item>Bathtub</item>
+        <item>Cooker Hob/Hood</item>
+        <item>Hairdryer</item>
+        <item>Intercom</item>
+        <item>Jacuzzi</item>
+        <item>Private Pool</item>
+        <item>Water Heater</item>
+    </array>
+
+    <array name="tenurearray">
+        <item>One year</item>
+        <item>Two years</item>
+        <item>Three or more years</item>
+        <item>Short Term</item>
+        <item>Flexible</item>
+    </array>
 </resources>

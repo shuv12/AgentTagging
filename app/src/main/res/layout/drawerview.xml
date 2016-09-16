@@ -14,11 +14,12 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="start|center"
+            android:id="@+id/viewmyprofile"
             android:padding="@dimen/activity_horizontal_margin">
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/house_icon"
+                android:src="@drawable/agentpic"
                 android:paddingRight="@dimen/activity_horizontal_margin"/>
             <TextView
                 android:layout_width="wrap_content"

@@ -113,9 +113,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="?android:attr/listChoiceIndicatorMultiple"
-                        android:text="FOR RENT"
+                        android:text="@string/fors"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
+                        android:textAllCaps="true"
                         android:layout_weight="1"/>
 
                     <RadioButton
@@ -123,7 +124,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="?android:attr/listChoiceIndicatorMultiple"
-                        android:text="FOR SALE"
+                        android:text="@string/forr"
+                        android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:layout_weight="1"/>

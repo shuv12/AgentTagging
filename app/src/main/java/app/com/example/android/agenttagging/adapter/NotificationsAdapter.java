@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder{
         TextView notipostStr,notiStatus,notifor;
         Button btnTag;
+        LinearLayout requestLayout;
         //ImageView notiPic;
 
         public ViewHolder(View itemView){
@@ -32,6 +34,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             this.notifor = (TextView) itemView.findViewById(R.id.fortype);
             this.notiStatus = (TextView) itemView.findViewById(R.id.status);
             this.btnTag = (Button) itemView.findViewById(R.id.btntag);
+            this.requestLayout = (LinearLayout) itemView.findViewById(R.id.requested);
+
             //this.notiPic = (ImageView) itemView.findViewById(R.id.notipropic);
         }
     }
@@ -62,6 +66,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                 break;
             case "Denied":
                 holder.notiStatus.setTextColor(Color.RED);
+                break;
+            case "tag":
+                holder.notiStatus.setVisibility(View.GONE);
+                holder.btnTag.setVisibility(View.VISIBLE);
+                break;
+            case "requested":
+                holder.notiStatus.setVisibility(View.GONE);
+                holder.requestLayout.setVisibility(View.VISIBLE);
                 break;
             default:
                 holder.notiStatus.setVisibility(View.GONE);

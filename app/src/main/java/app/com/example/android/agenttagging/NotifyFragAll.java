@@ -40,7 +40,7 @@ public class NotifyFragAll extends Fragment {
     String[] notiproAdd = new String[]{"22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street"};
     String[] notiproType = new String[]{"Apartment", "Bunglo", "Flat", "Open space", "Shutter", "Apartment", "HBD", "Flat", "Bunglo"};
     String[] notiforType = new String[]{forrent,forsale,forrent,forsale,forsale,forsale,forsale,forrent,forsale};
-    String[] notiStatus = new String[]{approved,"tag",pending,approved,denied,denied,pending,pending,approved,approved};
+    String[] notiStatus = new String[]{approved,"tag",pending,approved,denied,"requested",approved,pending,pending,approved,approved};
 
     public static NotifyFragAll newInstance(int page) {
         // Required empty public constructor

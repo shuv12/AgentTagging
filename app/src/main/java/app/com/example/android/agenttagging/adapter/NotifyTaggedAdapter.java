@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,7 +22,6 @@ public class NotifyTaggedAdapter extends RecyclerView.Adapter<NotifyTaggedAdapte
 
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
         TextView notipostStr, notiStatus, notifor;
-        Button btnTag;
         //ImageView notiPic;
 
         public ViewHolder(View itemView) {
@@ -31,7 +29,6 @@ public class NotifyTaggedAdapter extends RecyclerView.Adapter<NotifyTaggedAdapte
             this.notipostStr = (TextView) itemView.findViewById(R.id.notipoststr);
             this.notifor = (TextView) itemView.findViewById(R.id.fortype);
             this.notiStatus = (TextView) itemView.findViewById(R.id.status);
-            this.btnTag = (Button) itemView.findViewById(R.id.btntag);
             //this.notiPic = (ImageView) itemView.findViewById(R.id.notipropic);
         }
     }

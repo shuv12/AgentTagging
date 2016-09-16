@@ -29,6 +29,7 @@ public class Agent extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private Button createListing;
     private NavigationView nvDrawer;
+    private Button viewAgentProfile;
 
     String[] agentName = new String[]{"Ari Gold","Shuvam Agrawal","Ganesh Kumar","Suman Jung","Abin Rimal","Ashish","Vishal","Pujan","Shuvam","Ganesh","Suman","Abin","Ashish","Vishal","Pujan","Ari Gold"};
     String[] agentNum = new String[]{"+81-98986557","+977-8785636228","+91-8870639465","+81-001199111","+81-98986557","+977-8785636228","+91-8870639465","+81-001199111","+81-98986557","+977-8785636228","+91-8870639465","+81-001199111","+81-98986557","+977-8785636228","+91-8870639465","+81-001199111"};
@@ -101,6 +102,15 @@ public class Agent extends AppCompatActivity {
         recyclerView.setAdapter(agentAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
+
+        /*viewAgentProfile = (Button) recyclerView.findViewById(R.id.viewagentprofile);
+        viewAgentProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Agent.this,ViewProfile.class);
+                startActivity(intent);
+            }
+        });*/
 
         ImageView notibtn = (ImageView) findViewById(R.id.notificationbtn);
         notibtn.setOnClickListener(new View.OnClickListener() {
