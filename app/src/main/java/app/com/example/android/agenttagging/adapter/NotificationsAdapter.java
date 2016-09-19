@@ -22,13 +22,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     private Context context;
     private List<NotificationsModel> notificationsModelList;
 
-    public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder{
-        TextView notipostStr,notiStatus,notifor;
+    public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+        TextView notipostStr, notiStatus, notifor;
         Button btnTag;
         LinearLayout requestLayout;
         //ImageView notiPic;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView) {
             super(itemView);
             this.notipostStr = (TextView) itemView.findViewById(R.id.notipoststr);
             this.notifor = (TextView) itemView.findViewById(R.id.fortype);
@@ -40,16 +40,16 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         }
     }
 
-    public NotificationsAdapter(Context context, List<NotificationsModel> notificationsModelList){
+    public NotificationsAdapter(Context context, List<NotificationsModel> notificationsModelList) {
         this.context = context;
         this.notificationsModelList = notificationsModelList;
     }
 
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_display_item,parent,false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_display_item, parent, false));
     }
 
-    public void onBindViewHolder(ViewHolder holder,int position){
+    public void onBindViewHolder(ViewHolder holder, int position) {
         NotificationsModel notificationsModel = (NotificationsModel) this.notificationsModelList.get(position);
         holder.notipostStr.setText(notificationsModel.getNotiUser() + " has posted a property \" " + notificationsModel.getNotiforType() + " at " + notificationsModel.getNotiproadd() + "\". ");
         holder.notiStatus.setText(notificationsModel.getNotiStatus());
@@ -57,7 +57,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
 
         String curstatus = holder.notiStatus.getText().toString();
-        switch (curstatus){
+        switch (curstatus) {
             case "Pending":
                 holder.notiStatus.setTextColor(Color.BLUE);
                 break;
@@ -83,7 +83,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         //Picasso.with(context).load(notificationsModel.getNotiPic()).resize(150,150).into(holder.notiPic);
     }
 
-    public int getItemCount(){
+    public int getItemCount() {
         return notificationsModelList.size();
     }
 }

@@ -15,7 +15,12 @@ public class NewListingPageTwo extends AppCompatActivity {
 
     private Button toPageThree;
     private ImageView backBtn2;
-    private TextView furnished,floor,nobaths,splfeat,fnf,oispace,facilities,tenure;
+    private TextView furnished, floor, nobaths, splfeat, fnf, oispace, facilities, tenure;
+    Integer[] splitems = new Integer[]{};
+    Integer[] fnfitems = new Integer[]{};
+    Integer[] oispaceitems = new Integer[]{};
+    Integer[] facilitesitems = new Integer[]{};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,7 @@ public class NewListingPageTwo extends AppCompatActivity {
         toPageThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewListingPageTwo.this,NewListingPageThree.class);
+                Intent intent = new Intent(NewListingPageTwo.this, NewListingPageThree.class);
                 startActivity(intent);
             }
         });
@@ -41,10 +46,10 @@ public class NewListingPageTwo extends AppCompatActivity {
 
 
         furnished = (TextView) findViewById(R.id.furnished);
-        floor  = (TextView) findViewById(R.id.floor);
-        nobaths  = (TextView) findViewById(R.id.noofbathroom);
-        splfeat  = (TextView) findViewById(R.id.splf);
-        fnf  = (TextView) findViewById(R.id.fnf);
+        floor = (TextView) findViewById(R.id.floor);
+        nobaths = (TextView) findViewById(R.id.noofbathroom);
+        splfeat = (TextView) findViewById(R.id.splf);
+        fnf = (TextView) findViewById(R.id.fnf);
         oispace = (TextView) findViewById(R.id.outins);
         facilities = (TextView) findViewById(R.id.facilities);
         tenure = (TextView) findViewById(R.id.tenure);
@@ -84,13 +89,12 @@ public class NewListingPageTwo extends AppCompatActivity {
         });
 
 
-
         nobaths.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
                         .title(R.string.floor)
-                        .items("1","2","3","4","5","6","7","8","9","9+")
+                        .items("1", "2", "3", "4", "5", "6", "7", "8", "9", "9+")
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
                             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
@@ -109,13 +113,14 @@ public class NewListingPageTwo extends AppCompatActivity {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
                         .title(R.string.floor)
                         .items(R.array.splarray)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
+                        .itemsCallbackMultiChoice(splitems,new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                String dirflor = "<b>" + text + "</b>";
-                                splfeat.setText(Html.fromHtml(dirflor));
+                            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                splitems = which;
+                                return true;
                             }
                         })
+                        .positiveText(R.string.choose)
                         .show();
             }
         });
@@ -127,13 +132,14 @@ public class NewListingPageTwo extends AppCompatActivity {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
                         .title(R.string.floor)
                         .items(R.array.fnfarray)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
+                        .itemsCallbackMultiChoice(fnfitems, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                String dirflor = "<b>" + text + "</b>";
-                                fnf.setText(Html.fromHtml(dirflor));
+                            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                fnfitems = which;
+                                return true;
                             }
                         })
+                        .positiveText(R.string.choose)
                         .show();
             }
         });
@@ -145,17 +151,17 @@ public class NewListingPageTwo extends AppCompatActivity {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
                         .title(R.string.floor)
                         .items(R.array.oispacearray)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
+                        .itemsCallbackMultiChoice(oispaceitems, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                String dirflor = "<b>" + text + "</b>";
-                                oispace.setText(Html.fromHtml(dirflor));
+                            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                oispaceitems = which;
+                                return true;
                             }
                         })
+                        .positiveText(R.string.choose)
                         .show();
             }
         });
-
 
 
         facilities.setOnClickListener(new View.OnClickListener() {
@@ -164,13 +170,14 @@ public class NewListingPageTwo extends AppCompatActivity {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
                         .title(R.string.floor)
                         .items(R.array.facilitiesarray)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
+                        .itemsCallbackMultiChoice(facilitesitems, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                String dirflor = "<b>" + text + "</b>";
-                                facilities.setText(Html.fromHtml(dirflor));
+                            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                facilitesitems = which;
+                                return true;
                             }
                         })
+                        .positiveText(R.string.choose)
                         .show();
             }
         });

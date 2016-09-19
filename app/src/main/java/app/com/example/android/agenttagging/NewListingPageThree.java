@@ -26,7 +26,7 @@ public class NewListingPageThree extends AppCompatActivity {
     ImageButton addPropertyImage;
     FlowLayout addImageBody;
     Boolean addingMore = true;
-   // LayoutInflater layoutInflater;
+    // LayoutInflater layoutInflater;
 
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -136,8 +136,8 @@ public class NewListingPageThree extends AppCompatActivity {
                         image.setImageBitmap(selectedImage);
                         //FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(240,240);
                         //layoutParams.setMargins(10,10,10,0);
-                        image.setPadding(6,6,0,0);
-                        addImageBody.addView(image,240,240);
+                        image.setPadding(6, 6, 0, 0);
+                        addImageBody.addView(image, 240, 240);
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

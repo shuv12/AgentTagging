@@ -16,7 +16,7 @@ public class SimpleDividerItemDecorator extends RecyclerView.ItemDecoration {
     private int offset;
 
     public SimpleDividerItemDecorator(Context context, int offset) {
-        this.mDivider = ContextCompat.getDrawable(context,R.drawable.line_divider);
+        this.mDivider = ContextCompat.getDrawable(context, R.drawable.line_divider);
         this.offset = offset;
     }
 
@@ -36,7 +36,7 @@ public class SimpleDividerItemDecorator extends RecyclerView.ItemDecoration {
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         int left = parent.getPaddingLeft();
-       // int right =parent.getPaddingRight();
+        // int right =parent.getPaddingRight();
         int right = parent.getWidth() - parent.getPaddingRight();
 
         int childCount = parent.getChildCount();

@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/activity_horizontal_margin"
-    android:layout_marginBottom="@dimen/activity_horizontal_margin">
+    android:orientation="vertical">
+
     <ImageView
+        android:id="@+id/agentpic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/agentpic"
-        android:id="@+id/agentpic" />
+        android:src="@drawable/agentpic" />
+
     <TextView
+        android:id="@+id/agentname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_margin"
+        android:gravity="center"
         android:text="@string/agentname"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/card_margin"
         android:textSize="18sp"
-        android:gravity="center"
-        android:id="@+id/agentname"/>
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/agentnum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/agentnum"
-        android:gravity="center"
         android:layout_marginTop="@dimen/card_margin"
-        android:id="@+id/agentnum"/>
+        android:gravity="center"
+        android:text="@string/agentnum" />
+
     <Button
+        android:id="@+id/viewagentprofile"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/buttonheight"
-        android:text="@string/viewprofile"
-        android:gravity="center"
-        android:id="@+id/viewagentprofile"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/card_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/card_margin"
+        android:background="@color/green_back"
+        android:elevation="@dimen/activity_horizontal_margin"
+        android:gravity="center"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:elevation="@dimen/activity_horizontal_margin"
-        android:background="@color/green_back"
-        android:textColor="@android:color/white"/>
+        android:text="@string/viewprofile"
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

@@ -55,7 +55,6 @@ public class Notify extends AppCompatActivity {
         });
 
 
-
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
                 Notify.this));
@@ -64,6 +63,7 @@ public class Notify extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
     }
+
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -71,25 +71,26 @@ public class Notify extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         int id = menuItem.getItemId();
 
-                        if (id == R.id.property){
-                            Intent intent = new Intent(Notify.this,Home.class);
+                        if (id == R.id.property) {
+                            Intent intent = new Intent(Notify.this, Home.class);
                             startActivity(intent);
                         }
 
-                        if (id == R.id.groupteam){
+                        if (id == R.id.groupteam) {
 
                         }
 
-                        if (id == R.id.upcoming){
+                        if (id == R.id.upcoming) {
+                            Intent intent1 = new Intent(Notify.this, UpcomingEvent.class);
+                            startActivity(intent1);
+                        }
+
+                        if (id == R.id.setting) {
 
                         }
 
-                        if (id == R.id.setting){
-
-                        }
-
-                        if (id == R.id.agents){
-                            Intent intent = new Intent(Notify.this,Agent.class);
+                        if (id == R.id.agents) {
+                            Intent intent = new Intent(Notify.this, Agent.class);
                             startActivity(intent);
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);

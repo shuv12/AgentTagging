@@ -15,50 +15,51 @@ public class NotificationsModel implements Serializable {
     private String notiStatus;
 
 
-
-    public String getNotiPic(){
+    public String getNotiPic() {
         return notiPic;
     }
 
-    public void setNotiPic(String notiPic){
+    public void setNotiPic(String notiPic) {
         this.notiPic = notiPic;
     }
 
-    public String getNotiUser(){
+    public String getNotiUser() {
         return notiUser;
     }
 
-    public void setNotiUser(String notiUser){
+    public void setNotiUser(String notiUser) {
         this.notiUser = notiUser;
     }
 
-    public String getNotiproType(){
+    public String getNotiproType() {
         return notiproType;
     }
 
-    public void setNotiproType(String notiproType){
-        this.notiproType = notiproType;}
+    public void setNotiproType(String notiproType) {
+        this.notiproType = notiproType;
+    }
 
-    public String getNotiforType(){
+    public String getNotiforType() {
         return notiforType;
     }
 
-    public void setNotiforType(String notiforType){
-        this.notiforType = notiforType;}
+    public void setNotiforType(String notiforType) {
+        this.notiforType = notiforType;
+    }
 
-    public String getNotiStatus(){
+    public String getNotiStatus() {
         return notiStatus;
     }
 
-    public void setNotiStatus(String notiStatus){
+    public void setNotiStatus(String notiStatus) {
         this.notiStatus = notiStatus;
     }
 
-    public String getNotiproadd(){
+    public String getNotiproadd() {
         return notiproadd;
     }
 
-    public void setNotiproadd(String notiproadd){
+    public void setNotiproadd(String notiproadd) {
         this.notiproadd = notiproadd;
     }
 }

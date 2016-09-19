@@ -36,11 +36,11 @@ public class NotifyFragAll extends Fragment {
     private int mPage;
 
 
-    String[] notiUser = new String[]{"Shuvam Agrawal","Suman Jung","Abin Rimal","Ashish","Vishal","Pujan","Shuvam Agrawal","Suman Jung","Abin Rimal","Ashish","Vishal","Pujan"};
+    String[] notiUser = new String[]{"Shuvam Agrawal", "Suman Jung", "Abin Rimal", "Ashish", "Vishal", "Pujan", "Shuvam Agrawal", "Suman Jung", "Abin Rimal", "Ashish", "Vishal", "Pujan"};
     String[] notiproAdd = new String[]{"22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street"};
     String[] notiproType = new String[]{"Apartment", "Bunglo", "Flat", "Open space", "Shutter", "Apartment", "HBD", "Flat", "Bunglo"};
-    String[] notiforType = new String[]{forrent,forsale,forrent,forsale,forsale,forsale,forsale,forrent,forsale};
-    String[] notiStatus = new String[]{approved,"tag",pending,approved,denied,"requested",approved,pending,pending,approved,approved};
+    String[] notiforType = new String[]{forrent, forsale, forrent, forsale, forsale, forsale, forsale, forrent, forsale};
+    String[] notiStatus = new String[]{approved, "tag", pending, approved, denied, "requested", approved, pending, pending, approved, approved};
 
     public static NotifyFragAll newInstance(int page) {
         // Required empty public constructor
@@ -65,7 +65,7 @@ public class NotifyFragAll extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notify_frag_all, container, false);
 
         this.notificationsModelList = new ArrayList<>();
-        for (int i=0; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             NotificationsModel notificationsModel = new NotificationsModel();
             notificationsModel.setNotiforType(this.notiforType[i]);
             notificationsModel.setNotiproadd(this.notiproAdd[i]);
@@ -77,7 +77,7 @@ public class NotifyFragAll extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclenotipost);
-        final NotificationsAdapter notificationsAdapter = new NotificationsAdapter(getContext(),notificationsModelList);
+        final NotificationsAdapter notificationsAdapter = new NotificationsAdapter(getContext(), notificationsModelList);
         recyclerView.setAdapter(notificationsAdapter);
         recyclerView.setLayoutManager(layoutManager);
 

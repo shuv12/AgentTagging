@@ -12,27 +12,27 @@ public class AgentModel implements Serializable {
     private String agentName;
 
 
-    public String getAgentPic(){
+    public String getAgentPic() {
         return agentPic;
     }
 
-    public void setAgentPic(String agentPic){
+    public void setAgentPic(String agentPic) {
         this.agentPic = agentPic;
     }
 
-    public String getAgentNumber(){
+    public String getAgentNumber() {
         return agentNumber;
     }
 
-    public void setAgentNumber(String agentNumber){
+    public void setAgentNumber(String agentNumber) {
         this.agentNumber = agentNumber;
     }
 
-    public String getAgentName(){
+    public String getAgentName() {
         return agentName;
     }
 
-    public void setAgentName(String agentName){
+    public void setAgentName(String agentName) {
         this.agentName = agentName;
     }
 }

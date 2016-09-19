@@ -19,7 +19,7 @@ public class ViewProfile extends AppCompatActivity {
     private boolean mSlideState = false;
     private DrawerLayout mDrawerLayout;
     private NavigationView nvDrawer;
-    private Button createListing,messageme,updateme;
+    private Button createListing, messageme, updateme;
     private TextView titleName;
 
     @Override
@@ -46,9 +46,9 @@ public class ViewProfile extends AppCompatActivity {
         });
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
+        if (extras != null) {
             Boolean myprofile = extras.getBoolean("myprofile");
-            if (myprofile == true){
+            if (myprofile == true) {
                 messageme.setVisibility(View.GONE);
                 updateme.setVisibility(View.VISIBLE);
                 titleName.setText(getString(R.string.mypro));
@@ -71,7 +71,6 @@ public class ViewProfile extends AppCompatActivity {
         });
 
 
-
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         ProfileFragmentPagerAdapter pagerAdapter = new ProfileFragmentPagerAdapter(getSupportFragmentManager(),
                 ViewProfile.this);
@@ -80,12 +79,13 @@ public class ViewProfile extends AppCompatActivity {
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++){
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
         }
 
     }
+
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -93,25 +93,26 @@ public class ViewProfile extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         int id = menuItem.getItemId();
 
-                        if (id == R.id.property){
-                            Intent intent = new Intent(ViewProfile.this,Home.class);
+                        if (id == R.id.property) {
+                            Intent intent = new Intent(ViewProfile.this, Home.class);
                             startActivity(intent);
                         }
 
-                        if (id == R.id.groupteam){
+                        if (id == R.id.groupteam) {
 
                         }
 
-                        if (id == R.id.upcoming){
+                        if (id == R.id.upcoming) {
+                            Intent intent1 = new Intent(ViewProfile.this, UpcomingEvent.class);
+                            startActivity(intent1);
+                        }
+
+                        if (id == R.id.setting) {
 
                         }
 
-                        if (id == R.id.setting){
-
-                        }
-
-                        if (id == R.id.agents){
-                            Intent intent = new Intent(ViewProfile.this,Agent.class);
+                        if (id == R.id.agents) {
+                            Intent intent = new Intent(ViewProfile.this, Agent.class);
                             startActivity(intent);
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);

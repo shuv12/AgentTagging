@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[] { "All", "Tagged" };
+    private String tabTitles[] = new String[]{"All", "Tagged"};
     private FragmentManager fragmentManager;
     private Context context;
 
@@ -20,7 +20,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
         this.fragmentManager = fm;
     }
 
-    public SampleFragmentPagerAdapter(FragmentManager fm){
+    public SampleFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         this.fragmentManager = fm;
     }
@@ -35,7 +35,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
         //SharedPreferences prefs = context.getSharedPreferences(Constants.SHARED_PREFS_FILE, 0);
         //long patientId = prefs.getLong(Constants.SELECTED_PATIENT_ID, 1);
         //Fragment fragment = null;
-        switch (position){
+        switch (position) {
             case 0:
                 return NotifyFragAll.newInstance(position);
             case 1:

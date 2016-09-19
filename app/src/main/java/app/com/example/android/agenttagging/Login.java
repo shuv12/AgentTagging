@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -31,9 +32,10 @@ public class Login extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;
     private Button loginButton;
+    private TextView forgetPass;
 
-    public static final int CONNECTION_TIMEOUT=10000;
-    public static final int READ_TIMEOUT=15000;
+    public static final int CONNECTION_TIMEOUT = 10000;
+    public static final int READ_TIMEOUT = 15000;
 
     private static final String EMAIL = "email";
     private static final String PASSWORD = "password";
@@ -51,6 +53,15 @@ public class Login extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.userinputpassword);
 
 
+        forgetPass = (TextView) findViewById(R.id.forgetpass);
+        forgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Login.this, Home.class);
+                startActivity(intent1);
+            }
+        });
+
         loginButton = (Button) findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +75,10 @@ public class Login extends AppCompatActivity {
         final String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
 
-        new AsyncLogin().execute(email,password);
+        new AsyncLogin().execute(email, password);
     }
 
-    private class AsyncLogin extends AsyncTask<String,String,String> {
+    private class AsyncLogin extends AsyncTask<String, String, String> {
 
         ProgressDialog pdLoading = new ProgressDialog(Login.this);
         HttpURLConnection conn;
@@ -93,18 +104,17 @@ public class Login extends AppCompatActivity {
                 Object report = object.get("data");
                 String status = status_message.toString();
                 String report_msg = report.toString();
-                if (status.equals("true")){
-                    Toast.makeText(Login.this,"Welcome",Toast.LENGTH_SHORT).show();
+                if (status.equals("true")) {
+                    Toast.makeText(Login.this, "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, Home.class);
                     //intent.putExtra(EMAIL,email);
                     startActivity(intent);
                     Login.this.finish();
+                } else {
+                    Toast.makeText(Login.this, report_msg, Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    Toast.makeText(Login.this,report_msg,Toast.LENGTH_SHORT).show();
-                }
-            }catch (JSONException e){
-                Log.e("Agent","JSON exception",e);
+            } catch (JSONException e) {
+                Log.e("Agent", "JSON exception", e);
             }
 
         }
@@ -136,7 +146,7 @@ public class Login extends AppCompatActivity {
                         .appendQueryParameter("password", params[1]);
                 String query = builder.build().getEncodedQuery();
 
-                Log.v("query",query);
+                Log.v("query", query);
                 // Open connection for sending data
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(

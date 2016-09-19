@@ -13,8 +13,8 @@ import android.widget.TextView;
  */
 public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "All", "For rent", "For sale" };
-    private String noOfPost[] = new String[]{"55","22","33"};
+    private String tabTitles[] = new String[]{"All", "For rent", "For sale"};
+    private String noOfPost[] = new String[]{"55", "22", "33"};
     private FragmentManager fragmentManager;
     private Context context;
 
@@ -24,7 +24,7 @@ public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
         this.fragmentManager = fm;
     }
 
-    public ProfileFragmentPagerAdapter(FragmentManager fm){
+    public ProfileFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         this.fragmentManager = fm;
     }
@@ -51,12 +51,12 @@ public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
 
     //@Override
     //public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-      //  return tabTitles[position];
+    // Generate title based on item position
+    //  return tabTitles[position];
     //}
 
-    public View getTabView(int positon){
-        View v = LayoutInflater.from(context).inflate(R.layout.tablayout,null);
+    public View getTabView(int positon) {
+        View v = LayoutInflater.from(context).inflate(R.layout.tablayout, null);
         TextView title = (TextView) v.findViewById(R.id.titletext);
         title.setText(tabTitles[positon]);
         TextView noPost = (TextView) v.findViewById(R.id.noofposttext);

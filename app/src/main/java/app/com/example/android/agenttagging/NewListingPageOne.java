@@ -12,10 +12,10 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 public class NewListingPageOne extends AppCompatActivity {
-    private CheckableLinearLayout lhbd,lcondo,llanded,lbanksale;
+    private CheckableLinearLayout lhbd, lcondo, llanded, lbanksale;
     private Button toPageTwo;
     private ImageView backBtn1;
-    private TextView textnob,taggingLimit;
+    private TextView textnob, taggingLimit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class NewListingPageOne extends AppCompatActivity {
         toPageTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewListingPageOne.this,NewListingPageTwo.class);
+                Intent intent = new Intent(NewListingPageOne.this, NewListingPageTwo.class);
                 startActivity(intent);
             }
         });
@@ -46,7 +46,7 @@ public class NewListingPageOne extends AppCompatActivity {
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageOne.this)
                         .title(R.string.nob)
-                        .items("1","2","3","4","5","6","7","8","9","9+")
+                        .items("1", "2", "3", "4", "5", "6", "7", "8", "9", "9+")
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
                             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
@@ -64,11 +64,11 @@ public class NewListingPageOne extends AppCompatActivity {
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageOne.this)
                         .title(R.string.tagginglimit)
-                        .items("5","10","15","20","25","30","50","100")
-                        .itemsCallback(new MaterialDialog.ListCallback(){
+                        .items("5", "10", "15", "20", "25", "30", "50", "100")
+                        .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
                             public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                String displayt ="Tagging limit : "+ "<b>" + text + "</b>";
+                                String displayt = "Tagging limit : " + "<b>" + text + "</b>";
                                 taggingLimit.setText(Html.fromHtml(displayt));
                             }
                         })
@@ -85,7 +85,7 @@ public class NewListingPageOne extends AppCompatActivity {
         llanded.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (llanded.isChecked()){
+                if (llanded.isChecked()) {
                     lhbd.setChecked(false);
                     lcondo.setChecked(false);
                     lbanksale.setChecked(false);
@@ -96,7 +96,7 @@ public class NewListingPageOne extends AppCompatActivity {
         lcondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lcondo.isChecked()){
+                if (lcondo.isChecked()) {
                     lhbd.setChecked(false);
                     llanded.setChecked(false);
                     lbanksale.setChecked(false);
@@ -107,7 +107,7 @@ public class NewListingPageOne extends AppCompatActivity {
         lhbd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lhbd.isChecked()){
+                if (lhbd.isChecked()) {
                     llanded.setChecked(false);
                     lcondo.setChecked(false);
                     lbanksale.setChecked(false);
@@ -118,7 +118,7 @@ public class NewListingPageOne extends AppCompatActivity {
         lbanksale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lbanksale.isChecked()){
+                if (lbanksale.isChecked()) {
                     lhbd.setChecked(false);
                     lcondo.setChecked(false);
                     llanded.setChecked(false);

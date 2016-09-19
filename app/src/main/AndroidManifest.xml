@@ -3,10 +3,9 @@
     package="app.com.example.android.agenttagging">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -48,10 +47,17 @@
         <activity
             android:name=".NewListingPageOne"
             android:theme="@style/AppTheme.noTheme" />
-        <activity android:name=".NewListingPageTwo"
+        <activity
+            android:name=".NewListingPageTwo"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity
+            android:name=".NewListingPageThree"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity
+            android:name=".PropertyDetails"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity android:name=".UpcomingEvent"
             android:theme="@style/AppTheme.noTheme"/>
-        <activity android:name=".NewListingPageThree"
-            android:theme="@style/AppTheme.noTheme"></activity>
     </application>
 
 </manifest>

@@ -15,5 +15,6 @@
     <color name="dark_blue">#3ec6bf</color>
     <color name="shadow">#47193701</color>
     <color name="dotted">#7c8ea2</color>
+    <color name="dott">#aa7c8ea2</color>
     <color name="posttext">#475767</color>
 </resources>

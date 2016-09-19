@@ -7,6 +7,9 @@
     <string name="login">Login</string>
     <string name="passwordForget">Forget Password?</string>
     <string name="property_headline">55 Strathmore Avenue</string>
+    <string name="property_price">S$ 1,545,000/mo</string>
+    <string name="property_price_per_unit">S$ 15psf</string>
+    <string name="property_area_unit">1000sf</string>
     <string name="property_address">30 Kelatan Road</string>
     <string name="property_type">Apartment</string>
     <string name="property_owner">SumanJung</string>
@@ -75,8 +78,55 @@
     <string name="choose">Choose</string>
     <string name="btwen">&#009;:&#009;</string>
     <string name="units">Unit</string>
-
-
+    <string name="detail">Details</string>
+    <string name="property_detail">Property Details</string>
+    <string name="pro_listed">Listed</string>
+    <string name="pro_listing_type">Listing Type</string>
+    <string name="pro_unit_no">Unit No.</string>
+    <string name="pro_district">District</string>
+    <string name="pro_block_no">Block No.</string>
+    <string name="pro_postcode">Postcode</string>
+    <string name="ex_listed">Aug 30,2016</string>
+    <string name="ex_listing_type">For Rent</string>
+    <string name="ex_unit_no">10 to 12</string>
+    <string name="ex_district">District 23</string>
+    <string name="ex_block_no">123</string>
+    <string name="ex_postcode">44600</string>
+    <string name="show_more">SHOW MORE</string>
+    <string name="show_less">SHOW LESS</string>
+    <string name="pro_tenure">Tenure</string>
+    <string name="ex_tenure">2 Years</string>
+    <string name="pro_total_unit">Total No. of Units</string>
+    <string name="ex_total_unit">545</string>
+    <string name="pro_total_floor">Total No. of Floors</string>
+    <string name="ex_total_floor">4</string>
+    <string name="pro_top_year">Top Year</string>
+    <string name="ex_top_year">2016</string>
+    <string name="unit_details">Unit Details</string>
+    <string name="pro_furnished">Furnished</string>
+    <string name="ex_furnished">Partially</string>
+    <string name="pro_floor">Floor</string>
+    <string name="ex_floor">12th</string>
+    <string name="pro_spl_feat">Speacial Features</string>
+    <string name="ex_spl_feat">Security, Gym</string>
+    <string name="pro_iospace">Outdoor/Indoor Space</string>
+    <string name="ex_iospace">No</string>
+    <string name="pro_fnf">Fixtures &amp; Fittings</string>
+    <string name="ex_fnf">None</string>
+    <string name="description">Description</string>
+    <string name="ex_description">An apartment (in American and Canadian English) or a flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building, correctly, on a single level without a stair.\n&#xD;An apartment on the ground floor of an apartment building having direct access to a backyard or garden and a low-level apartment building or building complex surrounded by lawns and trees, shrubbery, or gardens.</string>
+    <string name="ex_facilities">Balcony, Partial Furnished, Bathtub, Intercom, Cooker, High Floor</string>
+    <string name="property_video">Property Video</string>
+    <string name="call_agent">Call Agent Now</string>
+    <string name="upcomingevent">Upcoming Events</string>
+    <string name="ue_title">Malaysia Property Show</string>
+    <string name="ue_address">Marriott Hotel Singapore</string>
+    <string name="ue_timing">11am - 7pm</string>
+    <string name="ue_date">Aug 15</string>
+    <string name="ue_headline">Marriott International, Inc. is an American multinational diversified hospitality company</string>
+    <string name="ue_description">Marriott was founded by John Willard Marriott in 1927 when he and his wife, Alice Sheets Marriott, opened a root beer stand in Washington, D.C.\n As a Mormon missionary in the humid summers in Washington D.C, Marriott was convinced that what residents of the city needed was a place to get a cool drink. The Marriotts later expanded their enterprise into a chain of restaurants and hotels.</string>
+    
+    
     <array name="listing_type_array">
         <item>For sale</item>
         <item>For rent</item>
@@ -93,7 +143,7 @@
         <item>Partially Furnished</item>
         <item>Fully Furnished</item>
     </array>
-    
+
     <array name="floorarray">
         <item>Ground Floor</item>
         <item>Low Floor</item>
@@ -101,7 +151,7 @@
         <item>High Floor</item>
         <item>Penthouse</item>
     </array>
-    
+
     <array name="splarray">
         <item>Penthouse</item>
         <item>Corner Unit</item>
@@ -116,7 +166,7 @@
         <item>High Floor</item>
         <item>Colonial Building</item>
     </array>
-    
+
     <array name="fnfarray">
         <item>Air conditioning</item>
         <item>Bathtub</item>
@@ -127,7 +177,7 @@
         <item>Private Pool</item>
         <item>Water Heater</item>
     </array>
-    
+
     <array name="oispacearray">
         <item>Balcony</item>
         <item>Bombshelter</item>
@@ -139,7 +189,7 @@
         <item>Terrace</item>
         <item>Walk-in-wardrobe</item>
     </array>
-    
+
     <array name="facilitiesarray">
         <item>Penthouse</item>
         <item>Corner Unit</item>

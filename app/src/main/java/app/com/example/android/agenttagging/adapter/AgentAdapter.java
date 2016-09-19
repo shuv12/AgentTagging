@@ -25,13 +25,13 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.ViewHolder> 
     private Context context;
     private List<AgentModel> agentModelList;
 
-    public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder{
-        TextView agentName,agentNumber;
+    public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+        TextView agentName, agentNumber;
         ImageView agentPic;
         Button viewAgentProfile;
         private final Context context;
 
-        public ViewHolder(final View itemView){
+        public ViewHolder(final View itemView) {
             super(itemView);
             context = itemView.getContext();
             this.agentName = (TextView) itemView.findViewById(R.id.agentname);
@@ -42,7 +42,7 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     final Intent intent;
-                    intent = new Intent(context,ViewProfile.class);
+                    intent = new Intent(context, ViewProfile.class);
                     context.startActivity(intent);
                 }
             });
@@ -50,24 +50,24 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.ViewHolder> 
         }
     }
 
-    public AgentAdapter(Context context, List<AgentModel> agentModelList){
+    public AgentAdapter(Context context, List<AgentModel> agentModelList) {
         this.context = context;
         this.agentModelList = agentModelList;
     }
 
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.agent_display_item,parent,false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.agent_display_item, parent, false));
     }
 
-    public void onBindViewHolder(ViewHolder holder,int position){
+    public void onBindViewHolder(ViewHolder holder, int position) {
         AgentModel agentModel = (AgentModel) this.agentModelList.get(position);
         holder.agentName.setText(agentModel.getAgentName());
         holder.agentNumber.setText(agentModel.getAgentNumber());
         //holder.agentPic.setImageResource(agentModel.getAgentPic());
-        Picasso.with(context).load(agentModel.getAgentPic()).resize(300,400).into(holder.agentPic);
+        Picasso.with(context).load(agentModel.getAgentPic()).resize(300, 400).into(holder.agentPic);
     }
 
-    public int getItemCount(){
+    public int getItemCount() {
         return agentModelList.size();
     }
 }

@@ -27,13 +27,13 @@ import app.com.example.android.agenttagging.model.PropertyModel;
 public class Home extends AppCompatActivity {
     private boolean mSlideState = false;
     private DrawerLayout mDrawerLayout;
-    public LinearLayout quick,quicksearchlayout,viewmyprofile;
+    public LinearLayout quick, quicksearchlayout, viewmyprofile;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyModel> propertyModelList;
     private NavigationView nvDrawer;
     private Button createListing;
-    private View header,headerlayout;
+    private View header, headerlayout;
 
     String[] propertyAddress = new String[]{"22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street"};
     String[] propertyHeadline = new String[]{"5th Avenue", "6th Avenue", "7th Avenue", "8th Avenue", "9th Avenue", "57th Avenue", "59th Avenue", "52th Avenue", "54th Avenue"};
@@ -47,8 +47,6 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-
-
         final SearchView mSearchView = (SearchView) findViewById(R.id.search_bar);
         mSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,20 +54,15 @@ public class Home extends AppCompatActivity {
                 mSearchView.setIconified(false);
             }
         });
-        try
-        {
+        try {
             Field searchField = SearchView.class.getDeclaredField("mSearchButton");
             searchField = SearchView.class.getDeclaredField("mSearchPlate");
-            LinearLayout searchPlate = (LinearLayout)searchField.get(mSearchView);
+            LinearLayout searchPlate = (LinearLayout) searchField.get(mSearchView);
             searchPlate.setBackgroundResource(R.drawable.searchviewbg);
-        }
-        catch (NoSuchFieldException e)
-        {
-            Log.e("error",e.getMessage(),e);
-        }
-        catch (IllegalAccessException e)
-        {
-            Log.e("error",e.getMessage(),e);
+        } catch (NoSuchFieldException e) {
+            Log.e("error", e.getMessage(), e);
+        } catch (IllegalAccessException e) {
+            Log.e("error", e.getMessage(), e);
         }
 
 
@@ -113,7 +106,7 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(Home.this, ViewProfile.class);
-                        intent.putExtra("myprofile",true);
+                        intent.putExtra("myprofile", true);
                         startActivity(intent);
                     }
                 });
@@ -126,10 +119,6 @@ public class Home extends AppCompatActivity {
                 });
             }
         });
-
-
-
-
 
 
         this.propertyModelList = new ArrayList<>();
@@ -149,7 +138,6 @@ public class Home extends AppCompatActivity {
         recyclerView.setAdapter(propertyAdapter);
         recyclerView.setLayoutManager(layoutManager);
         final RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
-
 
 
         quick = (LinearLayout) findViewById(R.id.quicksearch);
@@ -193,23 +181,24 @@ public class Home extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         int id = menuItem.getItemId();
 
-                        if (id == R.id.property){
+                        if (id == R.id.property) {
                         }
 
-                        if (id == R.id.groupteam){
-
-                        }
-
-                        if (id == R.id.upcoming){
+                        if (id == R.id.groupteam) {
 
                         }
 
-                        if (id == R.id.setting){
+                        if (id == R.id.upcoming) {
+                            Intent intent1 = new Intent(Home.this, UpcomingEvent.class);
+                            startActivity(intent1);
+                        }
+
+                        if (id == R.id.setting) {
 
                         }
 
-                        if (id == R.id.agents){
-                            Intent intent = new Intent(Home.this,Agent.class);
+                        if (id == R.id.agents) {
+                            Intent intent = new Intent(Home.this, Agent.class);
                             startActivity(intent);
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);

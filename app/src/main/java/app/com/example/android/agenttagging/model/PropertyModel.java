@@ -16,57 +16,61 @@ public class PropertyModel implements Serializable {
     private String views;
 
 
-    public String getPropertyPic(){
+    public String getPropertyPic() {
         return this.propertyPic;
     }
 
-    public void setPropertyPic(String propertyPic){
+    public void setPropertyPic(String propertyPic) {
         this.propertyPic = propertyPic;
     }
 
 
-    public String getPropertyType(){
+    public String getPropertyType() {
         return this.propertyType;
     }
 
-    public void setPropertyType(String propertyType){
+    public void setPropertyType(String propertyType) {
         this.propertyType = propertyType;
     }
 
-    public String getPropertyOwner(){
+    public String getPropertyOwner() {
         return this.propertyOwner;
     }
 
-    public void setPropertyOwner(String propertyOwner){
+    public void setPropertyOwner(String propertyOwner) {
         this.propertyOwner = propertyOwner;
     }
 
-    public String getPropertyAddress(){
+    public String getPropertyAddress() {
         return this.propertyAddress;
     }
 
-    public void setPropertyAddress(String propertyAddress){
+    public void setPropertyAddress(String propertyAddress) {
         this.propertyAddress = propertyAddress;
     }
 
-    public String getPropertyPrice(){
+    public String getPropertyPrice() {
         return this.propertyPrice;
     }
 
-    public void setPropertyPrice(String propertyPrice){
+    public void setPropertyPrice(String propertyPrice) {
         this.propertyPrice = propertyPrice;
     }
 
-    public String getPropertyHeadline(){
+    public String getPropertyHeadline() {
         return this.propertyHeadline;
     }
 
-    public void setPropertyHeadline(String propertyHeadline){
+    public void setPropertyHeadline(String propertyHeadline) {
         this.propertyHeadline = propertyHeadline;
     }
 
-    public String getViews() {return this.views;}
+    public String getViews() {
+        return this.views;
+    }
 
-    public void setViews(String views){this.views = views;}
+    public void setViews(String views) {
+        this.views = views;
+    }
 }
 

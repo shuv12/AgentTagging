@@ -34,13 +34,13 @@ public class NotifyFragTagged extends Fragment {
 
     private int mPage;
 
-    String[] notiUser = new String[]{"Shuvam Agrawal","Suman Jung","Abin Rimal","Ashish","Vishal","Pujan","Shuvam Agrawal","Suman Jung","Abin Rimal","Ashish","Vishal","Pujan"};
+    String[] notiUser = new String[]{"Shuvam Agrawal", "Suman Jung", "Abin Rimal", "Ashish", "Vishal", "Pujan", "Shuvam Agrawal", "Suman Jung", "Abin Rimal", "Ashish", "Vishal", "Pujan"};
     String[] notiproAdd = new String[]{"22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street", "22nd Jump Street", "23nd Jump Street", "24nd Jump Street"};
     String[] notiproType = new String[]{"Apartment", "Bunglo", "Flat", "Open space", "Shutter", "Apartment", "HBD", "Flat", "Bunglo"};
-    String[] notiforType = new String[]{forrent,forsale,forrent,forsale,forsale,forsale,forsale,forrent,forsale};
-    String[] notiStatus = new String[]{approved,"tag",pending,approved,denied,denied,pending,pending,approved,approved};
+    String[] notiforType = new String[]{forrent, forsale, forrent, forsale, forsale, forsale, forsale, forrent, forsale};
+    String[] notiStatus = new String[]{approved, "tag", pending, approved, denied, denied, pending, pending, approved, approved};
 
-    public static NotifyFragTagged newInstance(int page){
+    public static NotifyFragTagged newInstance(int page) {
         // Required empty public constructor
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
@@ -63,9 +63,9 @@ public class NotifyFragTagged extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notify_frag_tagged, container, false);
 
         this.notificationsModelList = new ArrayList<>();
-        for (int i=0; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             NotificationsModel notificationsModel = new NotificationsModel();
-            if (this.notiStatus[i].toString() == "Approved"){
+            if (this.notiStatus[i].toString() == "Approved") {
                 notificationsModel.setNotiforType(this.notiforType[i]);
                 notificationsModel.setNotiproadd(this.notiproAdd[i]);
                 notificationsModel.setNotiproType(this.notiproType[i]);
@@ -77,7 +77,7 @@ public class NotifyFragTagged extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclenotiposttagged);
-        final NotifyTaggedAdapter notifyTaggedAdapter = new NotifyTaggedAdapter(getContext(),notificationsModelList);
+        final NotifyTaggedAdapter notifyTaggedAdapter = new NotifyTaggedAdapter(getContext(), notificationsModelList);
         recyclerView.setAdapter(notifyTaggedAdapter);
         recyclerView.setLayoutManager(layoutManager);
 

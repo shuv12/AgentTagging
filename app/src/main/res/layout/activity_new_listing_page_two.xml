@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="app.com.example.android.agenttagging.NewListingPageTwo">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/green_back">
+            android:background="@color/green_back"
+            android:orientation="horizontal">
+
             <ImageView
+                android:id="@+id/backbtn2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_arrow_back_white_36dp"
-                android:id="@+id/backbtn2"/>
+                android:src="@drawable/ic_arrow_back_white_36dp" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/step2"
-                android:layout_weight="1"
-                android:textStyle="bold"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@android:color/white"/>
+                android:text="@string/step2"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
             <ImageView
+                android:id="@+id/notificationbtn"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/notification"
-                android:id="@+id/notificationbtn"/>
+                android:src="@drawable/notification" />
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -44,192 +48,203 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="true"
             android:background="@color/listingback"
-            >
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                >
+                android:layout_margin="@dimen/activity_horizontal_margin">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:focusableInTouchMode="true"
+                    android:orientation="vertical"
                     android:padding="@dimen/activity_horizontal_margin">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/ud"
                         android:gravity="center"
+                        android:paddingBottom="@dimen/activity_horizontal_margin"
+                        android:text="@string/ud"
                         android:textColor="@color/textmain"
-                        android:textStyle="bold"
-                        android:paddingBottom="@dimen/activity_horizontal_margin"/>
+                        android:textStyle="bold" />
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/furnished"
                         android:id="@+id/furnished"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/furnished"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <TextView
                         android:id="@+id/floor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
                         android:singleLine="true"
                         android:text="@string/floor"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/noofbathroom"
-                        android:id="@+id/noofbathroom"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/splf"
-                        android:singleLine="true"
-                        android:id="@+id/splf"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fnf"
-                        android:id="@+id/fnf"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/outins"
-                        android:id="@+id/outins"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/facilities"
-                        android:id="@+id/facilities"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pd"
-                        android:gravity="center"
                         android:textColor="@color/textmain"
-                        android:textStyle="bold"
-                        android:paddingBottom="@dimen/activity_horizontal_margin"/>
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/noofbathroom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/noofbathroom"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/splf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/splf"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/fnf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/fnf"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/outins"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/outins"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/facilities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/facilities"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/tenure"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/activity_horizontal_margin"
+                        android:text="@string/pd"
+                        android:textColor="@color/textmain"
+                        android:textStyle="bold" />
+
+                    <TextView
                         android:id="@+id/tenure"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColor="@color/textmain"/>
-                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:text="@string/tenure"
+                        android:textColor="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <EditText
                         android:id="@+id/topyr"
-                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
                         android:hint="@string/topyr"
-                        android:textSize="14sp"
                         android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColorHint="@color/textmain"/>
+                        android:singleLine="true"
+                        android:textColorHint="@color/textmain"
+                        android:textSize="14sp" />
+
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/tou"
                         android:id="@+id/tou"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColorHint="@color/textmain"/>
-                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/tof"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:hint="@string/tou"
+                        android:padding="@dimen/text_margin"
                         android:singleLine="true"
+                        android:textColorHint="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <EditText
                         android:id="@+id/tof"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
-                        android:layout_marginBottom="@dimen/card_margin"
-                        android:textColorHint="@color/textmain"/>
-                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/videourl"
-                        android:id="@+id/videourl"
-                        android:singleLine="true"
-                        android:textSize="14sp"
-                        android:padding="@dimen/text_margin"
-                        android:background="@drawable/edittextboxview"
                         android:layout_marginBottom="@dimen/card_margin"
-                        android:textColorHint="@color/textmain"/>
+                        android:background="@drawable/edittextboxview"
+                        android:hint="@string/tof"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:textColorHint="@color/textmain"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/videourl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/card_margin"
+                        android:background="@drawable/edittextboxview"
+                        android:hint="@string/videourl"
+                        android:padding="@dimen/text_margin"
+                        android:singleLine="true"
+                        android:textColorHint="@color/textmain"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <Button
+                android:id="@+id/nexttothree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/next"
-                android:background="@color/green_back"
-                android:textColor="@android:color/white"
                 android:layout_gravity="bottom|center"
+                android:background="@color/green_back"
                 android:gravity="bottom|center"
-                android:textStyle="bold"
-                android:id="@+id/nexttothree"
-                android:padding="@dimen/activity_horizontal_margin"/>
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="@string/next"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>
