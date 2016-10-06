@@ -6,14 +6,17 @@ import java.io.Serializable;
  * Created by shuvam on 30-08-2016.
  */
 public class PropertyModel implements Serializable {
-    private static final long serialVersionUID = 1;
     private String propertyType;
     private String propertyOwner;
     private String propertyAddress;
     private String propertyHeadline;
     private String propertyPic;
     private String propertyPrice;
-    private String views;
+    private String propertyArea;
+    private String propertyPricePerUnit;
+    private String propertyAreaUnit;
+    private String propertyPurpose;
+
 
 
     public String getPropertyPic() {
@@ -65,12 +68,36 @@ public class PropertyModel implements Serializable {
         this.propertyHeadline = propertyHeadline;
     }
 
-    public String getViews() {
-        return this.views;
+    public String getPropertyArea() {
+        return this.propertyArea;
     }
 
-    public void setViews(String views) {
-        this.views = views;
+    public void setPropertyArea(String propertyArea) {
+        this.propertyArea = propertyArea;
+    }
+
+    public String getPropertyPricePerUnit() {
+        return this.propertyPricePerUnit;
+    }
+
+    public void setPropertyPricePerUnit(String propertyPricePerUnit) {
+        this.propertyPricePerUnit = propertyPricePerUnit;
+    }
+
+    public String getPropertyAreaUnit() {
+        return this.propertyAreaUnit;
+    }
+
+    public void setPropertyAreaUnit(String propertyAreaUnit) {
+        this.propertyAreaUnit = propertyAreaUnit;
+    }
+
+    public String getPropertyPurpose() {
+        return this.propertyPurpose;
+    }
+
+    public void setPropertyPurpose(String propertyPurpose) {
+        this.propertyPurpose = propertyPurpose;
     }
 }
 

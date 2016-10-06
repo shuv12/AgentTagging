@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import app.com.example.android.agenttagging.PropertyDetails;
@@ -23,7 +25,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     private List<PropertyModel> propertyModelList;
 
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
-        TextView propertyHeadline, propertyAddress, propertyType, propertyOwner, propertyPrice;
+        TextView propertyHeadline, propertyAddress, propertyType, propertyOwner, propertyPrice,propertyPurpose, propertyPricePerUnit, propertyArea, propertyAreaUnit;
         ImageView propertyImage;
         private final Context context;
 
@@ -32,10 +34,14 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             context = itemView.getContext();
             this.propertyAddress = (TextView) itemView.findViewById(R.id.property_address);
             this.propertyHeadline = (TextView) itemView.findViewById(R.id.property_headline);
-            this.propertyOwner = (TextView) itemView.findViewById(R.id.property_owner);
+            //this.propertyOwner = (TextView) itemView.findViewById(R.id.property_owner);
+            this.propertyPurpose = (TextView) itemView.findViewById(R.id.property_purpose);
             this.propertyType = (TextView) itemView.findViewById(R.id.property_type);
             this.propertyPrice = (TextView) itemView.findViewById(R.id.property_price);
             this.propertyImage = (ImageView) itemView.findViewById(R.id.property_image);
+            this.propertyAreaUnit = (TextView) itemView.findViewById(R.id.property_area_unit);
+            this.propertyArea = (TextView) itemView.findViewById(R.id.property_area);
+            this.propertyPricePerUnit = (TextView) itemView.findViewById(R.id.property_price_per_unit);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,7 +68,11 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         holder.propertyPrice.setText(propertyModel.getPropertyPrice());
         holder.propertyHeadline.setText(propertyModel.getPropertyHeadline());
         holder.propertyType.setText(propertyModel.getPropertyType());
-        holder.propertyOwner.setText(propertyModel.getPropertyOwner());
+        holder.propertyPurpose.setText(propertyModel.getPropertyPurpose());
+        holder.propertyPricePerUnit.setText(propertyModel.getPropertyPricePerUnit());
+        holder.propertyArea.setText(propertyModel.getPropertyArea());
+        holder.propertyAreaUnit.setText(propertyModel.getPropertyAreaUnit());
+        Picasso.with(context).load(propertyModel.getPropertyPic()).resize(300, 400).into(holder.propertyImage);
         //holder.propertyImage.setImageResource(getItemId(R.drawable.houses));
     }
 

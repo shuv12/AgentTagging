@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "app.com.example.android.agenttagging"
@@ -30,4 +31,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.apmem.tools:layouts:1.10@aar'
     compile 'com.afollestad.material-dialogs:core:0.9.0.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }

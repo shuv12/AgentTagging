@@ -7,6 +7,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -16,6 +17,7 @@ public class NewListingPageOne extends AppCompatActivity {
     private Button toPageTwo;
     private ImageView backBtn1;
     private TextView textnob, taggingLimit;
+    private RadioGroup purpose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class NewListingPageOne extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        purpose = (RadioGroup) findViewById(R.id.purpose);
+        purpose.getCheckedRadioButtonId();
 
 
         textnob = (TextView) findViewById(R.id.new_nob);

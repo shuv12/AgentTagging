@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.GravityEnum;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
         TextView notipostStr, notiStatus, notifor;
         Button btnTag;
+        ImageButton tick,cross;
         LinearLayout requestLayout;
         //ImageView notiPic;
 
@@ -35,6 +40,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             this.notiStatus = (TextView) itemView.findViewById(R.id.status);
             this.btnTag = (Button) itemView.findViewById(R.id.btntag);
             this.requestLayout = (LinearLayout) itemView.findViewById(R.id.requested);
+            this.tick = (ImageButton) itemView.findViewById(R.id.checkaccept);
+            this.cross = (ImageButton) itemView.findViewById(R.id.crossdenied);
 
             //this.notiPic = (ImageView) itemView.findViewById(R.id.notipropic);
         }
@@ -56,7 +63,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         holder.notifor.setText(notificationsModel.getNotiforType());
 
 
-        String curstatus = holder.notiStatus.getText().toString();
+        final String curstatus = holder.notiStatus.getText().toString();
         switch (curstatus) {
             case "Pending":
                 holder.notiStatus.setTextColor(Color.BLUE);
@@ -70,17 +77,55 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             case "tag":
                 holder.notiStatus.setVisibility(View.GONE);
                 holder.btnTag.setVisibility(View.VISIBLE);
+                holder.btnTag.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean wrapInScrollView = true;
+                        final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                                .title(R.string.requestsentitle)
+                                .customView(R.layout.senttagboxlayout,wrapInScrollView)
+                                .titleGravity(GravityEnum.CENTER)
+                                .show();
+
+                        View view = dialog.getCustomView();
+                        Button sentTag = (Button) view.findViewById(R.id.senttagdone);
+                        sentTag.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
                 break;
             case "requested":
                 holder.notiStatus.setVisibility(View.GONE);
                 holder.requestLayout.setVisibility(View.VISIBLE);
+                holder.tick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean wrapInScrollView = true;
+                        final MaterialDialog dialogappr = new MaterialDialog.Builder(context)
+                                .title(R.string.notirequest)
+                                .customView(R.layout.approvedtagboxlayout,wrapInScrollView)
+                                .titleGravity(GravityEnum.CENTER)
+                                .show();
+
+                        View view = dialogappr.getCustomView();
+                        Button sendMsg = (Button) view.findViewById(R.id.sendtextmsg);
+                        sendMsg.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogappr.dismiss();
+                            }
+                        });
+                    }
+                });
                 break;
             default:
                 holder.notiStatus.setVisibility(View.GONE);
                 holder.btnTag.setVisibility(View.VISIBLE);
-
         }
-        //Picasso.with(context).load(notificationsModel.getNotiPic()).resize(150,150).into(holder.notiPic);
     }
 
     public int getItemCount() {

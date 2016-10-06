@@ -2,6 +2,7 @@ package app.com.example.android.agenttagging;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,21 +35,30 @@ public class Login extends AppCompatActivity {
     private EditText editTextEmail, editTextPassword;
     private Button loginButton;
     private TextView forgetPass;
+    private ImageView imageView;
+
 
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
+
+    public static final String UserPREFERENCES = "UserPrefs" ;
+    public static final String ID = "id";
+    public static final String FULLNAME = "fullname";
+    public static final String USERPHONE = "phone";
+
 
     private static final String EMAIL = "email";
     private static final String PASSWORD = "password";
     private static final String LOGIN_URL = "http://abinrimal.com.np/rest/userlogin.php";
 
-
-    //private LinearLayout findlogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        ///imageView = (ImageView) findViewById(R.id.fancy_login_image);
+        //imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),R.drawable.login_bg,200,200));
 
         editTextEmail = (EditText) findViewById(R.id.userinputemail);
         editTextPassword = (EditText) findViewById(R.id.userinputpassword);
@@ -57,7 +68,7 @@ public class Login extends AppCompatActivity {
         forgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(Login.this, Home.class);
+                Intent intent1 = new Intent(Login.this, FrontPage.class);
                 startActivity(intent1);
             }
         });
@@ -104,7 +115,24 @@ public class Login extends AppCompatActivity {
                 Object report = object.get("data");
                 String status = status_message.toString();
                 String report_msg = report.toString();
+                Object userid = object.get("id");
+                String UserID = userid.toString();
+                Object Fullname = object.get("fullname");
+                String fulln = Fullname.toString();
+                Object phone = object.get("phone");
+                String userphone = phone.toString();
+                Log.v("UserId : ",UserID);
+                Log.v("Fullname : ",fulln);
+                Log.v("Phone : ",userphone);
+
+
                 if (status.equals("true")) {
+                    SharedPreferences sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(ID,UserID);
+                    editor.putString(FULLNAME,fulln);
+                    editor.putString(USERPHONE,userphone);
+                    editor.commit();
                     Toast.makeText(Login.this, "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, Home.class);
                     //intent.putExtra(EMAIL,email);
@@ -195,4 +223,47 @@ public class Login extends AppCompatActivity {
 
         }
     }
+
+   /* public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }*/
+
+
 }

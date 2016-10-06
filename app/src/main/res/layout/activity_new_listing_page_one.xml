@@ -83,6 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/buttonheight"
+                        android:id="@+id/purpose"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_horizontal_margin">
 
@@ -92,6 +93,7 @@
                             android:layout_weight="1"
                             android:button="?android:attr/listChoiceIndicatorMultiple"
                             android:text="@string/fors"
+                            android:id="@+id/sale"
                             android:textColor="@color/textmain" />
 
                         <RadioButton
@@ -100,6 +102,7 @@
                             android:layout_weight="1"
                             android:button="?android:attr/listChoiceIndicatorMultiple"
                             android:text="@string/forr"
+                            android:id="@+id/rent"
                             android:textColor="@color/textmain" />
                     </RadioGroup>
                 </LinearLayout>

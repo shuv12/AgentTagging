@@ -151,8 +151,8 @@
                             android:orientation="vertical">
 
                             <app.com.example.android.agenttagging.CheckableImageView
-                                android:layout_width="72dp"
-                                android:layout_height="72dp"
+                                android:layout_width="@dimen/box_dimen"
+                                android:layout_height="@dimen/box_dimen"
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
@@ -184,8 +184,8 @@
                             android:orientation="vertical">
 
                             <app.com.example.android.agenttagging.CheckableImageView
-                                android:layout_width="72dp"
-                                android:layout_height="72dp"
+                                android:layout_width="@dimen/box_dimen"
+                                android:layout_height="@dimen/box_dimen"
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
@@ -216,8 +216,8 @@
                             android:orientation="vertical">
 
                             <app.com.example.android.agenttagging.CheckableImageView
-                                android:layout_width="72dp"
-                                android:layout_height="72dp"
+                                android:layout_width="@dimen/box_dimen"
+                                android:layout_height="@dimen/box_dimen"
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
@@ -248,8 +248,8 @@
                             android:orientation="vertical">
 
                             <app.com.example.android.agenttagging.CheckableImageView
-                                android:layout_width="72dp"
-                                android:layout_height="72dp"
+                                android:layout_width="@dimen/box_dimen"
+                                android:layout_height="@dimen/box_dimen"
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
@@ -328,6 +328,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:background="@color/green_back"
             android:text="@string/createlisting"
             android:textColor="@android:color/white"
@@ -335,8 +336,5 @@
             android:visibility="gone" />
 
     </android.support.design.widget.NavigationView>
-    <!--app:menu="@menu/drawer_items"
-    app:itemTextColor="@android:color/white"
-    app:headerLayout="@layout/logindrawerheader"-->
 
 </android.support.v4.widget.DrawerLayout>

@@ -93,7 +93,7 @@ public class NewListingPageTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
-                        .title(R.string.floor)
+                        .title(R.string.noofbathroom)
                         .items("1", "2", "3", "4", "5", "6", "7", "8", "9", "9+")
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
@@ -111,7 +111,7 @@ public class NewListingPageTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
-                        .title(R.string.floor)
+                        .title(R.string.splf)
                         .items(R.array.splarray)
                         .itemsCallbackMultiChoice(splitems,new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
@@ -130,7 +130,7 @@ public class NewListingPageTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
-                        .title(R.string.floor)
+                        .title(R.string.fnf)
                         .items(R.array.fnfarray)
                         .itemsCallbackMultiChoice(fnfitems, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
@@ -149,7 +149,7 @@ public class NewListingPageTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
-                        .title(R.string.floor)
+                        .title(R.string.pro_iospace)
                         .items(R.array.oispacearray)
                         .itemsCallbackMultiChoice(oispaceitems, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
@@ -168,7 +168,7 @@ public class NewListingPageTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
-                        .title(R.string.floor)
+                        .title(R.string.facilities)
                         .items(R.array.facilitiesarray)
                         .itemsCallbackMultiChoice(facilitesitems, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
@@ -186,7 +186,7 @@ public class NewListingPageTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(NewListingPageTwo.this)
-                        .title(R.string.floor)
+                        .title(R.string.tenure)
                         .items(R.array.tenurearray)
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override

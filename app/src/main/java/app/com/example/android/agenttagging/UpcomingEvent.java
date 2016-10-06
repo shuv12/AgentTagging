@@ -1,17 +1,18 @@
 package app.com.example.android.agenttagging;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class UpcomingEvent extends AppCompatActivity {
     private List<EventModel> eventModelList;
     private EventAdapter eventAdapter;
     private NavigationView nvDrawer;
+    private LinearLayout viewmyprofile;
+    private ImageView alwaysHome1,alwaysHome2;
 
     String[] title = new String[]{"Malaysia Property Show", "Nepal Radisson Hotel", "Hyatt Hotel", "Kaja Ghar", "Malaysia Property Show", "Nepal Radisson Hotel", "Hyatt Hotel", "Kaja Ghar", "Malaysia Property Show", "Nepal Radisson Hotel", "Hyatt Hotel", "Kaja Ghar"};
     String[] address = new String[]{"Marriott Hotel Singapore", "Nepal Radisson Hotel", "Hyatt Hotel", "Baneshwor", "Marriott Hotel Singapore", "Nepal Radisson Hotel", "Hyatt Hotel", "Baneshwor", "Marriott Hotel Singapore", "Nepal Radisson Hotel", "Hyatt Hotel", "Baneshwor"};
@@ -105,6 +108,15 @@ public class UpcomingEvent extends AppCompatActivity {
         setupDrawerContent(nvDrawer);
 
         View header = nvDrawer.getHeaderView(0);
+        alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
+        alwaysHome1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpcomingEvent.this, FrontPage.class);
+                startActivity(intent);
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
         TextView textView = (TextView) header.findViewById(R.id.logintext);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +124,31 @@ public class UpcomingEvent extends AppCompatActivity {
                 nvDrawer.getHeaderView(0).setVisibility(View.GONE);
                 View headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
                 createListing.setVisibility(View.VISIBLE);
+                alwaysHome2 = (ImageView) headerlayout.findViewById(R.id.alwayshome);
+                alwaysHome2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(UpcomingEvent.this, FrontPage.class);
+                        startActivity(intent);
+                        mDrawerLayout.closeDrawer(GravityCompat.START);
+                    }
+                });
+                viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
+                viewmyprofile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(UpcomingEvent.this, ViewProfile.class);
+                        intent.putExtra("myprofile", true);
+                        startActivity(intent);
+                    }
+                });
+                createListing.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent1 = new Intent(UpcomingEvent.this, NewListingPageOne.class);
+                        startActivity(intent1);
+                    }
+                });
             }
         });
 
@@ -158,7 +195,8 @@ public class UpcomingEvent extends AppCompatActivity {
                         }
 
                         if (id == R.id.groupteam) {
-
+                            Intent intent2 = new Intent(UpcomingEvent.this, GroupTeam.class);
+                            startActivity(intent2);
                         }
 
                         if (id == R.id.upcoming) {

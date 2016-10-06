@@ -16,7 +16,17 @@
             android:id="@+id/agents"/>
         <item
             android:id="@+id/setting"
-            android:title="Settings"/>
+            android:title="Settings" />
+        <item
+            android:id="@+id/spacer1"
+            android:title=""
+            android:checkable="false"
+            android:enabled="false"/>
+        <item
+            android:id="@+id/spacer2"
+            android:title=""
+            android:checkable="false"
+            android:enabled="false"/>
 
         <!--<item
             app:actionLayout="@layout/createlistingmenuitem"
