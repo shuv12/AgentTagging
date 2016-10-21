@@ -18,4 +18,7 @@
     <color name="dott">#aa7c8ea2</color>
     <color name="posttext">#475767</color>
     <color name="wite">#FFFFFF</color>
+    <color name="approved">#eca100</color>
+    <color name="denied">#ed3232</color>
+    <color name="pending">#5d6ae7</color>
 </resources>

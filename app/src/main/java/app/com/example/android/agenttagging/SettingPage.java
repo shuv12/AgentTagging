@@ -2,14 +2,11 @@ package app.com.example.android.agenttagging;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,16 +16,15 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class FrontPage extends AppCompatActivity {
+public class SettingPage extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
-    private Button createListing;
-    private NavigationView nvDrawer;
     private boolean mSlideState = false;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView nvDrawer;
+    private Button createListing;
     private LinearLayout viewmyprofile;
-    private SearchView searchView;
-    private ImageView alwaysHome1,alwaysHome2;
-    private LinearLayout frontHBD,frontCondo,frontLanded,frontBankSale;
+    private ImageView alwaysHome1,alwaysHome2,drawerMenu;
+    private TextView logout;
 
     private View header, headerlayout;
     private ImageView userImageview;
@@ -47,7 +43,20 @@ public class FrontPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_front_page);
+        setContentView(R.layout.activity_setting_page);
+
+        logout = (TextView) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                Intent intent = new Intent(SettingPage.this,FrontPage.class);
+                startActivity(intent);
+            }
+        });
 
         sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
         isLogged = sharedPreferences.getBoolean(ISLOGGED,false);
@@ -55,8 +64,8 @@ public class FrontPage extends AppCompatActivity {
         loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC,null);
         String userImageUrl = GETLOGGEDUSERPICURL + loggedUserPic;
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayoutfront);
-        ImageView drawerMenu = (ImageView) findViewById(R.id.drawermenu);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_setting_page);
+        drawerMenu = (ImageView) findViewById(R.id.drawermenu1);
 
         drawerMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,71 +74,6 @@ public class FrontPage extends AppCompatActivity {
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 } else
                     mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-
-        AnimationDrawable animation = new AnimationDrawable();
-        animation.addFrame(ContextCompat.getDrawable(this,R.drawable.banner_bk), 5000);
-        animation.addFrame(ContextCompat.getDrawable(this,R.drawable.banner_1), 5000);
-        animation.addFrame(ContextCompat.getDrawable(this,R.drawable.agent_banner), 5000);
-        animation.setOneShot(false);
-
-        LinearLayout imageAnim =  (LinearLayout) findViewById(R.id.banner);
-        imageAnim.setBackgroundDrawable(animation);
-
-        // start the animation!
-        animation.start();
-
-        frontBankSale = (LinearLayout) findViewById(R.id.front_banksale);
-        frontCondo = (LinearLayout) findViewById(R.id.front_condo);
-        frontHBD = (LinearLayout) findViewById(R.id.front_hbd);
-        frontLanded = (LinearLayout) findViewById(R.id.front_landed);
-
-        frontHBD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FrontPage.this,Home.class);
-                intent.putExtra("type","HDB");
-                startActivity(intent);
-            }
-        });
-
-        frontCondo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FrontPage.this,Home.class);
-                intent.putExtra("type","condo");
-                startActivity(intent);
-            }
-        });
-
-        frontLanded.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FrontPage.this,Home.class);
-                intent.putExtra("type","Landed");
-                startActivity(intent);
-            }
-        });
-
-        frontBankSale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FrontPage.this,Home.class);
-                intent.putExtra("type","BankSale");
-                startActivity(intent);
-            }
-        });
-
-
-
-
-        searchView = (SearchView) findViewById(R.id.searchview);
-        searchView.setQueryHint("Search by agent, property, location etc");
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchView.setIconified(false);
             }
         });
 
@@ -152,7 +96,7 @@ public class FrontPage extends AppCompatActivity {
             alwaysHome2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(FrontPage.this, FrontPage.class);
+                    Intent intent = new Intent(SettingPage.this, FrontPage.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
@@ -161,7 +105,7 @@ public class FrontPage extends AppCompatActivity {
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(FrontPage.this, ViewProfile.class);
+                    Intent intent = new Intent(SettingPage.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
                 }
@@ -169,7 +113,7 @@ public class FrontPage extends AppCompatActivity {
             createListing.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent1 = new Intent(FrontPage.this, NewListingPageOne.class);
+                    Intent intent1 = new Intent(SettingPage.this, NewListingPageOne.class);
                     startActivity(intent1);
                 }
             });
@@ -181,7 +125,7 @@ public class FrontPage extends AppCompatActivity {
             alwaysHome1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(FrontPage.this, FrontPage.class);
+                    Intent intent = new Intent(SettingPage.this, FrontPage.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
@@ -191,22 +135,12 @@ public class FrontPage extends AppCompatActivity {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(FrontPage.this, Login.class);
+                    Intent intent = new Intent(SettingPage.this, Login.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
-
         }
-
-        ImageView notibtn = (ImageView) findViewById(R.id.notificationbtn);
-        notibtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FrontPage.this, Notify.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -217,28 +151,27 @@ public class FrontPage extends AppCompatActivity {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.property) {
-                            Intent intent = new Intent(FrontPage.this, Home.class);
+                            Intent intent = new Intent(SettingPage.this, Home.class);
                             startActivity(intent);
                         }
 
                         if (id == R.id.groupteam) {
-                            Intent intent3 = new Intent(FrontPage.this, GroupTeam.class);
-                            startActivity(intent3);
+                            Intent intent2 = new Intent(SettingPage.this, GroupTeam.class);
+                            startActivity(intent2);
                         }
 
                         if (id == R.id.upcoming) {
-                            Intent intent1 = new Intent(FrontPage.this, UpcomingEvent.class);
+                            Intent intent1 = new Intent(SettingPage.this, UpcomingEvent.class);
                             startActivity(intent1);
                         }
 
                         if (id == R.id.setting) {
-                            Intent intent3 = new Intent(FrontPage.this, SettingPage.class);
-                            startActivity(intent3);
+
                         }
 
                         if (id == R.id.agents) {
-                            Intent intent2 = new Intent(FrontPage.this, Agent.class);
-                            startActivity(intent2);
+                            Intent intent = new Intent(SettingPage.this, Agent.class);
+                            startActivity(intent);
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;
@@ -246,4 +179,3 @@ public class FrontPage extends AppCompatActivity {
                 });
     }
 }
-

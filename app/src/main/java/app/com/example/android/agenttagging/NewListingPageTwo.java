@@ -31,7 +31,7 @@ public class NewListingPageTwo extends AppCompatActivity {
         toPageThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewListingPageTwo.this, NewListingPageThree.class);
+                Intent intent = new Intent(NewListingPageTwo.this, UploadPhoto.class);
                 startActivity(intent);
             }
         });

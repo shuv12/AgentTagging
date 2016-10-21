@@ -35,8 +35,9 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
                 pdoispace,pdff,propertyDetailDescription,propertyDetailFacilities;
         ImageView propertyUserPic,propertyDetailPic ;
         Button show_more,show_less,call_agent;
-        LinearLayout show_more_layout;
+        LinearLayout show_more_layout, blockll, districtll;
         Context context;
+        View blockLine,districtLine;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +73,10 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
             this.show_less = (Button) itemView.findViewById(R.id.show_less);
             this.show_more_layout = (LinearLayout) itemView.findViewById(R.id.show_more);
             this.call_agent = (Button) itemView.findViewById(R.id.call_agent);
+            this.blockll = (LinearLayout) itemView.findViewById(R.id.blockll);
+            this.districtll = (LinearLayout) itemView.findViewById(R.id.districtll);
+            this.blockLine = (View) itemView.findViewById(R.id.blockline);
+            this.districtLine = (View) itemView.findViewById(R.id.districtline);
 
 
             propertyUserPic.setOnClickListener(new View.OnClickListener() {
@@ -114,9 +119,25 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
         final PropertyDetailModel propertyDetailModel = (PropertyDetailModel) this.propertyDetailModelList.get(position);
         holder.propertyDetailAddress.setText(propertyDetailModel.getPropertyDetailAddress());
         holder.propertyDetailAreaUnit.setText(propertyDetailModel.getPropertyDetailAreaUnit());
-        holder.propertyDetailBlockno.setText(propertyDetailModel.getPropertyDetailBlockno());
+        if (propertyDetailModel.getPropertyDetailBlockno().isEmpty())
+        {
+            holder.blockll.setVisibility(View.GONE);
+            holder.blockLine.setVisibility(View.GONE);
+        }
+        else {
+            holder.propertyDetailBlockno.setText(propertyDetailModel.getPropertyDetailBlockno());
+        }
+
+        if (propertyDetailModel.getPropertyDetailDistrict().isEmpty())
+        {
+            holder.districtll.setVisibility(View.GONE);
+            holder.districtLine.setVisibility(View.GONE);
+        }
+        else {
+            holder.propertyDetailDistrict.setText(propertyDetailModel.getPropertyDetailDistrict());
+        }
         holder.propertyDetailDescription.setText(propertyDetailModel.getPropertyDetailDescription());
-        holder.propertyDetailDistrict.setText(propertyDetailModel.getPropertyDetailDistrict());
+
         holder.pdff.setText(propertyDetailModel.getPdff());
         holder.propertyDetailPurpose.setText(propertyDetailModel.getPropertyDetailPurpose());
         holder.propertyDetailAskingPrice.setText(propertyDetailModel.getPropertyDetailAskingPrice());

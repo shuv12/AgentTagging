@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -35,21 +36,25 @@ import static app.com.example.android.agenttagging.Login.CONNECTION_TIMEOUT;
 import static app.com.example.android.agenttagging.Login.READ_TIMEOUT;
 
 public class PropertyDetails extends AppCompatActivity {
-    private ImageView backbtn;
+    private ImageView backbtn, taggedbtn;
     private CircleImageView viewTaggedAgents;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyDetailModel> propertyDetailModelList;
+    private String propertyID;
 
-    private static final String GETPROPERTYDETAILURL = "http://abinrimal.com.np/rest/GetPost/1";
-    private static final String GETPROPERTYDETAILPIC = "http://abinrimal.com.np/rest/images/posts/";
-    private static final String GETPROPERTYDETAILUSERPIC = "http://abinrimal.com.np/rest/images/users/";
+
+    private static final String GETPROPERTYDETAILURL = "http://realthree60.com/dev/apis/GetPost/";
+    private static final String GETPROPERTYDETAILPIC = "http://www.realthree60.com/dev/apis/assets/posts/";
+    private static final String GETPROPERTYDETAILUSERPIC = "http://www.realthree60.com/dev/apis/assets/users/";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
+
+        propertyID = getIntent().getStringExtra("PropertyID");
 
         new GetDetailProperty().execute();
 
@@ -61,8 +66,8 @@ public class PropertyDetails extends AppCompatActivity {
             }
         });
 
-        viewTaggedAgents = (CircleImageView) findViewById(R.id.profile_image_show_tagged);
-        viewTaggedAgents.setOnClickListener(new View.OnClickListener() {
+        taggedbtn = (ImageView) findViewById(R.id.profile_show_tagged);
+        taggedbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(PropertyDetails.this)
@@ -100,36 +105,64 @@ public class PropertyDetails extends AppCompatActivity {
             super.onPostExecute(s);
             pdLoading.dismiss();
             try {
-                JSONArray mArray = new JSONArray(s);
-                propertyDetailModelList = new ArrayList<>();
-                for (int i = 0; i < mArray.length(); i++) {
+                JSONObject mObject = new JSONObject(s);
+                Boolean Success = mObject.optBoolean("Success");
+                if (Success) {
+                    propertyDetailModelList = new ArrayList<>();
                     PropertyDetailModel propertyDetailModel = new PropertyDetailModel();
-                    JSONObject object = new JSONObject();
-                    object = mArray.getJSONObject(i);
-                    String propertyDetailID = object.optString("id");
-                    String user_id = object.optString("user_id");
-                    String purpose = object.optString("purpose");
-                    String type = object.optString("type");
-                    String title = object.optString("title");
-                    String district = object.optString("district");
-                    String streetName = object.optString("street_name");
-                    String postalCode = object.optString("postal_code");
-                    String unitFrom = object.optString("unit_from");
-                    String unitTo = object.optString("unit_to");
-                    String block = object.optString("block");
-                    String bathroom = object.optString("bathroom");
-                    String askingPrice = object.optString("asking_price");
-                    String bankValuation = object.optString("bank_valuation");
-                    String taggingLimit = object.optString("tagging_limit");
-                    String bedroom = object.optString("bedroom");
-                    String fA = object.optString("floor_area");
-                    String floorArea = fA + " sf";
-                    String floorAreaUnit = object.optString("floor_area_unit");
-                    String description = object.optString("description");
-                    String furnished = object.optString("furnished");
-                    String floor = object.optString("floor");
+                    JSONArray topSliderArray = mObject.optJSONArray("top-slider");
+                    JSONObject topSlider = (JSONObject)topSliderArray.getJSONObject(0);
+                    String tsgString = topSlider.optString("gallery");
+                    JSONArray tsgArray = new JSONArray(tsgString);
+                    String topSlider1 = tsgArray.getString(0);
+                    String topSlider2 = tsgArray.getString(1);
 
-                    String splf = object.optString("special_features");
+
+                    JSONArray userDetailsArray = mObject.optJSONArray("user_details");
+                    JSONObject userDetailsObject = (JSONObject)userDetailsArray.getJSONObject(0);
+                    String userId = userDetailsObject.optString("id");
+                    String userImage = userDetailsObject.optString("user_image");
+                    String userPhone = userDetailsObject.optString("phone");
+
+                    JSONArray postHeaderArray = mObject.optJSONArray("post-header");
+                    JSONObject postHeaderObject = (JSONObject)postHeaderArray.getJSONObject(0);
+                    String title = postHeaderObject.optString("title");
+                    String streetName = postHeaderObject.optString("street_name");
+                    String askingPrice = postHeaderObject.optString("asking_price");
+                    String bedroom = postHeaderObject.optString("bedroom");
+                    String bathroom = postHeaderObject.optString("bathroom");
+                    String fA = postHeaderObject.optString("floor_area");
+                    String floorArea = fA + " sf";
+                    String floorAreaUnit = postHeaderObject.optString("floor_area_unit");
+                    String landArea = postHeaderObject.optString("land_area");
+                    String landAreaUnit = postHeaderObject.optString("land_area_unit");
+
+                    String priceperunit = String.valueOf(Integer.parseInt(askingPrice)/Integer.parseInt(fA));
+
+
+                    JSONArray proDeArray = mObject.optJSONArray("property-details");
+                    JSONObject proDeObject = (JSONObject)proDeArray.getJSONObject(0);
+                    String createdAt = proDeObject.optString("created_at");
+                    String purpose = proDeObject.optString("purpose");
+                    String unitFrom = proDeObject.optString("unit_from");
+                    String unitTo = proDeObject.optString("unit_to");
+                    String district = proDeObject.optString("district");
+                    String block = proDeObject.optString("block");
+                    String postalCode = proDeObject.optString("postal_code");
+                    String tenure = proDeObject.optString("tenure");
+                    String totalUnits = proDeObject.optString("total_units");
+                    String totalFloors = proDeObject.optString("total_floors");
+                    String topYear = proDeObject.optString("top_year");
+
+                    String unitNO = unitFrom + " to " + unitTo;
+
+
+                    JSONArray uDArray = mObject.optJSONArray("unit-detail");
+                    JSONObject uDObject = (JSONObject)uDArray.getJSONObject(0);
+                    String furnished = uDObject.optString("furnished");
+                    String floor = uDObject.optString("floor");
+
+                    String splf = uDObject.optString("special_features");
                     JSONArray splfJson = new JSONArray(splf);
                     String[] sF = new String[splfJson.length()];
                     for(int a=0;a<splfJson.length();a++)
@@ -137,15 +170,7 @@ public class PropertyDetails extends AppCompatActivity {
                     String specialFeatures = Arrays.toString(sF);
                     specialFeatures = specialFeatures.replaceAll("\\[", "").replaceAll("\\]","");
 
-                    String ff = object.optString("fixtures_fittings");
-                    JSONArray ffJson = new JSONArray(ff);
-                    String[] fF = new String[ffJson.length()];
-                    for (int b=0; b<ffJson.length();b++)
-                        fF[b]=ffJson.getString(b);
-                    String fixturesFittings = Arrays.toString(fF);
-                    fixturesFittings = fixturesFittings.replaceAll("\\[", "").replaceAll("\\]","");
-
-                    String oi = object.optString("outdoor_indoor");
+                    String oi = uDObject.optString("outdoor_indoor");
                     JSONArray oiJson = new JSONArray(oi);
                     String[] oI = new String[oiJson.length()];
                     for(int c=0;c<oiJson.length();c++)
@@ -153,34 +178,37 @@ public class PropertyDetails extends AppCompatActivity {
                     String outdoorIndoor = Arrays.toString(oI);
                     outdoorIndoor = outdoorIndoor.replaceAll("\\[", "").replaceAll("\\]","");
 
-                    String facc = object.optString("facilities");
-                    JSONArray facJson = new JSONArray(facc);
+                    String ff = uDObject.optString("fixtures_fittings");
+                    JSONArray ffJson = new JSONArray(ff);
+                    String[] fF = new String[ffJson.length()];
+                    for (int b=0; b<ffJson.length();b++)
+                        fF[b]=ffJson.getString(b);
+                    String fixturesFittings = Arrays.toString(fF);
+                    fixturesFittings = fixturesFittings.replaceAll("\\[", "").replaceAll("\\]","");
+
+
+                    JSONArray DesArray = mObject.optJSONArray("description");
+                    JSONObject DesObject = (JSONObject)DesArray.getJSONObject(0);
+                    String description = DesObject.optString("description");
+
+                    JSONArray facArray = mObject.optJSONArray("facilities");
+                    JSONObject facObject = (JSONObject)facArray.getJSONObject(0);
+                    String facString = facObject.optString("facilities");
+                    JSONArray facJson = new JSONArray(facString);
                     String[] fac = new String[facJson.length()];
                     for (int d=0;d<facJson.length();d++)
                         fac[d] = facJson.getString(d);
                     String facilities = Arrays.toString(fac);
                     facilities = facilities.replaceAll("\\[", "").replaceAll("\\]","");
 
-                    String tenure = object.optString("tenure");
-                    String topYear = object.optString("top_year");
-                    String totalUnits = object.optString("total_units");
-                    String totalFloors = object.optString("total_floors");
-                    String videoUrl = object.optString("video_url");
-                    String gallery = object.optString("gallery");
-                    String featuredImg = object.optString("featured_img");
-                    String report = object.optString("report");
-                    String totalView = object.optString("total_view");
-                    String searchMeta = object.optString("search_meta");
-                    String status = object.optString("status");
-                    String createdAt = object.optString("created_at");
-                    String updatedAt = object.optString("updated_at");
-                    String phone = object.optString("phone");
-                    String profilePhoto = object.optString("profile_photo");
 
-                    String priceperunit = String.valueOf(Integer.parseInt(askingPrice)/Integer.parseInt(fA));
-                    String unitNO = unitFrom + " to " + unitTo;
-                    String pro_img_url = GETPROPERTYDETAILPIC + featuredImg;
-                    String pro_user_pic_url = GETPROPERTYDETAILUSERPIC + profilePhoto;
+                    JSONArray videoArray = mObject.optJSONArray("property-video");
+                    JSONObject videoObject = (JSONObject)videoArray.getJSONObject(0);
+                    String videoUrl = videoObject.optString("video_url");
+
+                    String pro_img_url = GETPROPERTYDETAILPIC + topSlider1;
+                    String pro_user_pic_url = GETPROPERTYDETAILUSERPIC + userImage;
+
 
                     propertyDetailModel.setPdff(fixturesFittings);
                     propertyDetailModel.setPdfloor(floor);
@@ -196,7 +224,7 @@ public class PropertyDetails extends AppCompatActivity {
                     propertyDetailModel.setPropertyDetailDistrict(district);
                     propertyDetailModel.setPropertyDetailDescription(description);
                     propertyDetailModel.setPropertyDetailAskingPrice(askingPrice);
-                   // propertyDetailModel.setPropertyDetailFacilities();
+                    // propertyDetailModel.setPropertyDetailFacilities();
                     propertyDetailModel.setPropertyDetailNoofBedrooms(bedroom);
                     propertyDetailModel.setPropertyDetailtitle(title);
                     propertyDetailModel.setPropertyDetailPriceperUnit(priceperunit);
@@ -210,7 +238,7 @@ public class PropertyDetails extends AppCompatActivity {
                     propertyDetailModel.setPropertyDetailPic(pro_img_url);
                     propertyDetailModel.setPropertyUserPic(pro_user_pic_url);
                     propertyDetailModel.setPropertyDetailFacilities(facilities);
-                    propertyDetailModel.setAgentnumber(phone);
+                    propertyDetailModel.setAgentnumber(userPhone);
 
 
                     propertyDetailModelList.add(propertyDetailModel);
@@ -222,9 +250,16 @@ public class PropertyDetails extends AppCompatActivity {
                     recyclerView.setAdapter(propertyDetailAdapter);
                     recyclerView.setLayoutManager(layoutManager);
 
+
                 }
+                else {
+                    Toast.makeText(PropertyDetails.this,"Unable to fetch data",Toast.LENGTH_SHORT).show();
+                }
+
             } catch (JSONException e) {
-                Log.e("Agent", "JSON exception", e);
+                Log.e("PropertyDetail", "JSON exception", e);
+            } catch (Exception e){
+                Log.e("PropertyDetail", "Some kind of exception", e);
             }
 
         }
@@ -232,7 +267,8 @@ public class PropertyDetails extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                url = new URL(GETPROPERTYDETAILURL);
+                String urlString = GETPROPERTYDETAILURL + propertyID;
+                url = new URL(urlString);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return "exception";

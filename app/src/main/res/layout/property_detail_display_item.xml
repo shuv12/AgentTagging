@@ -267,7 +267,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/card_margin">
+                        android:padding="@dimen/card_margin"
+                        android:id="@+id/districtll">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -293,12 +294,14 @@
                         android:layout_marginLeft="@dimen/card_margin"
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
-                        android:layerType="software" />
+                        android:layerType="software"
+                        android:id="@+id/districtline"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/card_margin">
+                        android:padding="@dimen/card_margin"
+                        android:id="@+id/blockll">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -320,7 +323,9 @@
                         android:background="@drawable/dotted"
                         android:layout_marginLeft="@dimen/card_margin"
                         android:layout_marginRight="@dimen/card_margin"
-                        android:layerType="software" />
+                        android:layerType="software"
+                        android:id="@+id/blockline"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

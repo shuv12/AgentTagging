@@ -1,6 +1,7 @@
 package app.com.example.android.agenttagging;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class Notify extends AppCompatActivity {
 
     private boolean mSlideState = false;
@@ -24,10 +27,31 @@ public class Notify extends AppCompatActivity {
     private LinearLayout viewmyprofile;
     private ImageView alwaysHome1,alwaysHome2;
 
+    private View header, headerlayout;
+    private ImageView userImageview;
+    private TextView userTextview;
+    private SharedPreferences sharedPreferences;
+    private Boolean isLogged;
+    private String loggedUserName;
+    private String loggedUserPic;
+
+    private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
+    public static final String ISLOGGED = "islogged";
+    public static final String LOGGEDUSERNAME = "loggedusername";
+    public static final String LOGGEDUSERPIC = "loggeduserpic";
+    public static final String UserPREFERENCES = "UserPrefs" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify);
+
+
+        sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+        isLogged = sharedPreferences.getBoolean(ISLOGGED,false);
+        loggedUserName = sharedPreferences.getString(LOGGEDUSERNAME,null);
+        loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC,null);
+        String userImageUrl = GETLOGGEDUSERPICURL + loggedUserPic;
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         ImageView drawerMenu = (ImageView) findViewById(R.id.drawermenu);
@@ -46,50 +70,66 @@ public class Notify extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
-        View header = nvDrawer.getHeaderView(0);
-        alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
-        alwaysHome1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Notify.this, FrontPage.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-            }
-        });
-        TextView textView = (TextView) header.findViewById(R.id.logintext);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nvDrawer.getHeaderView(0).setVisibility(View.GONE);
-                View headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
-                createListing.setVisibility(View.VISIBLE);
-                alwaysHome2 = (ImageView) headerlayout.findViewById(R.id.alwayshome);
-                alwaysHome2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Notify.this, FrontPage.class);
-                        startActivity(intent);
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-                    }
-                });
-                viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
-                viewmyprofile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Notify.this, ViewProfile.class);
-                        intent.putExtra("myprofile", true);
-                        startActivity(intent);
-                    }
-                });
-                createListing.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent1 = new Intent(Notify.this, NewListingPageOne.class);
-                        startActivity(intent1);
-                    }
-                });
-            }
-        });
+        if (isLogged){
+            nvDrawer.getHeaderView(0).setVisibility(View.GONE);
+            headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
+
+            userTextview = (TextView) headerlayout.findViewById(R.id.loggedusername);
+            userImageview = (ImageView) headerlayout.findViewById(R.id.loggeduserpic);
+
+            userTextview.setText(loggedUserName);
+            Picasso.with(this).load(userImageUrl).fit().into(userImageview);
+
+            createListing.setVisibility(View.VISIBLE);
+            alwaysHome2 = (ImageView) headerlayout.findViewById(R.id.alwayshome);
+            alwaysHome2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notify.this, FrontPage.class);
+                    startActivity(intent);
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
+            viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
+            viewmyprofile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notify.this, ViewProfile.class);
+                    intent.putExtra("myprofile", true);
+                    startActivity(intent);
+                }
+            });
+            createListing.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(Notify.this, NewListingPageOne.class);
+                    startActivity(intent1);
+                }
+            });
+        }
+        else {
+            headerlayout.setVisibility(View.GONE);
+            header = nvDrawer.getHeaderView(0);
+            alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
+            alwaysHome1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notify.this, FrontPage.class);
+                    startActivity(intent);
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
+
+            TextView textView = (TextView) header.findViewById(R.id.logintext);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notify.this, Login.class);
+                    startActivity(intent);
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
+        }
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -124,7 +164,8 @@ public class Notify extends AppCompatActivity {
                         }
 
                         if (id == R.id.setting) {
-
+                            Intent intent3 = new Intent(Notify.this, SettingPage.class);
+                            startActivity(intent3);
                         }
 
                         if (id == R.id.agents) {

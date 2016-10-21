@@ -1,7 +1,9 @@
 package app.com.example.android.agenttagging;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,12 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,32 +56,27 @@ public class Agent extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private Button createListing;
     private NavigationView nvDrawer;
-    private LinearLayout viewmyprofile;
-    private ImageView alwaysHome1, alwaysHome2;
+    private LinearLayout viewmyprofile, toolbarLayout, searchLayout;
+    private ImageView alwaysHome1, alwaysHome2, searchIcon, crossIcon;
+    private EditText searchText;
 
-    private static final String GETAGENTURL = "http://abinrimal.com.np/rest/GetAgents";
-    private static final String GETAGENTPIC = "http://abinrimal.com.np/rest/images/users/";
+    private View header, headerlayout;
+    private ImageView userImageview;
+    private TextView userTextview;
+    private SharedPreferences sharedPreferences;
+    private Boolean isLogged;
+    private String loggedUserName;
+    private String loggedUserPic;
 
-    /*String[] agentName = new String[]{"Ari Gold", "Shuvam Agrawal", "Ganesh Kumar", "Suman Jung", "Abin Rimal", "Ashish", "Vishal", "Pujan", "Shuvam", "Ganesh", "Suman", "Abin", "Ashish", "Vishal", "Pujan", "Ari Gold"};
-    String[] agentNum = new String[]{"+81-98986557", "+977-8785636228", "+91-8870639465", "+81-001199111", "+81-98986557", "+977-8785636228", "+91-8870639465", "+81-001199111", "+81-98986557", "+977-8785636228", "+91-8870639465", "+81-001199111", "+81-98986557", "+977-8785636228", "+91-8870639465", "+81-001199111"};
-    String[] agentPic = new String[]{"http://www.montagio.com.au/display.php?o=1753", "http://www.montagio.com.au/display.php?o=1747"
-            , "http://static.socialitelife.com/uploads/2011/09/jeremy-piven-ari-gold-shopping-09302011-06-675x900.jpg"
-            , "https://s-media-cache-ak0.pinimg.com/236x/6c/41/3b/6c413bfa0ce3aaa185698b8408397df1.jpg"
-            , "http://cdn.styleforum.net/f/f5/350x197px-f54a2ac8_suit4.png"
-            , "https://s-media-cache-ak0.pinimg.com/736x/e0/a9/9c/e0a99c0993aa2de40e99df6388fc14ad.jpg"
-            , "http://www.montagio.com.au/display.php?o=1748", "http://www.montagio.com.au/display.php?o=1753"
-            , "http://www.montagio.com.au/display.php?o=1747"
-            , "http://static.socialitelife.com/uploads/2011/09/jeremy-piven-ari-gold-shopping-09302011-06-675x900.jpg"
-            , "https://s-media-cache-ak0.pinimg.com/236x/6c/41/3b/6c413bfa0ce3aaa185698b8408397df1.jpg"
-            , "http://cdn.styleforum.net/f/f5/350x197px-f54a2ac8_suit4.png"
-            , "https://s-media-cache-ak0.pinimg.com/736x/e0/a9/9c/e0a99c0993aa2de40e99df6388fc14ad.jpg"
-            , "http://www.montagio.com.au/display.php?o=1748", "http://www.montagio.com.au/display.php?o=1753"
-            , "http://www.montagio.com.au/display.php?o=1747"
-            , "http://static.socialitelife.com/uploads/2011/09/jeremy-piven-ari-gold-shopping-09302011-06-675x900.jpg"
-            , "https://s-media-cache-ak0.pinimg.com/236x/6c/41/3b/6c413bfa0ce3aaa185698b8408397df1.jpg"
-            , "http://cdn.styleforum.net/f/f5/350x197px-f54a2ac8_suit4.png"
-            , "https://s-media-cache-ak0.pinimg.com/736x/e0/a9/9c/e0a99c0993aa2de40e99df6388fc14ad.jpg"
-            , "http://www.montagio.com.au/display.php?o=1748"};*/
+    private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
+    public static final String ISLOGGED = "islogged";
+    public static final String LOGGEDUSERNAME = "loggedusername";
+    public static final String LOGGEDUSERPIC = "loggeduserpic";
+    public static final String UserPREFERENCES = "UserPrefs" ;
+
+    private static final String GETAGENTURL = "http://www.realthree60.com/dev/apis/GetAgents";
+    private static final String GETAGENTPIC = "http://www.realthree60.com/dev/apis/assets/users/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,60 @@ public class Agent extends AppCompatActivity {
         setContentView(R.layout.activity_agent);
 
         new GetAllAgents().execute();
+
+
+        sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+        isLogged = sharedPreferences.getBoolean(ISLOGGED,false);
+        loggedUserName = sharedPreferences.getString(LOGGEDUSERNAME,null);
+        loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC,null);
+        String userImageUrl = GETLOGGEDUSERPICURL + loggedUserPic;
+
+
+        searchText = (EditText) findViewById(R.id.searchtext);
+        searchIcon = (ImageView) findViewById(R.id.searchIcon);
+        crossIcon = (ImageView) findViewById(R.id.crossIcon);
+        toolbarLayout = (LinearLayout) findViewById(R.id.toolbar_layout);
+        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
+
+
+
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbarLayout.setVisibility(View.GONE);
+                searchLayout.setVisibility(View.VISIBLE);
+                searchText.setText("");
+                searchText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(searchText, InputMethodManager.SHOW_IMPLICIT);
+
+                searchText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+                searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                            //performSearch();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+            }
+        });
+
+        crossIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchLayout.setVisibility(View.GONE);
+                toolbarLayout.setVisibility(View.VISIBLE);
+                searchText.clearFocus();
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
+            }
+        });
+
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         ImageView drawerMenu = (ImageView) findViewById(R.id.drawermenu);
@@ -98,76 +156,67 @@ public class Agent extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
-        View header = nvDrawer.getHeaderView(0);
-        alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
-        alwaysHome1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Agent.this, FrontPage.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-            }
-        });
-        TextView textView = (TextView) header.findViewById(R.id.logintext);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nvDrawer.getHeaderView(0).setVisibility(View.GONE);
-                View headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
-                createListing.setVisibility(View.VISIBLE);
-                alwaysHome2 = (ImageView) headerlayout.findViewById(R.id.alwayshome);
-                alwaysHome2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Agent.this, FrontPage.class);
-                        startActivity(intent);
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-                    }
-                });
-                viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
-                viewmyprofile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Agent.this, ViewProfile.class);
-                        intent.putExtra("myprofile", true);
-                        startActivity(intent);
-                    }
-                });
-                createListing.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent1 = new Intent(Agent.this, NewListingPageOne.class);
-                        startActivity(intent1);
-                    }
-                });
-            }
-        });
+        if (isLogged){
+            nvDrawer.getHeaderView(0).setVisibility(View.GONE);
+            headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
 
+            userTextview = (TextView) headerlayout.findViewById(R.id.loggedusername);
+            userImageview = (ImageView) headerlayout.findViewById(R.id.loggeduserpic);
 
-       /* this.agentModelList = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
-            AgentModel agentModel = new AgentModel();
-            agentModel.setAgentName(this.agentName[i]);
-            agentModel.setAgentNumber(this.agentNum[i]);
-            agentModel.setAgentPic(this.agentPic[i]);
-            this.agentModelList.add(agentModel);
-        }*/
+            userTextview.setText(loggedUserName);
+            Picasso.with(this).load(userImageUrl).fit().into(userImageview);
 
-        /*layoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        recyclerView = (RecyclerView) findViewById(R.id.recycleagentpost);
-        final AgentAdapter agentAdapter = new AgentAdapter(getApplicationContext(), this.agentModelList);
-        recyclerView.setAdapter(agentAdapter);
-        recyclerView.setLayoutManager(layoutManager);*/
+            createListing.setVisibility(View.VISIBLE);
+            alwaysHome2 = (ImageView) headerlayout.findViewById(R.id.alwayshome);
+            alwaysHome2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Agent.this, FrontPage.class);
+                    startActivity(intent);
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
+            viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
+            viewmyprofile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Agent.this, ViewProfile.class);
+                    intent.putExtra("myprofile", true);
+                    startActivity(intent);
+                }
+            });
+            createListing.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(Agent.this, NewListingPageOne.class);
+                    startActivity(intent1);
+                }
+            });
+        }
+        else {
+            headerlayout.setVisibility(View.GONE);
+            header = nvDrawer.getHeaderView(0);
+            alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
+            alwaysHome1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Agent.this, FrontPage.class);
+                    startActivity(intent);
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
 
+            TextView textView = (TextView) header.findViewById(R.id.logintext);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Agent.this, Login.class);
+                    startActivity(intent);
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
 
-        ImageView notibtn = (ImageView) findViewById(R.id.notificationbtn);
-        notibtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Agent.this, Notify.class);
-                startActivity(intent);
-            }
-        });
+        }
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -193,7 +242,8 @@ public class Agent extends AppCompatActivity {
                         }
 
                         if (id == R.id.setting) {
-
+                            Intent intent3 = new Intent(Agent.this, SettingPage.class);
+                            startActivity(intent3);
                         }
 
                         if (id == R.id.agents) {
@@ -228,28 +278,36 @@ public class Agent extends AppCompatActivity {
             pdLoading.dismiss();
             try {
                 //JSONObject jsonObject = new JSONObject(s);
-                JSONArray mArray = new JSONArray(s);
-                agentModelList = new ArrayList<>();
-                for (int i = 0; i < mArray.length(); i++) {
-                    AgentModel agentModel = new AgentModel();
-                    JSONObject object = new JSONObject();
-                    object = mArray.getJSONObject(i);
-                    String fname = object.optString("first_name");
-                    String lname = object.optString("last_name");
-                    String phone = object.optString("phone");
-                    String userpic = object.optString("profile_photo");
-                    String picurl = GETAGENTPIC + userpic;
-                    agentModel.setAgentName(fname + " " + lname);
-                    agentModel.setAgentNumber(phone);
-                    agentModel.setAgentPic(picurl);
-                    agentModelList.add(agentModel);
+                JSONObject mObject = new JSONObject(s);
+                Boolean Success = mObject.optBoolean("Success");
+                if (Success) {
+                    JSONArray mArray = mObject.optJSONArray("data");
+                    agentModelList = new ArrayList<>();
+                    for (int i = 0; i < mArray.length(); i++) {
+                        AgentModel agentModel = new AgentModel();
+                        JSONObject object = new JSONObject();
+                        object = mArray.getJSONObject(i);
+                        String fname = object.optString("name");
+                        String email = object.optString("email");
+                        String phone = object.optString("phone");
+                        String userpic = object.optString("user_image");
+                        String picurl = GETAGENTPIC + userpic;
+                        agentModel.setAgentName(fname);
+                        agentModel.setAgentNumber(phone);
+                        agentModel.setAgentPic(picurl);
+                        agentModelList.add(agentModel);
 
-                    layoutManager = new GridLayoutManager(getApplicationContext(), 2);
-                    recyclerView = (RecyclerView) findViewById(R.id.recycleagentpost);
-                    final AgentAdapter agentAdapter = new AgentAdapter(getApplicationContext(), agentModelList);
-                    recyclerView.setAdapter(agentAdapter);
-                    recyclerView.setLayoutManager(layoutManager);
+                        layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+                        recyclerView = (RecyclerView) findViewById(R.id.recycleagentpost);
+                        final AgentAdapter agentAdapter = new AgentAdapter(getApplicationContext(), agentModelList);
+                        recyclerView.setAdapter(agentAdapter);
+                        recyclerView.setLayoutManager(layoutManager);
+                    }
                 }
+                else {
+                    Toast.makeText(Agent.this,"Unable to fetch data",Toast.LENGTH_SHORT).show();
+                }
+
             } catch (JSONException e) {
                 Log.e("Agent", "JSON exception", e);
             }
@@ -294,7 +352,7 @@ public class Agent extends AppCompatActivity {
                     }
 
 
-                    //Log.v("Result",result.toString());
+                    Log.v("Result",result.toString());
                     // Pass data to onPostExecute method
                     return (result.toString());
 

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,23 +43,29 @@ public class Login extends AppCompatActivity {
     public static final int READ_TIMEOUT = 15000;
 
     public static final String UserPREFERENCES = "UserPrefs" ;
-    public static final String ID = "id";
-    public static final String FULLNAME = "fullname";
-    public static final String USERPHONE = "phone";
+    public static final String ACCESSTOKEN = "accessToken";
+    public static final String ISLOGGED = "islogged";
+    public static final String LOGGEDUSERNAME = "loggedusername";
+    public static final String LOGGEDUSERPIC = "loggeduserpic";
 
 
-    private static final String EMAIL = "email";
+
+    private static final String LOGINFAILED = "Check username and password!";
+    private static final String GRANTYPEVAL = "password";
+    private static final String CLIENTIDVAL = "testclient";
+    private static final String CLIENTSECRETVAL = "testpass";
+    private static final String GRANTYPE = "grant_type";
+    private static final String CLIENTID = "client_id";
+    private static final String CLIENTSECRET = "client_secret";
+    private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
-    private static final String LOGIN_URL = "http://abinrimal.com.np/rest/userlogin.php";
+    private static final String LOGIN_URL = "http://realthree60.com/dev/apis/AgentLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        ///imageView = (ImageView) findViewById(R.id.fancy_login_image);
-        //imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),R.drawable.login_bg,200,200));
 
         editTextEmail = (EditText) findViewById(R.id.userinputemail);
         editTextPassword = (EditText) findViewById(R.id.userinputpassword);
@@ -111,38 +118,36 @@ public class Login extends AppCompatActivity {
             pdLoading.dismiss();
             try {
                 JSONObject object = new JSONObject(s);
-                Object status_message = object.get("status_message");
-                Object report = object.get("data");
-                String status = status_message.toString();
-                String report_msg = report.toString();
-                Object userid = object.get("id");
-                String UserID = userid.toString();
-                Object Fullname = object.get("fullname");
-                String fulln = Fullname.toString();
-                Object phone = object.get("phone");
-                String userphone = phone.toString();
-                Log.v("UserId : ",UserID);
-                Log.v("Fullname : ",fulln);
-                Log.v("Phone : ",userphone);
-
-
-                if (status.equals("true")) {
+                Boolean success = object.optBoolean("Success");
+                if (success)
+                {
+                    String userToken = object.optString("access_token");
+                    JSONArray userDetail = object.optJSONArray("user-data");
+                    JSONObject userObject = userDetail.getJSONObject(0);
+                    String userID = userObject.optString("id");
+                    String userName = userObject.optString("name");
+                    String userEmail = userObject.optString("email");
+                    String userImage = userObject.optString("user_image");
+                    String userPhone = userObject.optString("phone");
                     SharedPreferences sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(ID,UserID);
-                    editor.putString(FULLNAME,fulln);
-                    editor.putString(USERPHONE,userphone);
-                    editor.commit();
+                    editor.putString(ACCESSTOKEN, userToken);
+                    editor.putBoolean(ISLOGGED,true);
+                    editor.putString(LOGGEDUSERNAME,userName);
+                    editor.putString(LOGGEDUSERPIC,userImage);
+                    editor.apply();
                     Toast.makeText(Login.this, "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, Home.class);
-                    //intent.putExtra(EMAIL,email);
                     startActivity(intent);
                     Login.this.finish();
-                } else {
-                    Toast.makeText(Login.this, report_msg, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(Login.this, LOGINFAILED, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 Log.e("Agent", "JSON exception", e);
+                Toast.makeText(Login.this, LOGINFAILED, Toast.LENGTH_SHORT).show();
+
             }
 
         }
@@ -170,8 +175,11 @@ public class Login extends AppCompatActivity {
 
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("email", params[0])
-                        .appendQueryParameter("password", params[1]);
+                        .appendQueryParameter(USERNAME, params[0])
+                        .appendQueryParameter(PASSWORD, params[1])
+                        .appendQueryParameter(GRANTYPE, GRANTYPEVAL)
+                        .appendQueryParameter(CLIENTID,CLIENTIDVAL)
+                        .appendQueryParameter(CLIENTSECRET,CLIENTSECRETVAL);
                 String query = builder.build().getEncodedQuery();
 
                 Log.v("query", query);
@@ -206,6 +214,7 @@ public class Login extends AppCompatActivity {
                         result.append(line);
                     }
 
+                   // Log.v("Login Data",result.toString());
                     // Pass data to onPostExecute method
                     return (result.toString());
 
@@ -223,47 +232,5 @@ public class Login extends AppCompatActivity {
 
         }
     }
-
-   /* public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) >= reqHeight
-                    && (halfWidth / inSampleSize) >= reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
-
-
-
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-                                                         int reqWidth, int reqHeight) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(res, resId, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeResource(res, resId, options);
-    }*/
-
 
 }

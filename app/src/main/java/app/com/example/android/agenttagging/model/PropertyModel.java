@@ -16,7 +16,16 @@ public class PropertyModel implements Serializable {
     private String propertyPricePerUnit;
     private String propertyAreaUnit;
     private String propertyPurpose;
+    private String propertyID;
 
+
+    public String getPropertyID() {
+        return this.propertyID;
+    }
+
+    public void setPropertyID(String propertyID) {
+        this.propertyID = propertyID;
+    }
 
 
     public String getPropertyPic() {

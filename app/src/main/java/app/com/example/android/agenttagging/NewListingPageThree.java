@@ -22,10 +22,14 @@ import java.io.InputStream;
 
 public class NewListingPageThree extends AppCompatActivity {
 
-    ImageView backBtn3;
-    ImageButton addPropertyImage;
-    FlowLayout addImageBody;
-    Boolean addingMore = true;
+    private ImageView backBtn3;
+    private ImageButton addPropertyImage;
+    private FlowLayout addImageBody;
+    private Boolean addingMore;
+    private Uri imageUri;
+    private InputStream imageStream;
+    private Bitmap selectedImage;
+    private ImageView image;
     // LayoutInflater layoutInflater;
 
     private static String[] PERMISSIONS_STORAGE = {
@@ -129,10 +133,10 @@ public class NewListingPageThree extends AppCompatActivity {
             case SELECT_PICTURE:
                 if (resultCode == RESULT_OK) {
                     try {
-                        final Uri imageUri = data.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                        ImageView image = new ImageView(NewListingPageThree.this);
+                        imageUri = data.getData();
+                        imageStream = getContentResolver().openInputStream(imageUri);
+                        selectedImage = BitmapFactory.decodeStream(imageStream);
+                        image = new ImageView(NewListingPageThree.this);
                         image.setImageBitmap(selectedImage);
                         //FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(240,240);
                         //layoutParams.setMargins(10,10,10,0);

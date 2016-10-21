@@ -1,7 +1,7 @@
 package app.com.example.android.agenttagging.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,13 +66,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         final String curstatus = holder.notiStatus.getText().toString();
         switch (curstatus) {
             case "Pending":
-                holder.notiStatus.setTextColor(Color.BLUE);
+                holder.notiStatus.setTextColor(ContextCompat.getColor(context,R.color.pending));
                 break;
             case "Approved":
-                holder.notiStatus.setTextColor(Color.YELLOW);
+                holder.notiStatus.setTextColor(ContextCompat.getColor(context,R.color.approved));
                 break;
             case "Denied":
-                holder.notiStatus.setTextColor(Color.RED);
+                holder.notiStatus.setTextColor(ContextCompat.getColor(context,R.color.denied));
                 break;
             case "tag":
                 holder.notiStatus.setVisibility(View.GONE);

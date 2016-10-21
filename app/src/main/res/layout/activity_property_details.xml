@@ -33,38 +33,12 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/activity_horizontal_margin">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image_show_tagged"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/agentpic"
-                    android:layout_marginRight="@dimen/card_margin"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@android:color/white"/>
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_check_circle"
-                    android:tint="@color/green_back"
-                    android:layout_marginLeft="@dimen/marginlow"
-                    android:layout_marginBottom="@dimen/marginlow"
-                    android:layout_alignBottom="@id/profile_image_show_tagged"
-                    android:layout_alignLeft="@id/profile_image_show_tagged"/>
-            </RelativeLayout>
-
-
-            <!--<ImageView
-                android:id="@+id/notificationbtn"
+            <ImageView
+                android:id="@+id/profile_show_tagged"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/notification" />-->
+                android:src="@drawable/tagged" />
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v7.widget.RecyclerView

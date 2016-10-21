@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -25,9 +26,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
         TextView title, address, timing, date, headline, description;
         ImageView image;
+        LinearLayout mainell;
         Boolean expanded = false;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             this.timing = (TextView) itemView.findViewById(R.id.ue_timing);
             this.title = (TextView) itemView.findViewById(R.id.ue_title);
@@ -36,11 +38,19 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             this.headline = (TextView) itemView.findViewById(R.id.ue_headline);
             this.description = (TextView) itemView.findViewById(R.id.ue_description);
             this.image = (ImageView) itemView.findViewById(R.id.ue_image);
+            this.mainell = (LinearLayout) itemView.findViewById(R.id.mainell);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (expanded) description.setVisibility(View.GONE);
-                    else description.setVisibility(View.VISIBLE);
+                    if (expanded) {
+                        description.setVisibility(View.GONE);
+                        headline.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        description.setVisibility(View.VISIBLE);
+                        mainell.requestFocus();
+                        headline.setVisibility(View.GONE);
+                    }
                     expanded = !expanded;
                 }
             });

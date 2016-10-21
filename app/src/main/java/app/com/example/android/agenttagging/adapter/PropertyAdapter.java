@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -27,11 +28,12 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
         TextView propertyHeadline, propertyAddress, propertyType, propertyOwner, propertyPrice,propertyPurpose, propertyPricePerUnit, propertyArea, propertyAreaUnit;
         ImageView propertyImage;
-        private final Context context;
+       // private final Context context;
+        LinearLayout mainll;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            context = itemView.getContext();
+           // context = itemView.getContext();
             this.propertyAddress = (TextView) itemView.findViewById(R.id.property_address);
             this.propertyHeadline = (TextView) itemView.findViewById(R.id.property_headline);
             //this.propertyOwner = (TextView) itemView.findViewById(R.id.property_owner);
@@ -42,14 +44,16 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             this.propertyAreaUnit = (TextView) itemView.findViewById(R.id.property_area_unit);
             this.propertyArea = (TextView) itemView.findViewById(R.id.property_area);
             this.propertyPricePerUnit = (TextView) itemView.findViewById(R.id.property_price_per_unit);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            this.mainll = (LinearLayout) itemView.findViewById(R.id.mainll);
+
+            /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final Intent intent;
                     intent = new Intent(context, PropertyDetails.class);
                     context.startActivity(intent);
                 }
-            });
+            });*/
         }
     }
 
@@ -63,7 +67,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PropertyModel propertyModel = (PropertyModel) this.propertyModelList.get(position);
+        final PropertyModel propertyModel = (PropertyModel) this.propertyModelList.get(position);
         holder.propertyAddress.setText(propertyModel.getPropertyAddress());
         holder.propertyPrice.setText(propertyModel.getPropertyPrice());
         holder.propertyHeadline.setText(propertyModel.getPropertyHeadline());
@@ -73,7 +77,15 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         holder.propertyArea.setText(propertyModel.getPropertyArea());
         holder.propertyAreaUnit.setText(propertyModel.getPropertyAreaUnit());
         Picasso.with(context).load(propertyModel.getPropertyPic()).resize(300, 400).into(holder.propertyImage);
-        //holder.propertyImage.setImageResource(getItemId(R.drawable.houses));
+        holder.mainll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PropertyDetails.class);
+                intent.putExtra("PropertyID",propertyModel.getPropertyID());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     public int getItemCount() {

@@ -34,12 +34,14 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:paddingRight="@dimen/activity_horizontal_margin"
+                android:id="@+id/loggeduserpic"
                 android:src="@drawable/agentpic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/userprofilename"
+                android:id="@+id/loggedusername"
                 android:textColor="@android:color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />

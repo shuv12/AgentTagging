@@ -56,7 +56,15 @@
                         android:layout_height="25dp"
                         android:layout_margin="@dimen/activity_horizontal_margin"
                         android:tint="@android:color/white"
-                        android:src="@drawable/search_icon" />
+                        android:src="@drawable/search_icon"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/call_2"
+                        android:id="@+id/callthisagent" />
 
                 </LinearLayout>
 
@@ -106,7 +114,8 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/agentpic" />
+                        android:src="@drawable/agentpic"
+                        android:id="@+id/profilepic"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -115,7 +124,7 @@
                         android:paddingLeft="@dimen/activity_horizontal_margin">
 
                         <TextView
-                            android:id="@+id/agentprofilename"
+                            android:id="@+id/profilename"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="@dimen/card_margin"
@@ -133,7 +142,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingTop="@dimen/card_margin"
-                                android:text="@string/agentnumber" />
+                                android:text="@string/agentnumber"
+                                android:id="@+id/profilenumber"/>
 
                             <Button
                                 android:id="@+id/messageme"
