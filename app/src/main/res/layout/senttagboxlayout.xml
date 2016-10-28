@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:text="@string/requestcontent"
-        android:paddingBottom="@dimen/activity_horizontal_margin"/>
+        android:gravity="center"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:text="@string/requestcontent" />
+
     <Button
+        android:id="@+id/senttagdone"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:text="DONE"
-        android:textColor="@android:color/white"
-        android:background="@color/green_back"
         android:layout_gravity="center"
-        android:id="@+id/senttagdone"/>
+        android:background="@color/green_back"
+        android:text="DONE"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

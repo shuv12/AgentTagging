@@ -1,6 +1,7 @@
 package app.com.example.android.agenttagging;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -42,11 +44,22 @@ public class PropertyDetails extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyDetailModel> propertyDetailModelList;
     private String propertyID;
+    private String topSlider1,topSlider2;
+    private String priceperunit = "#";
+    private String userId;
+    private LinearLayout thisIsMyProperty;
+    private String loggedUserId;
+    private Boolean isMyproperty = false;
+    private String videoUrl = null;
 
+    public static final String UserPREFERENCES = "UserPrefs" ;
+    private SharedPreferences sharedPreferences;
+    public static final String LOGGEDUSERID = "loggeduserid";
 
     private static final String GETPROPERTYDETAILURL = "http://realthree60.com/dev/apis/GetPost/";
     private static final String GETPROPERTYDETAILPIC = "http://www.realthree60.com/dev/apis/assets/posts/";
     private static final String GETPROPERTYDETAILUSERPIC = "http://www.realthree60.com/dev/apis/assets/users/";
+    private static final String YOUTUBETHUMBNAILURL = "http://img.youtube.com/vi/";
 
 
     @Override
@@ -65,6 +78,13 @@ public class PropertyDetails extends AppCompatActivity {
                 PropertyDetails.this.finish();
             }
         });
+
+
+        thisIsMyProperty = (LinearLayout) findViewById(R.id.mypropertydetail);
+        sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+        loggedUserId = sharedPreferences.getString(LOGGEDUSERID,null);
+
+
 
         taggedbtn = (ImageView) findViewById(R.id.profile_show_tagged);
         taggedbtn.setOnClickListener(new View.OnClickListener() {
@@ -105,22 +125,31 @@ public class PropertyDetails extends AppCompatActivity {
             super.onPostExecute(s);
             pdLoading.dismiss();
             try {
-                JSONObject mObject = new JSONObject(s);
-                Boolean Success = mObject.optBoolean("Success");
+                JSONObject mObject1 = new JSONObject(s);
+                Boolean Success = mObject1.optBoolean("Success");
                 if (Success) {
                     propertyDetailModelList = new ArrayList<>();
                     PropertyDetailModel propertyDetailModel = new PropertyDetailModel();
+                    JSONObject mObject = mObject1.optJSONObject("data");
                     JSONArray topSliderArray = mObject.optJSONArray("top-slider");
+                    Log.v("topSliderArrayValue : ",topSliderArray.toString());
                     JSONObject topSlider = (JSONObject)topSliderArray.getJSONObject(0);
                     String tsgString = topSlider.optString("gallery");
-                    JSONArray tsgArray = new JSONArray(tsgString);
-                    String topSlider1 = tsgArray.getString(0);
-                    String topSlider2 = tsgArray.getString(1);
+                    if (!tsgString.isEmpty()){
+                        try {
+                            JSONArray tsgArray = new JSONArray(tsgString);
+                            topSlider1 = tsgArray.getString(0);
+                            topSlider2 = tsgArray.getString(1);
+                        }
+                        catch (Exception e){
+                            Log.e("GalleryException",e.toString());
+                        }
 
+                    }
 
                     JSONArray userDetailsArray = mObject.optJSONArray("user_details");
                     JSONObject userDetailsObject = (JSONObject)userDetailsArray.getJSONObject(0);
-                    String userId = userDetailsObject.optString("id");
+                    userId = userDetailsObject.optString("id");
                     String userImage = userDetailsObject.optString("user_image");
                     String userPhone = userDetailsObject.optString("phone");
 
@@ -136,8 +165,13 @@ public class PropertyDetails extends AppCompatActivity {
                     String floorAreaUnit = postHeaderObject.optString("floor_area_unit");
                     String landArea = postHeaderObject.optString("land_area");
                     String landAreaUnit = postHeaderObject.optString("land_area_unit");
+//                    Log.v("floorArea",String.valueOf(Integer.parseInt(fA)));
 
-                    String priceperunit = String.valueOf(Integer.parseInt(askingPrice)/Integer.parseInt(fA));
+
+                  //  if (String.valueOf(Integer.parseInt(fA)) != "0"){
+                   //     priceperunit = String.valueOf(Integer.parseInt(askingPrice)/Integer.parseInt(fA));
+                   // }
+
 
 
                     JSONArray proDeArray = mObject.optJSONArray("property-details");
@@ -204,10 +238,20 @@ public class PropertyDetails extends AppCompatActivity {
 
                     JSONArray videoArray = mObject.optJSONArray("property-video");
                     JSONObject videoObject = (JSONObject)videoArray.getJSONObject(0);
-                    String videoUrl = videoObject.optString("video_url");
+                    videoUrl = videoObject.optString("video_url");
+                    Log.v("Video url",videoUrl);
 
                     String pro_img_url = GETPROPERTYDETAILPIC + topSlider1;
                     String pro_user_pic_url = GETPROPERTYDETAILUSERPIC + userImage;
+
+
+                    if (loggedUserId != null){
+                        if (Integer.parseInt(loggedUserId) == Integer.parseInt(userId)){
+                            isMyproperty = true;
+                        }
+                        else isMyproperty = false;
+                        Log.v("IsmyProperty? : ",isMyproperty.toString());
+                    }
 
 
                     propertyDetailModel.setPdff(fixturesFittings);
@@ -224,6 +268,9 @@ public class PropertyDetails extends AppCompatActivity {
                     propertyDetailModel.setPropertyDetailDistrict(district);
                     propertyDetailModel.setPropertyDetailDescription(description);
                     propertyDetailModel.setPropertyDetailAskingPrice(askingPrice);
+                    propertyDetailModel.setUserId(userId);
+                    propertyDetailModel.setVideoID(videoUrl);
+                    propertyDetailModel.setIsMyproperty(isMyproperty);
                     // propertyDetailModel.setPropertyDetailFacilities();
                     propertyDetailModel.setPropertyDetailNoofBedrooms(bedroom);
                     propertyDetailModel.setPropertyDetailtitle(title);
@@ -239,6 +286,7 @@ public class PropertyDetails extends AppCompatActivity {
                     propertyDetailModel.setPropertyUserPic(pro_user_pic_url);
                     propertyDetailModel.setPropertyDetailFacilities(facilities);
                     propertyDetailModel.setAgentnumber(userPhone);
+
 
 
                     propertyDetailModelList.add(propertyDetailModel);
@@ -302,7 +350,7 @@ public class PropertyDetails extends AppCompatActivity {
                         result.append(line);
                     }
 
-                    //Log.v("Result",result.toString());
+                    Log.v("Result",result.toString());
                     return (result.toString());
 
                 } else {

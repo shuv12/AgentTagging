@@ -177,7 +177,6 @@
                         android:layout_marginBottom="@dimen/card_margin"
                         android:background="@drawable/edittextboxview"
                         android:padding="@dimen/text_margin"
-                        android:singleLine="true"
                         android:text="@string/tenure"
                         android:textColor="@color/textmain"
                         android:textSize="14sp" />
@@ -189,8 +188,8 @@
                         android:layout_marginBottom="@dimen/card_margin"
                         android:background="@drawable/edittextboxview"
                         android:hint="@string/topyr"
+                        android:inputType="number"
                         android:padding="@dimen/text_margin"
-                        android:singleLine="true"
                         android:textColorHint="@color/textmain"
                         android:textSize="14sp" />
 
@@ -201,8 +200,8 @@
                         android:layout_marginBottom="@dimen/card_margin"
                         android:background="@drawable/edittextboxview"
                         android:hint="@string/tou"
+                        android:inputType="number"
                         android:padding="@dimen/text_margin"
-                        android:singleLine="true"
                         android:textColorHint="@color/textmain"
                         android:textSize="14sp" />
 
@@ -213,8 +212,8 @@
                         android:layout_marginBottom="@dimen/card_margin"
                         android:background="@drawable/edittextboxview"
                         android:hint="@string/tof"
+                        android:inputType="number"
                         android:padding="@dimen/text_margin"
-                        android:singleLine="true"
                         android:textColorHint="@color/textmain"
                         android:textSize="14sp" />
 
@@ -226,7 +225,6 @@
                         android:background="@drawable/edittextboxview"
                         android:hint="@string/videourl"
                         android:padding="@dimen/text_margin"
-                        android:singleLine="true"
                         android:textColorHint="@color/textmain"
                         android:textSize="14sp" />
                 </LinearLayout>

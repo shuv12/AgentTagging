@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <ScrollView
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/listingback"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@android:color/white"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/activity_horizontal_margin">
 
                 <ImageView
+                    android:id="@+id/detail_property_image"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
-                    android:id="@+id/detail_property_image"
-                    android:background="@android:color/darker_gray"/>
-
+                    android:background="@android:color/darker_gray" />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/card_margin"
                     android:layout_marginBottom="@dimen/card_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                    android:layout_marginTop="@dimen/card_margin"
+                    android:orientation="vertical">
+
                     <TextView
+                        android:id="@+id/property_detail_headline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/property_headline"
                         android:textColor="@color/green_back"
-                        android:id="@+id/property_detail_headline"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/card_margin"
                         android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="12dp"
                             android:layout_height="12dp"
+                            android:layout_marginRight="@dimen/marginlow"
                             android:layout_marginTop="@dimen/marginlow"
-                            android:src="@drawable/location"
-                            android:layout_marginRight="@dimen/marginlow"/>
+                            android:src="@drawable/location" />
+
                         <TextView
+                            android:id="@+id/property_detail_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/property_detail_address"
                             android:text="@string/property_address"
-                            android:textColor="@color/textmain"/>
+                            android:textColor="@color/textmain" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -71,110 +77,128 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin">
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="S$ "
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/property_detail_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/property_price"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"
-                            android:id="@+id/property_detail_price"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="|"
                             android:paddingLeft="@dimen/marginlow"
-                            android:paddingRight="@dimen/marginlow"/>
+                            android:paddingRight="@dimen/marginlow"
+                            android:text="|" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="S$ "/>
+                            android:text="S$ " />
+
                         <TextView
+                            android:id="@+id/property_detail_price_per_unit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/property_price_per_unit"
-                            android:id="@+id/property_detail_price_per_unit"/>
+                            android:text="@string/property_price_per_unit" />
+
                         <TextView
+                            android:id="@+id/property_detail_area_unit"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/property_detail_area_unit"/>
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/card_margin">
+                        android:layout_marginTop="@dimen/card_margin"
+                        android:orientation="horizontal">
+
                         <TextView
+                            android:id="@+id/property_detail_area"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/property_area_unit"
-                            android:id="@+id/property_detail_area"
                             android:textColor="@color/green_back"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_gravity="right"
-                            android:gravity="right">
+                            android:gravity="right"
+                            android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/noofbeds"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
                                 android:layout_marginRight="@dimen/marginlow"
-                                android:id="@+id/noofbeds"/>
+                                android:text="2" />
+
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginRight="@dimen/card_margin"
-                                android:src="@drawable/bed"/>
+                                android:src="@drawable/bed" />
+
                             <TextView
+                                android:id="@+id/noofbaths"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/marginlow"
-                                android:text="1"
-                                android:id="@+id/noofbaths"/>
+                                android:text="1" />
+
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginRight="@dimen/marginlow"
-                                android:src="@drawable/bath"/>
+                                android:src="@drawable/bath" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/card_margin">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/property_detail"
                             android:textColor="@color/green_back"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -182,170 +206,191 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pro_listed"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pro_listed"
-                            android:text="@string/ex_listed"
-                            android:layout_weight="1"
-                            android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
-                        android:background="@drawable/dotted"
-                        android:layerType="software" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/card_margin">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pro_listing_type"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pro_listing_type"
-                            android:text="@string/ex_listing_type"
-                            android:layout_weight="1"
-                            android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
-                        android:background="@drawable/dotted"
-                        android:layerType="software" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/card_margin">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pro_unit_no"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pro_unit_no"
-                            android:text="@string/ex_unit_no"
-                            android:layout_weight="1"
-                            android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@drawable/dotted"
-                        android:layout_marginLeft="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
-                        android:layerType="software" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/card_margin"
-                        android:id="@+id/districtll">
 
                         <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/pro_listed"
+                            android:textColor="@color/textmain" />
+
+                        <TextView
+                            android:id="@+id/pro_listed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ex_listed"
+                            android:textColor="@color/textmain"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="@dimen/card_margin"
+                        android:layout_marginRight="@dimen/card_margin"
+                        android:background="@drawable/dotted"
+                        android:layerType="software" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/card_margin">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/pro_listing_type"
+                            android:textColor="@color/textmain" />
+
+                        <TextView
+                            android:id="@+id/pro_listing_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ex_listing_type"
+                            android:textColor="@color/textmain"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="@dimen/card_margin"
+                        android:layout_marginRight="@dimen/card_margin"
+                        android:background="@drawable/dotted"
+                        android:layerType="software" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/card_margin">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/pro_unit_no"
+                            android:textColor="@color/textmain" />
+
+                        <TextView
+                            android:id="@+id/pro_unit_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ex_unit_no"
+                            android:textColor="@color/textmain"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="@dimen/card_margin"
+                        android:layout_marginRight="@dimen/card_margin"
+                        android:background="@drawable/dotted"
+                        android:layerType="software" />
+
+                    <LinearLayout
+                        android:id="@+id/districtll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/card_margin">
+
+                        <TextView
+                            android:id="@+id/textView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="@string/pro_district"
-                            android:textColor="@color/textmain"
                             android:layout_weight="1"
-                            android:id="@+id/textView" />
+                            android:text="@string/pro_district"
+                            android:textColor="@color/textmain" />
 
                         <TextView
+                            android:id="@+id/pro_district"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/pro_district"
-                            android:text="@string/ex_district"
                             android:layout_weight="1"
+                            android:text="@string/ex_district"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <View
+                        android:id="@+id/districtline"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginLeft="@dimen/card_margin"
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
-                        android:layerType="software"
-                        android:id="@+id/districtline"/>
+                        android:layerType="software" />
+
                     <LinearLayout
+                        android:id="@+id/blockll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/card_margin"
-                        android:id="@+id/blockll">
+                        android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/pro_block_no"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pro_block_no"
-                            android:text="@string/ex_block_no"
                             android:layout_weight="1"
+                            android:text="@string/pro_block_no"
+                            android:textColor="@color/textmain" />
+
+                        <TextView
+                            android:id="@+id/pro_block_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ex_block_no"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
+                        android:id="@+id/blockline"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:background="@drawable/dotted"
                         android:layout_marginLeft="@dimen/card_margin"
                         android:layout_marginRight="@dimen/card_margin"
-                        android:layerType="software"
-                        android:id="@+id/blockline"/>
+                        android:background="@drawable/dotted"
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/pro_postcode"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pro_postcode"
-                            android:text="@string/ex_postcode"
                             android:layout_weight="1"
+                            android:text="@string/pro_postcode"
+                            android:textColor="@color/textmain" />
+
+                        <TextView
+                            android:id="@+id/pro_postcode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ex_postcode"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -353,40 +398,46 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <Button
+                        android:id="@+id/show_more_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/show_more"
                         android:background="@android:color/white"
-                        android:id="@+id/show_more_button"
+                        android:text="@string/show_more"
                         android:textColor="@color/textmain"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <LinearLayout
+                        android:id="@+id/show_more"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone"
-                        android:id="@+id/show_more">
+                        android:visibility="gone">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="@dimen/card_margin">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:text="@string/pro_tenure"
-                                android:textColor="@color/textmain"
-                                android:layout_weight="1"/>
+                                android:textColor="@color/textmain" />
+
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:id="@+id/pro_tenure"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:text="@string/ex_tenure"
-                                android:layout_weight="1"
                                 android:textColor="@color/textmain"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
@@ -394,53 +445,61 @@
                             android:layout_marginRight="@dimen/card_margin"
                             android:background="@drawable/dotted"
                             android:layerType="software" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="@dimen/card_margin">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:text="@string/pro_total_unit"
-                                android:textColor="@color/textmain"
-                                android:layout_weight="1"/>
+                                android:textColor="@color/textmain" />
+
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:id="@+id/pro_total_unit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:text="@string/ex_total_unit"
-                                android:layout_weight="1"
                                 android:textColor="@color/textmain"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@drawable/dotted"
                             android:layout_marginLeft="@dimen/card_margin"
                             android:layout_marginRight="@dimen/card_margin"
+                            android:background="@drawable/dotted"
                             android:layerType="software" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="@dimen/card_margin">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:text="@string/pro_total_floor"
-                                android:textColor="@color/textmain"
-                                android:layout_weight="1"/>
+                                android:textColor="@color/textmain" />
+
                             <TextView
+                                android:id="@+id/pro_total_floor"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/pro_total_floor"
-                                android:text="@string/ex_total_floor"
                                 android:layout_weight="1"
+                                android:text="@string/ex_total_floor"
                                 android:textColor="@color/textmain"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
@@ -448,26 +507,30 @@
                             android:layout_marginRight="@dimen/card_margin"
                             android:background="@drawable/dotted"
                             android:layerType="software" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="@dimen/card_margin">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/pro_top_year"
-                                android:textColor="@color/textmain"
-                                android:layout_weight="1"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/pro_top_year"
-                                android:text="@string/ex_top_year"
                                 android:layout_weight="1"
+                                android:text="@string/pro_top_year"
+                                android:textColor="@color/textmain" />
+
+                            <TextView
+                                android:id="@+id/pro_top_year"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/ex_top_year"
                                 android:textColor="@color/textmain"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
@@ -475,38 +538,44 @@
                             android:layout_marginRight="@dimen/card_margin"
                             android:background="@drawable/dotted"
                             android:layerType="software" />
+
                         <Button
+                            android:id="@+id/show_less"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/show_less"
-                            android:text="@string/show_less"
                             android:background="@android:color/white"
+                            android:text="@string/show_less"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
                 android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin">
+                android:layout_marginRight="@dimen/card_margin">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/unit_details"
                             android:textColor="@color/green_back"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -514,26 +583,30 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/pro_furnished"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
+                            android:textColor="@color/textmain" />
+
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:id="@+id/pro_furnished"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/ex_furnished"
-                            android:layout_weight="1"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -541,26 +614,30 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/pro_floor"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
+                            android:textColor="@color/textmain" />
+
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:id="@+id/pro_floor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/ex_floor"
-                            android:layout_weight="1"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -568,27 +645,31 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:text="@string/pro_spl_feat"
-                            android:layout_gravity="center"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
+                            android:textColor="@color/textmain" />
+
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:id="@+id/pro_spl_feat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/ex_spl_feat"
-                            android:layout_weight="1"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -596,27 +677,31 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:text="@string/pro_iospace"
-                            android:layout_gravity="center"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
+                            android:textColor="@color/textmain" />
+
                         <TextView
+                            android:id="@+id/pro_iospace"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/pro_iospace"
-                            android:text="@string/ex_iospace"
                             android:layout_weight="1"
+                            android:text="@string/ex_iospace"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -624,51 +709,59 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/pro_fnf"
                             android:layout_gravity="center"
-                            android:textColor="@color/textmain"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="@string/pro_fnf"
+                            android:textColor="@color/textmain" />
+
                         <TextView
+                            android:id="@+id/pro_fnf"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/pro_fnf"
-                            android:text="@string/ex_fnf"
                             android:layout_weight="1"
+                            android:text="@string/ex_fnf"
                             android:textColor="@color/textmain"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/description"
                             android:textColor="@color/green_back"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -676,40 +769,47 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
+                            android:id="@+id/pro_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ex_description"
-                            android:id="@+id/pro_description"
-                            android:textColor="@color/textmain"/>
+                            android:textColor="@color/textmain" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
                 android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin">
+                android:layout_marginRight="@dimen/card_margin">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/facilities"
                             android:textColor="@color/green_back"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -717,74 +817,129 @@
                         android:layout_marginRight="@dimen/card_margin"
                         android:background="@drawable/dotted"
                         android:layerType="software" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
+                            android:id="@+id/pro_facilities"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ex_facilities"
-                            android:textStyle="bold"
                             android:textColor="@color/textmain"
-                            android:id="@+id/pro_facilities"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/card_margin">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/property_video"
                             android:textColor="@color/green_back"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
-                    <ImageView
+
+                    <RelativeLayout
+                        android:id="@+id/playvideo"
                         android:layout_width="match_parent"
-                        android:layout_height="240dp"
-                        android:src="@android:color/darker_gray"/>
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/youtubetumbnail"
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp"
+                            android:src="@android:color/darker_gray" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_playy" />
+                    </RelativeLayout>
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <Button
+                android:id="@+id/call_agent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/call_agent"
+                android:layout_marginBottom="@dimen/card_margin"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin"
-                android:text="@string/call_agent"
-                app:layout_scrollFlags="scroll"
-                android:textColor="@android:color/white"
                 android:background="@color/green_back"
-                />
+                android:text="@string/call_agent"
+                android:textColor="@android:color/white"
+                app:layout_scrollFlags="scroll" />
+
+
+            <LinearLayout
+                android:id="@+id/mypropertydetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/deletemyproperty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/card_margin"
+                    android:layout_marginLeft="@dimen/card_margin"
+                    android:layout_marginRight="@dimen/card_margin"
+                    android:layout_weight="1"
+                    android:background="@color/textmain"
+                    android:text="@string/delete"
+                    android:textColor="@android:color/white"
+                    app:layout_scrollFlags="scroll" />
+
+                <Button
+                    android:id="@+id/updatemyproperty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/card_margin"
+                    android:layout_marginLeft="@dimen/card_margin"
+                    android:layout_marginRight="@dimen/card_margin"
+                    android:layout_weight="1"
+                    android:background="@color/green_back"
+                    android:text="@string/update"
+                    android:textColor="@android:color/white"
+                    app:layout_scrollFlags="scroll" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:src="@drawable/agentpic"
         android:layout_marginRight="@dimen/card_margin"
-        app:civ_border_width="2dp"
+        android:src="@drawable/agentpic"
         app:civ_border_color="@color/green_back"
+        app:civ_border_width="2dp"
         app:layout_anchor="@id/detail_property_image"
-        app:layout_anchorGravity="bottom|end|right"/>
+        app:layout_anchorGravity="bottom|end|right" />
 </android.support.design.widget.CoordinatorLayout>
 

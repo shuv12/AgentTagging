@@ -30,6 +30,8 @@ public class NewListingPageThree extends AppCompatActivity {
     private InputStream imageStream;
     private Bitmap selectedImage;
     private ImageView image;
+    private byte[] imageBytes;
+    String encodedImage;
     // LayoutInflater layoutInflater;
 
     private static String[] PERMISSIONS_STORAGE = {

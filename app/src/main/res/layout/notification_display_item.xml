@@ -1,92 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_horizontal_margin">
 
     <LinearLayout
-        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin">
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
         <ImageView
+            android:id="@+id/notipropic"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:src="@android:color/darker_gray"
-            android:id="@+id/notipropic"/>
+            android:src="@android:color/darker_gray" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/notipoststr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/poststr"
-                android:id="@+id/notipoststr"
                 android:maxLines="2"
-                android:textColor="@color/posttext"/>
+                android:text="@string/poststr"
+                android:textColor="@color/posttext" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:id="@+id/fortype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fortype"
+                    android:layout_marginTop="18dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
                     android:text="@string/fortype"
                     android:textAllCaps="true"
                     android:textColor="@color/green_back"
-                    android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="18dp"
-                    android:gravity="left"/>
+                    android:textStyle="bold" />
+
                 <TextView
+                    android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/status"
-                    android:layout_weight="1"
-                    android:text="@string/status"
                     android:layout_marginTop="18dp"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:gravity="right"/>
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/status"
+                    android:textColor="@android:color/holo_blue_dark" />
+
                 <Button
+                    android:id="@+id/btntag"
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
-                    android:text="TAG"
-                    android:background="@color/green_back"
-                    android:visibility="gone"
-                    android:id="@+id/btntag"
                     android:layout_marginTop="12dp"
-                    android:textColor="@android:color/white"/>
+                    android:background="@color/green_back"
+                    android:text="TAG"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone" />
+
                 <LinearLayout
+                    android:id="@+id/requested"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/requested">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
                     <ImageButton
+                        android:id="@+id/checkaccept"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_checked"
-                        android:tint="@color/green_back"
-                        android:id="@+id/checkaccept"
                         android:background="@android:color/transparent"
                         android:paddingRight="@dimen/text_margin"
-                        />
+                        android:src="@drawable/ic_checked"
+                        android:tint="@color/green_back" />
+
                     <ImageButton
+                        android:id="@+id/crossdenied"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_cross"
-                        android:tint="@color/textmain"
                         android:background="@android:color/transparent"
-                        android:id="@+id/crossdenied"/>
+                        android:src="@drawable/ic_cross"
+                        android:tint="@color/textmain" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -29,23 +29,23 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.ViewHolder> 
         TextView agentName, agentNumber;
         ImageView agentPic;
         Button viewAgentProfile;
-        private final Context context;
+        //private final Context context;
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            context = itemView.getContext();
+            //context = itemView.getContext();
             this.agentName = (TextView) itemView.findViewById(R.id.agentname);
             this.agentNumber = (TextView) itemView.findViewById(R.id.agentnum);
             this.agentPic = (ImageView) itemView.findViewById(R.id.agentpic);
             this.viewAgentProfile = (Button) itemView.findViewById(R.id.viewagentprofile);
-            viewAgentProfile.setOnClickListener(new View.OnClickListener() {
+           /* viewAgentProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final Intent intent;
                     intent = new Intent(context, ViewProfile.class);
                     context.startActivity(intent);
                 }
-            });
+            });*/
 
         }
     }
@@ -60,11 +60,20 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.ViewHolder> 
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        AgentModel agentModel = (AgentModel) this.agentModelList.get(position);
+        final AgentModel agentModel = (AgentModel) this.agentModelList.get(position);
         holder.agentName.setText(agentModel.getAgentName());
         holder.agentNumber.setText(agentModel.getAgentNumber());
         //holder.agentPic.setImageResource(agentModel.getAgentPic());
         Picasso.with(context).load(agentModel.getAgentPic()).resize(300, 400).into(holder.agentPic);
+        holder.viewAgentProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ViewProfile.class);
+                intent.putExtra("agentdetailID",agentModel.getAgentID());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     public int getItemCount() {

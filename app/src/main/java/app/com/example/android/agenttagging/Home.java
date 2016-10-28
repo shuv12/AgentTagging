@@ -290,6 +290,8 @@ public class Home extends AppCompatActivity {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.property) {
+                            Intent intent = new Intent(Home.this, Home.class);
+                            startActivity(intent);
                         }
 
                         if (id == R.id.groupteam) {
@@ -357,8 +359,8 @@ public class Home extends AppCompatActivity {
                         String streetName = object.optString("street_name");
                         String askingPrice = object.optString("asking_price");
                         String floorArea = object.optString("floor_area");
-                        String priceperunit = String.valueOf(Integer.parseInt(askingPrice) / Integer.parseInt(floorArea));
-                        String faUnit = object.optString("floor_area_unit");
+                       // String priceperunit = String.valueOf(Integer.parseInt(askingPrice) / Integer.parseInt(floorArea));
+                        //String faUnit = object.optString("floor_area_unit");
                         String pro_img_url = GETPROPERTYPIC + img;
 
                         propertyModel.setPropertyID(propertyID);
@@ -370,8 +372,8 @@ public class Home extends AppCompatActivity {
                         propertyModel.setPropertyPic(pro_img_url);
                         propertyModel.setPropertyType(type);
                         propertyModel.setPropertyArea(floorArea);
-                        propertyModel.setPropertyAreaUnit(faUnit);
-                        propertyModel.setPropertyPricePerUnit(priceperunit);
+                        //propertyModel.setPropertyAreaUnit(faUnit);
+                        //propertyModel.setPropertyPricePerUnit(priceperunit);
                         propertyModelList.add(propertyModel);
 
 

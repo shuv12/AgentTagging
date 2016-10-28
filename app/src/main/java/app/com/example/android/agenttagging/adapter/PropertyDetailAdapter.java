@@ -1,8 +1,10 @@
 package app.com.example.android.agenttagging.adapter;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -33,15 +36,18 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
                 propertyDetailListedDate, propertyDetailPurpose,propertyDetailUnitNo,propertyDetailDistrict,propertyDetailBlockno,
                 propertyDetailPostcode,propertyDetailTenure, pdtotalnounits,pdtotalfloors,pdtopyear,pdfurnished,pdfloor,pdspl,
                 pdoispace,pdff,propertyDetailDescription,propertyDetailFacilities;
-        ImageView propertyUserPic,propertyDetailPic ;
+        ImageView propertyUserPic,propertyDetailPic,videoThumbnail;
         Button show_more,show_less,call_agent;
-        LinearLayout show_more_layout, blockll, districtll;
-        Context context;
+        LinearLayout show_more_layout, blockll, districtll,thisIsMyProperty;
+        //YouTubePlayerView youTubePlayerView;
+       // Context context;
         View blockLine,districtLine;
+        RelativeLayout playVideo;
+        //public static final String API_KEY = "AIzaSyAhajiuQLmXvRNz-xL570WNaHMrA_Jw1Vk";
 
         public ViewHolder(View itemView) {
             super(itemView);
-            context = itemView.getContext();
+           // context = itemView.getContext();
             this.propertyDetailAddress = (TextView) itemView.findViewById(R.id.property_detail_address);
             this.propertyDetailAreaUnit = (TextView) itemView.findViewById(R.id.property_detail_area_unit);
             this.propertyDetailBlockno = (TextView) itemView.findViewById(R.id.pro_block_no);
@@ -77,15 +83,19 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
             this.districtll = (LinearLayout) itemView.findViewById(R.id.districtll);
             this.blockLine = (View) itemView.findViewById(R.id.blockline);
             this.districtLine = (View) itemView.findViewById(R.id.districtline);
+            this.thisIsMyProperty = (LinearLayout) itemView.findViewById(R.id.mypropertydetail);
+            //this.youTubePlayerView = (YouTubePlayerView) itemView.findViewById(R.id.youtube_player_view);
 
+            this.videoThumbnail = (ImageView) itemView.findViewById(R.id.youtubetumbnail);
+            this.playVideo = (RelativeLayout) itemView.findViewById(R.id.playvideo);
 
-            propertyUserPic.setOnClickListener(new View.OnClickListener() {
+           /* propertyUserPic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context,ViewProfile.class);
                     context.startActivity(intent);
                 }
-            });
+            });*/
 
 
             show_more.setOnClickListener(new View.OnClickListener() {
@@ -119,21 +129,17 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
         final PropertyDetailModel propertyDetailModel = (PropertyDetailModel) this.propertyDetailModelList.get(position);
         holder.propertyDetailAddress.setText(propertyDetailModel.getPropertyDetailAddress());
         holder.propertyDetailAreaUnit.setText(propertyDetailModel.getPropertyDetailAreaUnit());
-        if (propertyDetailModel.getPropertyDetailBlockno().isEmpty())
-        {
+        if (propertyDetailModel.getPropertyDetailBlockno().isEmpty()) {
             holder.blockll.setVisibility(View.GONE);
             holder.blockLine.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             holder.propertyDetailBlockno.setText(propertyDetailModel.getPropertyDetailBlockno());
         }
 
-        if (propertyDetailModel.getPropertyDetailDistrict().isEmpty())
-        {
+        if (propertyDetailModel.getPropertyDetailDistrict().isEmpty()) {
             holder.districtll.setVisibility(View.GONE);
             holder.districtLine.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             holder.propertyDetailDistrict.setText(propertyDetailModel.getPropertyDetailDistrict());
         }
         holder.propertyDetailDescription.setText(propertyDetailModel.getPropertyDetailDescription());
@@ -170,7 +176,57 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
             }
         });
 
+        if (propertyDetailModel.getIsMyproperty()) {
+            holder.call_agent.setVisibility(View.GONE);
+            holder.thisIsMyProperty.setVisibility(View.VISIBLE);
+        } else {
+            holder.thisIsMyProperty.setVisibility(View.GONE);
+            holder.call_agent.setVisibility(View.VISIBLE);
+        }
+
+        if (propertyDetailModel.getVideoID() != null || propertyDetailModel.getVideoID() != ""){
+            Picasso.with(context).load("http://img.youtube.com/vi/" + propertyDetailModel.getVideoID() + "/default.jpg").fit().into(holder.videoThumbnail);
+            holder.playVideo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + propertyDetailModel.getVideoID()));
+                    appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://www.youtube.com/watch?v=" + propertyDetailModel.getVideoID()));
+                    webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    try {
+                        context.startActivity(appIntent);
+                    } catch (ActivityNotFoundException ex) {
+                        context.startActivity(webIntent);
+                    }
+                }
+            });
+        }else {
+            holder.videoThumbnail.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.novideo));
+            //Picasso.with(context).load(R.drawable.novidd).fit().into(holder.videoThumbnail);
+        }
+
+        holder.propertyUserPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myProfile = new Intent(context, ViewProfile.class);
+                myProfile.putExtra("myprofile",true);
+                myProfile.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent agentProfile = new Intent(context, ViewProfile.class);
+                agentProfile.putExtra("agentdetailID",propertyDetailModel.getUserId());
+                agentProfile.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                if (propertyDetailModel.getIsMyproperty()){
+                    context.startActivity(myProfile);
+                }
+                else context.startActivity(agentProfile);
+
+            }
+        });
+
+
     }
+
 
     public int getItemCount() {
         return propertyDetailModelList.size();

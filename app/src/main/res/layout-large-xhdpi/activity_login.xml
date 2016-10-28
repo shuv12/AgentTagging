@@ -15,6 +15,7 @@
         android:paddingTop="@dimen/top_padding">
 
         <ImageView
+            android:id="@+id/thisback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/top_padding"
@@ -116,6 +117,7 @@
                     android:orientation="horizontal">
 
                     <CheckBox
+                        android:id="@+id/rememberpassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/passwordRem"
@@ -136,12 +138,12 @@
 
 
                 <TextView
+                    android:id="@+id/forgetpass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:gravity="center"
                     android:text="@string/passwordForget"
-                    android:id="@+id/forgetpass"
                     android:textAllCaps="true"
                     android:textColor="@color/textmain"
                     android:textStyle="bold" />
@@ -158,15 +160,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:gravity="bottom"
-        >
+        android:gravity="bottom">
+
         <ImageView
+            android:id="@+id/fancy_login_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/fancy_login_image"
-            android:background="@drawable/login_b"
-            />
+            android:background="@drawable/login_b" />
     </LinearLayout>
 
 

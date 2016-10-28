@@ -57,127 +57,135 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.4"
-                android:orientation="vertical"
                 android:layout_gravity="center"
+                android:layout_weight="0.4"
+                android:background="@drawable/banner_bk"
                 android:gravity="center"
-                android:id="@+id/banner"
-                android:background="@drawable/banner_bk">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:text="@string/at"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:text="@string/at"
-                    android:gravity="center"
-                    />
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <android.support.v7.widget.SearchView
+                    android:id="@+id/searchview"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:id="@+id/searchview"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:background="@android:color/white"
                     android:clickable="true"
                     android:gravity="bottom"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:queryHint="@string/queryhint"
-                    android:background="@android:color/white"
-                    />
+                    android:queryHint="@string/queryhint" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="@dimen/card_margin"
                 android:layout_weight="0.6"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/card_margin">
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.3"
                     android:layout_marginBottom="@dimen/marginlow"
+                    android:layout_weight="0.3"
                     android:orientation="horizontal">
+
                     <LinearLayout
+                        android:id="@+id/front_hbd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:id="@+id/front_hbd"
-                        android:orientation="vertical"
                         android:layout_marginRight="@dimen/marginlow"
-                        android:background="@drawable/hdb_bk">
+                        android:layout_weight="0.1"
+                        android:background="@drawable/hdb_bk"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:text="@string/hbd"
                             android:textAllCaps="true"
-                            android:textStyle="bold"
                             android:textColor="@android:color/white"
-                            android:layout_gravity="center"
-                            android:gravity="center"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:id="@+id/front_condo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0.1"
-                        android:id="@+id/front_condo"
-                        android:orientation="vertical"
-                        android:background="@drawable/condo_bk">
+                        android:background="@drawable/condo_bk"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:text="@string/condo"
-                            android:textStyle="bold"
                             android:textAllCaps="true"
                             android:textColor="@android:color/white"
-                            android:layout_gravity="center"
-                            android:gravity="center"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.3"
                     android:orientation="horizontal">
+
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
                         android:id="@+id/front_landed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/marginlow"
-                        android:orientation="vertical"
-                        android:background="@drawable/landed_bk">
+                        android:layout_weight="0.1"
+                        android:background="@drawable/landed_bk"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:text="@string/landed"
-                            android:textStyle="bold"
                             android:textAllCaps="true"
                             android:textColor="@android:color/white"
-                            android:layout_gravity="center"
-                            android:gravity="center"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:id="@+id/front_banksale"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0.1"
-                        android:id="@+id/front_banksale"
-                        android:orientation="vertical"
-                        android:background="@drawable/bank_sale_bk">
+                        android:background="@drawable/bank_sale_bk"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:text="@string/banksale"
-                            android:textStyle="bold"
                             android:textAllCaps="true"
                             android:textColor="@android:color/white"
-                            android:layout_gravity="center"
-                            android:gravity="center"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

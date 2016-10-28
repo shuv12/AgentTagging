@@ -194,7 +194,7 @@ public class Agent extends AppCompatActivity {
             });
         }
         else {
-            headerlayout.setVisibility(View.GONE);
+           // headerlayout.setVisibility(View.GONE);
             header = nvDrawer.getHeaderView(0);
             alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
             alwaysHome1.setOnClickListener(new View.OnClickListener() {
@@ -287,11 +287,13 @@ public class Agent extends AppCompatActivity {
                         AgentModel agentModel = new AgentModel();
                         JSONObject object = new JSONObject();
                         object = mArray.getJSONObject(i);
+                        String id = object.optString("id");
                         String fname = object.optString("name");
                         String email = object.optString("email");
                         String phone = object.optString("phone");
                         String userpic = object.optString("user_image");
                         String picurl = GETAGENTPIC + userpic;
+                        agentModel.setAgentID(id);
                         agentModel.setAgentName(fname);
                         agentModel.setAgentNumber(phone);
                         agentModel.setAgentPic(picurl);

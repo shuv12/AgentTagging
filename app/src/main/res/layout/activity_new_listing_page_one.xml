@@ -80,29 +80,29 @@
                         android:textStyle="bold" />
 
                     <RadioGroup
+                        android:id="@+id/purpose"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/buttonheight"
-                        android:id="@+id/purpose"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_horizontal_margin">
 
                         <RadioButton
+                            android:id="@+id/thisisforsale"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:button="?android:attr/listChoiceIndicatorMultiple"
                             android:text="@string/fors"
-                            android:id="@+id/sale"
                             android:textColor="@color/textmain" />
 
                         <RadioButton
+                            android:id="@+id/thisisforrent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:button="?android:attr/listChoiceIndicatorMultiple"
                             android:text="@string/forr"
-                            android:id="@+id/rent"
                             android:textColor="@color/textmain" />
                     </RadioGroup>
                 </LinearLayout>
@@ -293,7 +293,6 @@
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/pname"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -305,7 +304,6 @@
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/district"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -316,8 +314,8 @@
                             android:layout_marginBottom="@dimen/card_margin"
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/bno"
+                            android:inputType="number"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -329,7 +327,6 @@
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/sn"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -341,7 +338,6 @@
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/pc"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -359,9 +355,9 @@
                                 android:background="@drawable/edittextboxview"
                                 android:hint="@string/unit"
                                 android:imeOptions="actionNext"
+                                android:inputType="number"
                                 android:nextFocusRight="@+id/right_unit"
                                 android:padding="@dimen/text_margin"
-                                android:singleLine="true"
                                 android:textColorHint="@color/textmain"
                                 android:textSize="14sp" />
 
@@ -379,8 +375,8 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/edittextboxview"
                                 android:hint="@string/unit"
+                                android:inputType="number"
                                 android:padding="@dimen/text_margin"
-                                android:singleLine="true"
                                 android:textColorHint="@color/textmain"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -393,8 +389,8 @@
                             android:layout_marginBottom="@dimen/card_margin"
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/ap"
+                            android:inputType="number"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -405,8 +401,8 @@
                             android:layout_marginBottom="@dimen/card_margin"
                             android:background="@drawable/edittextboxview"
                             android:hint="@string/obv"
+                            android:inputType="number"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:textColorHint="@color/textmain"
                             android:textSize="14sp" />
 
@@ -417,7 +413,6 @@
                             android:layout_marginBottom="@dimen/card_margin"
                             android:background="@drawable/edittextboxview"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:text="@string/tagginglimit"
                             android:textColor="@color/textmain"
                             android:textSize="14sp" />
@@ -438,7 +433,6 @@
                             android:layout_marginBottom="@dimen/card_margin"
                             android:background="@drawable/edittextboxview"
                             android:padding="@dimen/text_margin"
-                            android:singleLine="true"
                             android:text="@string/nob"
                             android:textColor="@color/textmain"
                             android:textSize="14sp" />
@@ -456,12 +450,13 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/edittextboxview"
                                 android:hint="@string/fa"
+                                android:inputType="number"
                                 android:padding="@dimen/text_margin"
-                                android:singleLine="true"
                                 android:textColorHint="@color/textmain"
                                 android:textSize="14sp" />
 
                             <Spinner
+                                android:id="@+id/floorareaunit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"

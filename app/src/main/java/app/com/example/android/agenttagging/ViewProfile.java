@@ -62,6 +62,10 @@ public class ViewProfile extends AppCompatActivity {
     private NavigationView nvDrawer;
     private Button createListing, messageme, updateme;
     private TextView titleName,profileName,profileNumber,editProfileName, editProfileNumber;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    String[] count = new String[3];
+
     private EditText searchText;
     private ImageView searchIcon,crossIcon,callAgent;
     private LinearLayout viewmyprofile,searchLayout,toolbarLayout;
@@ -69,6 +73,7 @@ public class ViewProfile extends AppCompatActivity {
     private String userToken;
     private SharedPreferences sharedPreferences;
 
+    private String agentDetailID;
 
     private View header, headerlayout;
     private ImageView userImageview;
@@ -76,6 +81,7 @@ public class ViewProfile extends AppCompatActivity {
     private Boolean isLogged;
     private String loggedUserName;
     private String loggedUserPic;
+    private ImageView drawerMenu,backFromAgent;
 
 
     private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
@@ -92,6 +98,8 @@ public class ViewProfile extends AppCompatActivity {
     private static final String GETPROFILEPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
     private String userName, userPhone, pro_img_url, totalSale, totalRent, totalProperty;
 
+    private static final String GETAGENTSDETAILSURL = " http://realthree60.com/dev/apis/Agent/";
+
 
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -106,7 +114,7 @@ public class ViewProfile extends AppCompatActivity {
         setContentView(R.layout.activity_view_profile);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        ImageView drawerMenu = (ImageView) findViewById(R.id.drawermenu);
+        drawerMenu = (ImageView) findViewById(R.id.drawermenu);
 
         profilePic = (ImageView) findViewById(R.id.profilepic);
         profileName = (TextView) findViewById(R.id.profilename);
@@ -119,14 +127,15 @@ public class ViewProfile extends AppCompatActivity {
         loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC,null);
         String userImageUrl = GETLOGGEDUSERPICURL + loggedUserPic;
 
-        if (userToken == null){
+        /*if (userToken == null){
             Toast.makeText(ViewProfile.this,"Please Login First",Toast.LENGTH_SHORT).show();
         }
         else {
             new GetMyDetails().execute();
-        }
+        }*/
 
 
+        backFromAgent = (ImageView) findViewById(R.id.backbtnfromagent);
         callAgent = (ImageView) findViewById(R.id.callthisagent);
         searchText = (EditText) findViewById(R.id.searchtext);
         searchIcon = (ImageView) findViewById(R.id.searchIcon);
@@ -136,6 +145,23 @@ public class ViewProfile extends AppCompatActivity {
         messageme = (Button) findViewById(R.id.messageme);
         updateme = (Button) findViewById(R.id.updateprofile);
         titleName = (TextView) findViewById(R.id.titlename);
+
+        backFromAgent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        callAgent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" + userPhone));
+                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(callIntent);
+            }
+        });
 
         searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,11 +213,20 @@ public class ViewProfile extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Boolean myprofile = extras.getBoolean("myprofile");
-            if (myprofile == true) {
+            if (myprofile) {
                 messageme.setVisibility(View.GONE);
                 updateme.setVisibility(View.VISIBLE);
                 searchIcon.setVisibility(View.VISIBLE);
                 callAgent.setVisibility(View.GONE);
+                drawerMenu.setVisibility(View.VISIBLE);
+                backFromAgent.setVisibility(View.GONE);
+
+                if (userToken == null){
+                    Toast.makeText(ViewProfile.this,"Please Login First",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    new GetMyDetails().execute();
+                }
 
                 updateme.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -247,6 +282,11 @@ public class ViewProfile extends AppCompatActivity {
                 });
                 titleName.setText(getString(R.string.mypro));
             }
+            else {
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                agentDetailID = extras.getString("agentdetailID");
+                new GetAgentsDetails().execute();
+            }
         }
 
         createListing = (Button) findViewById(R.id.createlisting);
@@ -291,7 +331,6 @@ public class ViewProfile extends AppCompatActivity {
             });
         }
         else {
-            //headerlayout.setVisibility(View.GONE);
             header = nvDrawer.getHeaderView(0);
             alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
             alwaysHome1.setOnClickListener(new View.OnClickListener() {
@@ -315,18 +354,18 @@ public class ViewProfile extends AppCompatActivity {
         }
 
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+       /* viewPager = (ViewPager) findViewById(R.id.viewpager);
         ProfileFragmentPagerAdapter pagerAdapter = new ProfileFragmentPagerAdapter(getSupportFragmentManager(),
-                ViewProfile.this);
+                ViewProfile.this,count);
         viewPager.setAdapter(pagerAdapter);
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
-        }
+        }*/
 
     }
 
@@ -439,19 +478,38 @@ public class ViewProfile extends AppCompatActivity {
                     userPhone = object.optString("phone");
                     totalSale = object.optString("total_sale");
                     totalRent = object.optString("total_rent");
-                    int totalP = Integer.parseInt(totalRent) + Integer.parseInt(totalSale);
-                    totalProperty = Integer.toString(totalP);
+                    totalProperty = String.valueOf(Integer.parseInt(totalRent) + Integer.parseInt(totalSale));
                     pro_img_url = GETPROFILEPICURL + userImage;
+
+                    count[0] = totalProperty;
+                    count[1] = totalRent;
+                    count[2] = totalSale;
+                    Log.v("Total property : ",count[0]);
+                    Log.v("Total Rent : ",count[1]);
+                    Log.v("Total Sale : ",count[2]);
 
                     profileName.setText(userName);
                     profileNumber.setText(userPhone);
                     Picasso.with(ViewProfile.this).load(pro_img_url).fit().into(profilePic);
 
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    viewPager = (ViewPager) findViewById(R.id.viewpager);
+                    ProfileFragmentPagerAdapter pagerAdapter = new ProfileFragmentPagerAdapter(getSupportFragmentManager(),
+                            ViewProfile.this,count);
+                    viewPager.setAdapter(pagerAdapter);
+
+                    tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+                    tabLayout.setupWithViewPager(viewPager);
+
+                    for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                        TabLayout.Tab tab = tabLayout.getTabAt(i);
+                        tab.setCustomView(pagerAdapter.getTabView(i));
+                    }
+                   /* SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(TOTALPROPERTY,totalProperty);
                     editor.putString(TOTALRENT,totalRent);
                     editor.putString(TOTALSALE,totalSale);
-                    editor.apply();
+                    editor.apply();*/
 
                 }
                 else {
@@ -540,5 +598,139 @@ public class ViewProfile extends AppCompatActivity {
         }
     }
 
+
+    private class GetAgentsDetails extends AsyncTask<String, String, String> {
+
+        ProgressDialog pdLoading = new ProgressDialog(ViewProfile.this);
+        HttpURLConnection conn;
+        URL url = null;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pdLoading.setMessage("\tLoading...");
+            pdLoading.setCancelable(false);
+            pdLoading.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pdLoading.dismiss();
+            try {
+                JSONObject mObject = new JSONObject(s);
+                Boolean Success = mObject.optBoolean("Success");
+                if (Success) {
+                    JSONArray mArray = mObject.optJSONArray("user-detail");
+                    JSONObject object = new JSONObject();
+                    object = mArray.getJSONObject(0);
+                    String userID = object.optString("id");
+                    userName = object.optString("name");
+                    String userEmail = object.optString("email");
+                    String userImage = object.optString("user_image");
+                    userPhone = object.optString("phone");
+                    totalSale = object.optString("total_sale");
+                    totalRent = object.optString("total_rent");
+                    totalProperty = String.valueOf(Integer.parseInt(totalRent) + Integer.parseInt(totalSale));
+                    pro_img_url = GETPROFILEPICURL + userImage;
+
+                    count[0] = totalProperty;
+                    count[1] = totalRent;
+                    count[2] = totalSale;
+                    Log.v("Total Agent Property : ", totalProperty);
+
+                    profileName.setText(userName);
+                    profileNumber.setText(userPhone);
+                    Picasso.with(ViewProfile.this).load(pro_img_url).fit().into(profilePic);
+
+
+                    viewPager = (ViewPager) findViewById(R.id.viewpager);
+                    ProfileFragmentPagerAdapter pagerAdapter = new ProfileFragmentPagerAdapter(getSupportFragmentManager(),
+                            ViewProfile.this,count);
+                    viewPager.setAdapter(pagerAdapter);
+
+                    tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+                    tabLayout.setupWithViewPager(viewPager);
+
+                    for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                        TabLayout.Tab tab = tabLayout.getTabAt(i);
+                        tab.setCustomView(pagerAdapter.getTabView(i));
+                    }
+                    /*SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(TOTALPROPERTY,totalProperty);
+                    editor.putString(TOTALRENT,totalRent);
+                    editor.putString(TOTALSALE,totalSale);
+                    editor.apply();*/
+
+                }
+                else {
+                    Toast.makeText(ViewProfile.this,"Error in fetching data",Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                Log.e("ViewProfile", "JSON exception", e);
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String agentDetailUrl = GETAGENTSDETAILSURL + agentDetailID;
+                url = new URL(agentDetailUrl);
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return "exception";
+            }
+            try {
+                // Setup HttpURLConnection class to send and receive data from php and mysql
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(READ_TIMEOUT);
+                conn.setConnectTimeout(CONNECTION_TIMEOUT);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+                conn.connect();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                return "exception";
+            }
+            try {
+
+                int response_code = conn.getResponseCode();
+
+                // Check if successful connection made
+                if (response_code == HttpURLConnection.HTTP_OK) {
+
+                    // Read data sent from server
+                    InputStream input = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+
+                    Log.v("ViewProfileData",result.toString());
+                    // Pass data to onPostExecute method
+                    return (result.toString());
+
+                } else {
+
+                    return ("unsuccessful");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "exception";
+            } finally {
+                conn.disconnect();
+            }
+
+        }
+    }
 }
 

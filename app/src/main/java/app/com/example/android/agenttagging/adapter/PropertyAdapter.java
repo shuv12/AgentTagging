@@ -26,7 +26,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     private List<PropertyModel> propertyModelList;
 
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
-        TextView propertyHeadline, propertyAddress, propertyType, propertyOwner, propertyPrice,propertyPurpose, propertyPricePerUnit, propertyArea, propertyAreaUnit;
+        TextView propertyHeadline, propertyAddress, propertyType, propertyPrice,propertyPurpose, propertyPricePerUnit, propertyArea, propertyAreaUnit;
         ImageView propertyImage;
        // private final Context context;
         LinearLayout mainll;
@@ -41,9 +41,9 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             this.propertyType = (TextView) itemView.findViewById(R.id.property_type);
             this.propertyPrice = (TextView) itemView.findViewById(R.id.property_price);
             this.propertyImage = (ImageView) itemView.findViewById(R.id.property_image);
-            this.propertyAreaUnit = (TextView) itemView.findViewById(R.id.property_area_unit);
+           // this.propertyAreaUnit = (TextView) itemView.findViewById(R.id.property_area_unit);
             this.propertyArea = (TextView) itemView.findViewById(R.id.property_area);
-            this.propertyPricePerUnit = (TextView) itemView.findViewById(R.id.property_price_per_unit);
+           // this.propertyPricePerUnit = (TextView) itemView.findViewById(R.id.property_price_per_unit);
             this.mainll = (LinearLayout) itemView.findViewById(R.id.mainll);
 
             /*itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +73,9 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         holder.propertyHeadline.setText(propertyModel.getPropertyHeadline());
         holder.propertyType.setText(propertyModel.getPropertyType());
         holder.propertyPurpose.setText(propertyModel.getPropertyPurpose());
-        holder.propertyPricePerUnit.setText(propertyModel.getPropertyPricePerUnit());
+        //holder.propertyPricePerUnit.setText(propertyModel.getPropertyPricePerUnit());
         holder.propertyArea.setText(propertyModel.getPropertyArea());
-        holder.propertyAreaUnit.setText(propertyModel.getPropertyAreaUnit());
+        //holder.propertyAreaUnit.setText(propertyModel.getPropertyAreaUnit());
         Picasso.with(context).load(propertyModel.getPropertyPic()).resize(300, 400).into(holder.propertyImage);
         holder.mainll.setOnClickListener(new View.OnClickListener() {
             @Override

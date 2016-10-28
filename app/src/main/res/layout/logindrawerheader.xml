@@ -3,16 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
+
         <ImageView
+            android:id="@+id/alwayshome"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:id="@+id/alwayshome"
-            android:src="@drawable/home"/>
+            android:src="@drawable/home" />
     </LinearLayout>
 
     <LinearLayout

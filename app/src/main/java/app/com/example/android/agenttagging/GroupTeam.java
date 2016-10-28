@@ -41,6 +41,7 @@ import app.com.example.android.agenttagging.model.GroupModel;
 
 import static app.com.example.android.agenttagging.Login.CONNECTION_TIMEOUT;
 import static app.com.example.android.agenttagging.Login.READ_TIMEOUT;
+import static app.com.example.android.agenttagging.R.id.agents;
 
 public class GroupTeam extends AppCompatActivity {
 
@@ -53,6 +54,12 @@ public class GroupTeam extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private List<GroupModel> groupModelList;
+
+
+    private ArrayList<String> agentsName = new ArrayList<String>();
+    private ArrayList<String> agentsPhone = new ArrayList<String>();
+    private ArrayList<String> agentsImage = new ArrayList<String>();
+
 
     private View header, headerlayout;
     private ImageView userImageview;
@@ -202,7 +209,7 @@ public class GroupTeam extends AppCompatActivity {
                             startActivity(intent3);
                         }
 
-                        if (id == R.id.agents) {
+                        if (id == agents) {
                             Intent intent2 = new Intent(GroupTeam.this, Agent.class);
                             startActivity(intent2);
                         }
@@ -245,43 +252,31 @@ public class GroupTeam extends AppCompatActivity {
                     JSONObject bannerobj = (JSONObject)bannerArray.getJSONObject(0);
                     String bannerimage = bannerobj.optString("image");
                     String topBannerUrl = GETBANNER + bannerimage;
-                    //Log.v("Top banner", topBannerUrl);
+                    JSONObject bannerobj1 = (JSONObject)bannerArray.getJSONObject(1);
+                    String bannerimage1 = bannerobj1.optString("image");
+                    String topBannerUrl1 = GETBANNER + bannerimage;
+                    Log.v("Top banner", topBannerUrl);
+                    Log.v("Top banner 1", topBannerUrl1);
 
                     JSONArray agentsArray = object.optJSONArray("agents");
-                    JSONObject agentObj1 = new JSONObject();
-                    agentObj1 = agentsArray.getJSONObject(0);
-                    String Agent_name1 = agentObj1.optString("name");
-                    String Agent_image1 = agentObj1.optString("user_image");
-                    String Agent_phone1 = agentObj1.optString("phone");
-                    String agentImageUrl1 = GETPIC + Agent_image1;
+                    for (int i=0; i < agentsArray.length(); i++){
+                        JSONObject agentObj = new JSONObject();
+                        agentObj = agentsArray.getJSONObject(i);
+                        String agent_name = agentObj.optString("name");
+                        String agent_image = agentObj.optString("user_image");
+                        String agent_phone = agentObj.optString("phone");
+                        String agentImageUrl = GETPIC + agent_image;
 
-                    JSONObject agentObj2 = new JSONObject();
-                    agentObj2 = agentsArray.getJSONObject(1);
-                    String Agent_name2 = agentObj2.optString("name");
-                    String Agent_image2 = agentObj2.optString("user_image");
-                    String Agent_phone2 = agentObj2.optString("phone");
-                    String agentImageUrl2 = GETPIC + Agent_image2;
+                        agentsName.add(agent_name);
+                        agentsPhone.add(agent_phone);
+                        agentsImage.add(agentImageUrl);
 
-                    JSONObject agentObj3 = new JSONObject();
-                    agentObj3 = agentsArray.getJSONObject(2);
-                    String Agent_name3 = agentObj3.optString("name");
-                    String Agent_image3 = agentObj3.optString("user_image");
-                    String Agent_phone3 = agentObj3.optString("phone");
-                    String agentImageUrl3 = GETPIC + Agent_image3;
-
-                    JSONObject agentObj4 = new JSONObject();
-                    agentObj4 = agentsArray.getJSONObject(3);
-                    String Agent_name4 = agentObj4.optString("name");
-                    String Agent_image4 = agentObj4.optString("user_image");
-                    String Agent_phone4 = agentObj4.optString("phone");
-                    String agentImageUrl4 = GETPIC + Agent_image4;
-
+                    }
 
 
                     JSONArray Desarray = object.optJSONArray("company_description");
                     JSONObject desobj = (JSONObject)Desarray.getJSONObject(0);
                     String companyDes = desobj.optString("value");
-                   // Log.v("company description = ", companyDes);
 
                     JSONArray midbannerArray = object.optJSONArray("mid-slider");
                     JSONObject midbannerobj1 = (JSONObject) midbannerArray.getJSONObject(0);
@@ -290,36 +285,23 @@ public class GroupTeam extends AppCompatActivity {
                     String midbannerimage2 = midbannerobj2.optString("image");
                     String midBannerUrl1 = GETBANNER + midbannerimage1;
                     String midBannerUrl2 = GETBANNER + midbannerimage2;
-                   // Log.v("Mid banner 1", midBannerUrl1);
-                   /// Log.v("Mid banner 2", midBannerUrl2);
-
+                    Log.v("Mid banner 1", midBannerUrl1);
+                    Log.v("Mid banner 2", midBannerUrl2);
 
                     JSONArray RecruitArray = object.optJSONArray("company_recruitment");
                     JSONObject recruobj = (JSONObject)RecruitArray.getJSONObject(0);
                     String companyRecruit = recruobj.optString("value");
-                    //Log.v("company recruit = ", companyRecruit);
-
 
                     JSONArray contactArray = object.optJSONArray("contact");
                     JSONObject contactobj = (JSONObject)contactArray.getJSONObject(0);
                     String contactname = contactobj.optString("name");
                     String contactimage = contactobj.optString("user_image");
                     String contactphone = contactobj.optString("phone");
-                   // Log.v("contact : ", contactimage + contactname + contactphone);
                     String contactImageUrl = GETPIC + contactimage;
 
-                    groupModel.setAgent_name1(Agent_name1);
-                    groupModel.setAgent_number1(Agent_phone1);
-                    groupModel.setAgent_pic1(agentImageUrl1);
-                    groupModel.setAgent_name2(Agent_name2);
-                    groupModel.setAgent_number2(Agent_phone2);
-                    groupModel.setAgent_pic2(agentImageUrl2);
-                    groupModel.setAgent_name3(Agent_name3);
-                    groupModel.setAgent_number3(Agent_phone3);
-                    groupModel.setAgent_pic3(agentImageUrl3);
-                    groupModel.setAgent_name4(Agent_name4);
-                    groupModel.setAgent_number4(Agent_phone4);
-                    groupModel.setAgent_pic4(agentImageUrl4);
+                    groupModel.setAgentsImage(agentsImage);
+                    groupModel.setAgentsName(agentsName);
+                    groupModel.setAgentsPhone(agentsPhone);
 
                     groupModel.setCompany_des(companyDes);
                     groupModel.setCompany_recruit(companyRecruit);
@@ -385,7 +367,7 @@ public class GroupTeam extends AppCompatActivity {
                     }
 
 
-                   // Log.v("Result",result.toString());
+                    Log.v("Result",result.toString());
                     // Pass data to onPostExecute method
                     return (result.toString());
 

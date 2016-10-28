@@ -50,7 +50,7 @@
     <string name="banksale">Bank Sale</string>
     <string name="bi">Basic Info</string>
     <string name="district">District</string>
-    <string name="pname">Name</string>
+    <string name="pname">Title</string>
     <string name="bno">Block No.</string>
     <string name="sn">Street Name</string>
     <string name="pc">PostCode</string>
@@ -151,6 +151,8 @@
     <string name="Tnc">Terms &amp; Conditions</string>
     <string name="pp">Privacy Policy</string>
     <string name="logout">Log Out</string>
+    <string name="delete">DELETE</string>
+    <string name="update">UPDATE</string>
 
 
     <array name="tagged_agents">
@@ -168,8 +170,8 @@
     </array>
 
     <string-array name="unit_area">
-        <item>sqft</item>
-        <item>sqm</item>
+        <item>sq ft.</item>
+        <item>sq mt.</item>
     </string-array>
 
     <array name="furnishedarray">

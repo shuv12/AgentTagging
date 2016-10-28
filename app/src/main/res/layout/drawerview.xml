@@ -3,24 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
+
         <ImageView
+            android:id="@+id/alwayshome"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:id="@+id/alwayshome"
-            android:src="@drawable/home"/>
+            android:src="@drawable/home" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <LinearLayout
             android:id="@+id/viewmyprofile"
@@ -31,17 +33,17 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <ImageView
+                android:id="@+id/loggeduserpic"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:id="@+id/loggeduserpic"
                 android:src="@drawable/agentpic" />
 
             <TextView
+                android:id="@+id/loggedusername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/userprofilename"
-                android:id="@+id/loggedusername"
                 android:textColor="@android:color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -59,16 +61,31 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <LinearLayout
+                android:id="@+id/drawermessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/message" />
+                <RelativeLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/message">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/counticon"
+                        android:padding="@dimen/marginlow"
+                        android:text="99" />
+                    <!--<ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/message" />-->
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,16 +103,31 @@
                 android:background="@android:color/white" />
 
             <LinearLayout
+                android:id="@+id/drawernotification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/notification" />
+                <RelativeLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/notification">
+                    <!-- <ImageView
+                         android:layout_width="32dp"
+                         android:layout_height="32dp"
+                         android:src="@drawable/notification" />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/counticon"
+                        android:padding="@dimen/marginlow"
+                        android:text="88" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"

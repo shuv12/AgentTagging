@@ -108,7 +108,7 @@ public class Notify extends AppCompatActivity {
             });
         }
         else {
-            headerlayout.setVisibility(View.GONE);
+            //headerlayout.setVisibility(View.GONE);
             header = nvDrawer.getHeaderView(0);
             alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
             alwaysHome1.setOnClickListener(new View.OnClickListener() {

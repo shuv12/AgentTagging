@@ -35,6 +35,33 @@ public class PropertyDetailModel implements Serializable {
     private String propertyDetailDescription;
     private String propertyDetailFacilities;
     private String Agentnumber;
+    private String userId;
+    private Boolean isMyproperty;
+    private String videoID;
+
+    public String getVideoID() {
+        return this.videoID;
+    }
+
+    public void setVideoID(String videoID) {
+        this.videoID = videoID;
+    }
+
+    public Boolean getIsMyproperty() {
+        return this.isMyproperty;
+    }
+
+    public void setIsMyproperty(Boolean isMyproperty) {
+        this.isMyproperty = isMyproperty;
+    }
+
+    public String getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getAgentnumber() {
         return this.Agentnumber;

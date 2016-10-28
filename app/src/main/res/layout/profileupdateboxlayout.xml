@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
+
     <ImageView
+        android:id="@+id/editprofilepic"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_gravity="center"
-        android:id="@+id/editprofilepic"
-        android:src="@drawable/agentpic"/>
+        android:src="@drawable/agentpic" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/editprofilename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/activity_horizontal_margin"
-        android:text="@string/agentname"/>
+        android:text="@string/agentname" />
+
     <EditText
+        android:id="@+id/editprofileno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editprofileno"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/agentnum"/>
+        android:text="@string/agentnum" />
+
     <Button
+        android:id="@+id/saveupdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/saveupdate"
-        android:text="SAVE"
-        android:textColor="@android:color/white"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:background="@color/green_back"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@color/green_back"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="SAVE"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ public class UploadPhoto extends AppCompatActivity {
 
     private ImageView backBtn3;
     private LinearLayout tapUpload;
+    private String newPostId;
 
 
     @Override
@@ -18,11 +19,15 @@ public class UploadPhoto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_photo);
 
+        Bundle extra = getIntent().getExtras();
+        newPostId = extra.getString("newpostid");
+
         tapUpload = (LinearLayout) findViewById(R.id.clickedtoupload);
         tapUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UploadPhoto.this,DisplayUploadingPhoto.class);
+                intent.putExtra("newpostid",newPostId);
                 startActivity(intent);
             }
         });

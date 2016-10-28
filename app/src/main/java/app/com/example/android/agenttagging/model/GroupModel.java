@@ -3,8 +3,7 @@ package app.com.example.android.agenttagging.model;
 import android.widget.LinearLayout;
 
 import java.io.Serializable;
-
-import static app.com.example.android.agenttagging.R.id.mid_banner;
+import java.util.ArrayList;
 
 /**
  * Created by shuvam on 09-10-2016.
@@ -14,9 +13,7 @@ public class GroupModel implements Serializable {
     private static final long serialVersionUID = 1;
     private String top_banner;
     private String mid_banner1,mid_banner2;
-    private String agent_pic1,agent_pic2,agent_pic3,agent_pic4;
-    private String agent_name1,agent_name2,agent_name3,agent_name4;
-    private String agent_number1,agent_number2,agent_number3,agent_number4;
+    private ArrayList<String> agentsName,agentsImage,agentsPhone;
     private String company_des;
     private String company_recruit;
     private String contact_name;
@@ -29,105 +26,17 @@ public class GroupModel implements Serializable {
     public void setAddAgent(LinearLayout addAgent){this.addAgent = addAgent;}
 
 
-    public String getAgent_pic1() {
-        return agent_pic1;
-    }
+    public ArrayList<String> getAgentsName(){return agentsName;}
 
-    public void setAgent_pic1(String agent_pic1) {
-        this.agent_pic1 = agent_pic1;
-    }
+    public void setAgentsName(ArrayList<String> agentsName){this.agentsName = agentsName;}
 
-    public String getAgent_name1() {
-        return agent_name1;
-    }
+    public ArrayList<String> getAgentsImage(){return agentsImage;}
 
-    public void setAgent_name1(String agent_name1) {
-        this.agent_name1 = agent_name1;
-    }
+    public void setAgentsImage(ArrayList<String> agentsImage){this.agentsImage = agentsImage;}
 
-    public String getAgent_number1() {
-        return agent_number1;
-    }
+    public ArrayList<String> getAgentsPhone(){return agentsPhone;}
 
-    public void setAgent_number1(String agent_number1) {
-        this.agent_number1 = agent_number1;
-    }
-
-
-    public String getAgent_pic2() {
-        return agent_pic2;
-    }
-
-    public void setAgent_pic2(String agent_pic2) {
-        this.agent_pic2 = agent_pic2;
-    }
-
-    public String getAgent_name2() {
-        return agent_name2;
-    }
-
-    public void setAgent_name2(String agent_name2) {
-        this.agent_name2 = agent_name2;
-    }
-
-    public String getAgent_number2() {
-        return agent_number2;
-    }
-
-    public void setAgent_number2(String agent_number2) {
-        this.agent_number2 = agent_number2;
-    }
-
-
-    public String getAgent_pic3() {
-        return agent_pic3;
-    }
-
-    public void setAgent_pic3(String agent_pic3) {
-        this.agent_pic3 = agent_pic3;
-    }
-
-    public String getAgent_name3() {
-        return agent_name3;
-    }
-
-    public void setAgent_name3(String agent_name3) {
-        this.agent_name3 = agent_name3;
-    }
-
-    public String getAgent_number3() {
-        return agent_number3;
-    }
-
-    public void setAgent_number3(String agent_number3) {
-        this.agent_number3 = agent_number3;
-    }
-
-
-    public String getAgent_pic4() {
-        return agent_pic4;
-    }
-
-    public void setAgent_pic4(String agent_pic4) {
-        this.agent_pic4 = agent_pic4;
-    }
-
-    public String getAgent_name4() {
-        return agent_name4;
-    }
-
-    public void setAgent_name4(String agent_name4) {
-        this.agent_name4 = agent_name4;
-    }
-
-    public String getAgent_number4() {
-        return agent_number4;
-    }
-
-    public void setAgent_number4(String agent_number4) {
-        this.agent_number4 = agent_number4;
-    }
-
+    public void setAgentsPhone(ArrayList<String> agentsPhone){this.agentsPhone = agentsPhone;}
 
 
     public String getTop_banner() {

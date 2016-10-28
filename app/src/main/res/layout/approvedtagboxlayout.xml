@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:hint="@string/input_hint"
+        android:background="@drawable/editboxnormal"
         android:gravity="start"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:background="@drawable/editboxnormal"/>
+        android:hint="@string/input_hint"
+        android:padding="@dimen/activity_horizontal_margin" />
+
     <Button
+        android:id="@+id/sendtextmsg"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:text="SEND"
         android:layout_gravity="center"
-        android:id="@+id/sendtextmsg"
-        android:textColor="@android:color/white"
+        android:layout_marginTop="@dimen/card_margin"
         android:background="@color/green_back"
-        android:layout_marginTop="@dimen/card_margin"/>
+        android:text="SEND"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

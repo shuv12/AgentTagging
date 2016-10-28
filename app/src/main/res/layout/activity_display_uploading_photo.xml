@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_display_uploading_photo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,19 +49,20 @@
         android:layout_height="match_parent"
         android:background="@color/editbox"
         android:orientation="vertical"
-        android:paddingTop="@dimen/card_margin"
         android:paddingLeft="@dimen/card_margin"
         android:paddingRight="@dimen/card_margin"
+        android:paddingTop="@dimen/card_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <org.apmem.tools.layouts.FlowLayout
+            android:id="@+id/addimagebody"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginRight="@dimen/marginlow"
             android:layout_marginTop="@dimen/marginlow"
-            android:orientation="horizontal"
-            android:id="@+id/addimagebody"
-            >
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/add_property_image"
                 android:layout_width="80dp"
@@ -70,6 +71,7 @@
                 android:background="@android:color/white"
                 android:src="@drawable/add" />
         </org.apmem.tools.layouts.FlowLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,6 +93,7 @@
                 android:textColor="@android:color/white" />
 
             <Button
+                android:id="@+id/donepost"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="5dp"

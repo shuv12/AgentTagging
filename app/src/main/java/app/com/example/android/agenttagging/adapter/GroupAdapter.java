@@ -2,8 +2,13 @@ package app.com.example.android.agenttagging.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +32,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
     private List<GroupModel> groupModelList;
 
     public static class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
-        ImageView top_banner,mid_banner,contact_pic,callgroupagent,agent1,agent2,agent3,agent4;
-        TextView company_des,company_recruit,contact_name,contact_number,
-                nameagent1,nameagent2,nameagent3,nameagent4,noagent1,noagent2,noagent3,noagent4;
+        ImageView top_banner,mid_banner,contact_pic,callgroupagent;
+        TextView company_des,company_recruit,contact_name,contact_number;
         LinearLayout addAgent;
 
         public ViewHolder(View itemView){
@@ -43,18 +47,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             this.company_des = (TextView) itemView.findViewById(R.id.company_des);
             this.callgroupagent = (ImageView) itemView.findViewById(R.id.callgroupagent);
             this.addAgent = (LinearLayout) itemView.findViewById(R.id.addagents);
-            this.agent1 = (ImageView) itemView.findViewById(R.id.agentpic1);
-            this.agent2 = (ImageView) itemView.findViewById(R.id.agentpic2);
-            this.agent3 = (ImageView) itemView.findViewById(R.id.agentpic3);
-            this.agent4 = (ImageView) itemView.findViewById(R.id.agentpic4);
-            this.nameagent1 = (TextView) itemView.findViewById(R.id.agentname1);
-            this.nameagent2 = (TextView) itemView.findViewById(R.id.agentname2);
-            this.nameagent3 = (TextView) itemView.findViewById(R.id.agentname3);
-            this.nameagent4 = (TextView) itemView.findViewById(R.id.agentname4);
-            this.noagent1 = (TextView) itemView.findViewById(R.id.agentnum1);
-            this.noagent2 = (TextView) itemView.findViewById(R.id.agentnum2);
-            this.noagent3 = (TextView) itemView.findViewById(R.id.agentnum3);
-            this.noagent4 = (TextView) itemView.findViewById(R.id.agentnum4);
         }
     }
 
@@ -74,20 +66,46 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         holder.contact_name.setText(groupModel.getContact_name());
         holder.contact_number.setText(groupModel.getContact_number());
 
-        holder.nameagent1.setText(groupModel.getAgent_name1());
-        holder.noagent1.setText(groupModel.getAgent_number1());
-        Picasso.with(context).load(groupModel.getAgent_pic1()).fit().into(holder.agent1);
-        holder.nameagent2.setText(groupModel.getAgent_name2());
-        holder.noagent2.setText(groupModel.getAgent_number2());
-        Picasso.with(context).load(groupModel.getAgent_pic2()).fit().into(holder.agent2);
-        holder.nameagent3.setText(groupModel.getAgent_name3());
-        holder.noagent3.setText(groupModel.getAgent_number3());
-        Picasso.with(context).load(groupModel.getAgent_pic3()).fit().into(holder.agent3);
-        holder.nameagent4.setText(groupModel.getAgent_name4());
-        holder.noagent4.setText(groupModel.getAgent_number4());
-        Picasso.with(context).load(groupModel.getAgent_pic4()).fit().into(holder.agent4);
+        for (int i=0; i<groupModel.getAgentsName().size();i++){
 
-        Picasso.with(context).load(groupModel.getTop_banner()).fit().centerCrop().into(holder.top_banner);
+            LinearLayout addlinearLayout = new LinearLayout(context);
+            addlinearLayout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(27, 27, 27, 27);
+            addlinearLayout.setLayoutParams(layoutParams);
+
+            ImageView addimageView = new ImageView(context);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(360, 360);
+            addimageView.setLayoutParams(lp);
+            Picasso.with(context).load(groupModel.getAgentsImage().get(i)).into(addimageView);
+
+            TextView addtextView = new TextView(context);
+            addtextView.setText(groupModel.getAgentsName().get(i));
+            addtextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            addtextView.setTypeface(Typeface.DEFAULT_BOLD);
+            addtextView.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.CENTER;
+            params.setMargins(0,27,0,0);
+            addtextView.setLayoutParams(params);
+            addtextView.setTextColor(ContextCompat.getColor(context, R.color.textmain));
+
+            TextView addphonetext = new TextView(context);
+            addphonetext.setText(groupModel.getAgentsPhone().get(i));
+            addphonetext.setLayoutParams(params);
+            addphonetext.setGravity(Gravity.CENTER);
+            addphonetext.setTextColor(ContextCompat.getColor(context, R.color.textmain));
+
+            addlinearLayout.addView(addimageView);
+            addlinearLayout.addView(addtextView);
+            addlinearLayout.addView(addphonetext);
+
+            holder.addAgent.addView(addlinearLayout);
+        }
+
+
+        Picasso.with(context).load(groupModel.getTop_banner()).fit().into(holder.top_banner);
         Picasso.with(context).load(groupModel.getMid_banner2()).fit().into(holder.mid_banner);
         Picasso.with(context).load(groupModel.getContact_pic()).fit().into(holder.contact_pic);
         holder.callgroupagent.setOnClickListener(new View.OnClickListener() {

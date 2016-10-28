@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,18 +38,30 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private TextView forgetPass;
     private ImageView imageView;
-
+    private CheckBox rememberPassword;
+    private ImageView thisBack;
 
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
 
-    public static final String UserPREFERENCES = "UserPrefs" ;
+    public static final String UserPREFERENCES = "UserPrefs";
+    public static final String UserPREFERENCESS = "UserPref";
     public static final String ACCESSTOKEN = "accessToken";
     public static final String ISLOGGED = "islogged";
+    public static final String EDITTEXTUSERNAME = "saveusername";
+    public static final String EDITTEXTPASSWORD = "savepassword";
     public static final String LOGGEDUSERNAME = "loggedusername";
     public static final String LOGGEDUSERPIC = "loggeduserpic";
+    public static final String LOGGEDUSERID = "loggeduserid";
 
+    private SharedPreferences sharedPreferencess;
+    private SharedPreferences.Editor editors;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
+    private String email;
+    private String password;
 
     private static final String LOGINFAILED = "Check username and password!";
     private static final String GRANTYPEVAL = "password";
@@ -67,8 +80,26 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
+        thisBack = (ImageView) findViewById(R.id.thisback);
+        rememberPassword = (CheckBox) findViewById(R.id.rememberpassword);
         editTextEmail = (EditText) findViewById(R.id.userinputemail);
         editTextPassword = (EditText) findViewById(R.id.userinputpassword);
+        sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+        String istoken = sharedPreferences.getString(ACCESSTOKEN,null);
+        if (istoken == null){
+            sharedPreferencess = getSharedPreferences(UserPREFERENCESS,MODE_PRIVATE);
+            editTextEmail.setText(sharedPreferencess.getString(EDITTEXTUSERNAME,null));
+            editTextPassword.setText(sharedPreferencess.getString(EDITTEXTPASSWORD,null));
+        }
+
+
+        thisBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
 
         forgetPass = (TextView) findViewById(R.id.forgetpass);
@@ -90,8 +121,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void invokeLogin(View view) {
-        final String email = editTextEmail.getText().toString();
-        final String password = editTextPassword.getText().toString();
+        email = editTextEmail.getText().toString();
+        password = editTextPassword.getText().toString();
 
         new AsyncLogin().execute(email, password);
     }
@@ -121,21 +152,41 @@ public class Login extends AppCompatActivity {
                 Boolean success = object.optBoolean("Success");
                 if (success)
                 {
-                    String userToken = object.optString("access_token");
-                    JSONArray userDetail = object.optJSONArray("user-data");
+                   // String userToken = object.optString("access_token");
+                    JSONObject data = object.optJSONObject("data");
+                    JSONArray userDetail = data.optJSONArray("user-details");
                     JSONObject userObject = userDetail.getJSONObject(0);
                     String userID = userObject.optString("id");
                     String userName = userObject.optString("name");
                     String userEmail = userObject.optString("email");
                     String userImage = userObject.optString("user_image");
                     String userPhone = userObject.optString("phone");
-                    SharedPreferences sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    String userToken = data.optString("access_token");
+                    //String totalSale = userObject.optString("total_sale");
+                    //String totalRent = userObject.optString("total_rent");
+                    //String totalProperty = String.valueOf(Integer.parseInt(totalSale) + Integer.parseInt(totalRent));
+                    sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
                     editor.putString(ACCESSTOKEN, userToken);
                     editor.putBoolean(ISLOGGED,true);
                     editor.putString(LOGGEDUSERNAME,userName);
                     editor.putString(LOGGEDUSERPIC,userImage);
+                    editor.putString(LOGGEDUSERID,userID);
                     editor.apply();
+                    if (rememberPassword.isChecked()){
+                        sharedPreferencess = getSharedPreferences(UserPREFERENCESS,MODE_PRIVATE);
+                        editors = sharedPreferencess.edit();
+                        editors.putString(EDITTEXTUSERNAME, email);
+                        editors.putString(EDITTEXTPASSWORD,password);
+                        editors.apply();
+                    }
+                    else {
+                        sharedPreferencess = getSharedPreferences(UserPREFERENCESS,MODE_PRIVATE);
+                        editors = sharedPreferencess.edit();
+                        editors.clear();
+                        editors.apply();
+                    }
+                    //editor.apply();
                     Toast.makeText(Login.this, "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, Home.class);
                     startActivity(intent);

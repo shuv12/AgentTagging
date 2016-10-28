@@ -10,7 +10,16 @@ public class AgentModel implements Serializable {
     private String agentPic;
     private String agentNumber;
     private String agentName;
+    private String agentID;
 
+
+    public String getAgentID() {
+        return agentID;
+    }
+
+    public void setAgentID(String agentID) {
+        this.agentID = agentID;
+    }
 
     public String getAgentPic() {
         return agentPic;
