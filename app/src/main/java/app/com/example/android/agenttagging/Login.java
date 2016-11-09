@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,8 +110,24 @@ public class Login extends AppCompatActivity {
         forgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(Login.this, FrontPage.class);
-                startActivity(intent1);
+                new MaterialDialog.Builder(Login.this)
+                        .title(R.string.enteremail)
+                        .positiveText(R.string.agree)
+                        .negativeText(R.string.disagree)
+                        .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+                        .input(R.string.emailhint, R.string.a, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                                new MaterialDialog.Builder(Login.this)
+                                        .content(R.string.checkemail)
+                                        .positiveText(R.string.ok)
+                                        .show();
+                                //Intent intent1 = new Intent(Login.this, FrontPage.class);
+                                //startActivity(intent1);
+                                //finish();
+                            }
+                        })
+                        .show();
             }
         });
 

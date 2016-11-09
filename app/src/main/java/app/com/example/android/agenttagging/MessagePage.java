@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class SettingPage extends AppCompatActivity {
+public class MessagePage extends AppCompatActivity {
 
     private boolean mSlideState = false;
     private DrawerLayout mDrawerLayout;
@@ -33,7 +33,6 @@ public class SettingPage extends AppCompatActivity {
     private Boolean isLogged;
     private String loggedUserName;
     private String loggedUserPic;
-    private LinearLayout drawertoMsg,drawertoNoti;
 
     private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
     public static final String ISLOGGED = "islogged";
@@ -44,21 +43,7 @@ public class SettingPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting_page);
-
-        logout = (TextView) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(SettingPage.this,FrontPage.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_message_page);
 
         sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
         isLogged = sharedPreferences.getBoolean(ISLOGGED,false);
@@ -66,7 +51,7 @@ public class SettingPage extends AppCompatActivity {
         loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC,null);
         String userImageUrl = GETLOGGEDUSERPICURL + loggedUserPic;
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_setting_page);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_message_page);
         drawerMenu = (ImageView) findViewById(R.id.drawermenu1);
 
         drawerMenu.setOnClickListener(new View.OnClickListener() {
@@ -98,38 +83,17 @@ public class SettingPage extends AppCompatActivity {
             alwaysHome2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(SettingPage.this, FrontPage.class);
+                    Intent intent = new Intent(MessagePage.this, FrontPage.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                     finish();
                 }
             });
-
-            drawertoMsg = (LinearLayout) headerlayout.findViewById(R.id.drawermessage);
-            drawertoMsg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SettingPage.this, MessagePage.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-            drawertoNoti = (LinearLayout) headerlayout.findViewById(R.id.drawernotification);
-            drawertoNoti.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SettingPage.this, Notify.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
             viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(SettingPage.this, ViewProfile.class);
+                    Intent intent = new Intent(MessagePage.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
                     finish();
@@ -138,23 +102,23 @@ public class SettingPage extends AppCompatActivity {
             createListing.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent1 = new Intent(SettingPage.this, NewListingPageOne.class);
+                    Intent intent1 = new Intent(MessagePage.this, NewListingPageOne.class);
                     startActivity(intent1);
                     finish();
                 }
             });
         }
         else {
-           // headerlayout.setVisibility(View.GONE);
+            // headerlayout.setVisibility(View.GONE);
             header = nvDrawer.getHeaderView(0);
             alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
             alwaysHome1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(SettingPage.this, FrontPage.class);
+                    Intent intent = new Intent(MessagePage.this, FrontPage.class);
                     startActivity(intent);
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
                     finish();
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
 
@@ -162,10 +126,10 @@ public class SettingPage extends AppCompatActivity {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(SettingPage.this, Login.class);
+                    Intent intent = new Intent(MessagePage.this, Login.class);
                     startActivity(intent);
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
                     finish();
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
         }
@@ -179,29 +143,31 @@ public class SettingPage extends AppCompatActivity {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.property) {
-                            Intent intent = new Intent(SettingPage.this, Home.class);
+                            Intent intent = new Intent(MessagePage.this, Home.class);
                             startActivity(intent);
                             finish();
                         }
 
                         if (id == R.id.groupteam) {
-                            Intent intent2 = new Intent(SettingPage.this, GroupTeam.class);
+                            Intent intent2 = new Intent(MessagePage.this, GroupTeam.class);
                             startActivity(intent2);
                             finish();
                         }
 
                         if (id == R.id.upcoming) {
-                            Intent intent1 = new Intent(SettingPage.this, UpcomingEvent.class);
+                            Intent intent1 = new Intent(MessagePage.this, UpcomingEvent.class);
                             startActivity(intent1);
                             finish();
                         }
 
                         if (id == R.id.setting) {
-
+                            Intent intent = new Intent(MessagePage.this, SettingPage.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                         if (id == R.id.agents) {
-                            Intent intent = new Intent(SettingPage.this, Agent.class);
+                            Intent intent = new Intent(MessagePage.this, Agent.class);
                             startActivity(intent);
                             finish();
                         }

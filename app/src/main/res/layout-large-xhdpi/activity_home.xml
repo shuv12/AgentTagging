@@ -100,7 +100,7 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checkedButton="@+id/two"
+                    android:id="@+id/purpose"
                     android:orientation="horizontal"
                     android:paddingBottom="@dimen/activity_horizontal_margin"
                     android:paddingLeft="@dimen/left_right_margin"
@@ -156,6 +156,7 @@
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
+                                android:id="@+id/HBD"
                                 android:src="@drawable/hbd" />
                         </LinearLayout>
 
@@ -189,6 +190,7 @@
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
+                                android:id="@+id/Condo"
                                 android:src="@drawable/condo" />
                         </LinearLayout>
 
@@ -221,6 +223,7 @@
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
+                                android:id="@+id/landed"
                                 android:src="@drawable/landed" />
                         </LinearLayout>
 
@@ -253,6 +256,7 @@
                                 android:background="@drawable/clickablebox"
                                 android:clickable="true"
                                 android:padding="@dimen/activity_horizontal_margin"
+                                android:id="@+id/banksale"
                                 android:src="@drawable/banksale" />
                         </LinearLayout>
 

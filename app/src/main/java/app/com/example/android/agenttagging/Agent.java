@@ -59,6 +59,8 @@ public class Agent extends AppCompatActivity {
     private LinearLayout viewmyprofile, toolbarLayout, searchLayout;
     private ImageView alwaysHome1, alwaysHome2, searchIcon, crossIcon;
     private EditText searchText;
+    private LinearLayout drawertoMsg,drawertoNoti;
+    private AgentAdapter agentAdapter;
 
     private View header, headerlayout;
     private ImageView userImageview;
@@ -67,6 +69,12 @@ public class Agent extends AppCompatActivity {
     private Boolean isLogged;
     private String loggedUserName;
     private String loggedUserPic;
+    private String agentSearchString;
+    private static final String searchValue = "searchAgent";
+
+    private static final String SEARCHAGENTURL = "http://realthree60.com/dev/apis/searchAgent?name=";
+    private static final String searchPara = "name";
+
 
     private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
     public static final String ISLOGGED = "islogged";
@@ -116,7 +124,15 @@ public class Agent extends AppCompatActivity {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                            //performSearch();
+                            searchLayout.setVisibility(View.GONE);
+                            toolbarLayout.setVisibility(View.VISIBLE);
+                            searchText.clearFocus();
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
+                            agentSearchString = searchText.getText().toString();
+                            Intent intent = new Intent(Agent.this,SearchAgent.class);
+                            intent.putExtra(searchValue,agentSearchString);
+                            startActivity(intent);
                             return true;
                         }
                         return false;
@@ -173,9 +189,31 @@ public class Agent extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(Agent.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
+
+            drawertoMsg = (LinearLayout) headerlayout.findViewById(R.id.drawermessage);
+            drawertoMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Agent.this, MessagePage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            drawertoNoti = (LinearLayout) headerlayout.findViewById(R.id.drawernotification);
+            drawertoNoti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Agent.this, Notify.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
             viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -183,6 +221,7 @@ public class Agent extends AppCompatActivity {
                     Intent intent = new Intent(Agent.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
+                    finish();
                 }
             });
             createListing.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +241,7 @@ public class Agent extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(Agent.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -212,6 +252,7 @@ public class Agent extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(Agent.this, Login.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -229,24 +270,31 @@ public class Agent extends AppCompatActivity {
                         if (id == R.id.property) {
                             Intent intent = new Intent(Agent.this, Home.class);
                             startActivity(intent);
+                            finish();
                         }
 
                         if (id == R.id.groupteam) {
                             Intent intent2 = new Intent(Agent.this, GroupTeam.class);
                             startActivity(intent2);
+                            finish();
                         }
 
                         if (id == R.id.upcoming) {
                             Intent intent1 = new Intent(Agent.this, UpcomingEvent.class);
                             startActivity(intent1);
+                            finish();
                         }
 
                         if (id == R.id.setting) {
                             Intent intent3 = new Intent(Agent.this, SettingPage.class);
                             startActivity(intent3);
+                            finish();
                         }
 
                         if (id == R.id.agents) {
+                            Intent intent = new Intent(Agent.this,Agent.class);
+                            startActivity(intent);
+                            finish();
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;
@@ -301,7 +349,7 @@ public class Agent extends AppCompatActivity {
 
                         layoutManager = new GridLayoutManager(getApplicationContext(), 2);
                         recyclerView = (RecyclerView) findViewById(R.id.recycleagentpost);
-                        final AgentAdapter agentAdapter = new AgentAdapter(getApplicationContext(), agentModelList);
+                        agentAdapter = new AgentAdapter(getApplicationContext(), agentModelList);
                         recyclerView.setAdapter(agentAdapter);
                         recyclerView.setLayoutManager(layoutManager);
                     }
@@ -372,4 +420,5 @@ public class Agent extends AppCompatActivity {
 
         }
     }
+
 }

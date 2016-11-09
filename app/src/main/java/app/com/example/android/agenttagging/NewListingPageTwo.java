@@ -376,7 +376,8 @@ public class NewListingPageTwo extends AppCompatActivity {
                 Boolean success = object.optBoolean("Success");
                 if (success)
                 {
-                    String newPostID = object.optString("post_id");
+                    JSONObject jsonObject = object.optJSONObject("data");
+                    String newPostID = jsonObject.optString("post_id");
                     Toast.makeText(NewListingPageTwo.this, "Post successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(NewListingPageTwo.this, UploadPhoto.class);
                     intent.putExtra("newpostid",newPostID);

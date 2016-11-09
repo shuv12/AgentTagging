@@ -54,11 +54,14 @@ public class GroupTeam extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private List<GroupModel> groupModelList;
+    private LinearLayout drawertoMsg,drawertoNoti;
 
 
     private ArrayList<String> agentsName = new ArrayList<String>();
     private ArrayList<String> agentsPhone = new ArrayList<String>();
     private ArrayList<String> agentsImage = new ArrayList<String>();
+    private ArrayList<String> topBanner = new ArrayList<String>();
+    private ArrayList<String> midBanner = new ArrayList<String>();
 
 
     private View header, headerlayout;
@@ -130,8 +133,30 @@ public class GroupTeam extends AppCompatActivity {
                     Intent intent = new Intent(GroupTeam.this, FrontPage.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
+                    finish();
                 }
             });
+
+            drawertoMsg = (LinearLayout) headerlayout.findViewById(R.id.drawermessage);
+            drawertoMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(GroupTeam.this, MessagePage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            drawertoNoti = (LinearLayout) headerlayout.findViewById(R.id.drawernotification);
+            drawertoNoti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(GroupTeam.this, Notify.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
             viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -139,6 +164,7 @@ public class GroupTeam extends AppCompatActivity {
                     Intent intent = new Intent(GroupTeam.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
+                    finish();
                 }
             });
             createListing.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +172,7 @@ public class GroupTeam extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent1 = new Intent(GroupTeam.this, NewListingPageOne.class);
                     startActivity(intent1);
+                    finish();
                 }
             });
         }
@@ -158,6 +185,7 @@ public class GroupTeam extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(GroupTeam.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -168,6 +196,7 @@ public class GroupTeam extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(GroupTeam.this, Login.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -179,6 +208,7 @@ public class GroupTeam extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(GroupTeam.this, Notify.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -193,6 +223,7 @@ public class GroupTeam extends AppCompatActivity {
                         if (id == R.id.property) {
                             Intent intent = new Intent(GroupTeam.this, Home.class);
                             startActivity(intent);
+                            finish();
                         }
 
                         if (id == R.id.groupteam) {
@@ -202,16 +233,19 @@ public class GroupTeam extends AppCompatActivity {
                         if (id == R.id.upcoming) {
                             Intent intent1 = new Intent(GroupTeam.this, UpcomingEvent.class);
                             startActivity(intent1);
+                            finish();
                         }
 
                         if (id == R.id.setting) {
                             Intent intent3 = new Intent(GroupTeam.this, SettingPage.class);
                             startActivity(intent3);
+                            finish();
                         }
 
                         if (id == agents) {
                             Intent intent2 = new Intent(GroupTeam.this, Agent.class);
                             startActivity(intent2);
+                            finish();
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;
@@ -248,15 +282,26 @@ public class GroupTeam extends AppCompatActivity {
                     JSONObject object = new JSONObject(dataString);
                     groupModelList = new ArrayList<>();
                     GroupModel groupModel = new GroupModel();
+
                     JSONArray bannerArray = object.optJSONArray("top-slider");
-                    JSONObject bannerobj = (JSONObject)bannerArray.getJSONObject(0);
-                    String bannerimage = bannerobj.optString("image");
-                    String topBannerUrl = GETBANNER + bannerimage;
-                    JSONObject bannerobj1 = (JSONObject)bannerArray.getJSONObject(1);
-                    String bannerimage1 = bannerobj1.optString("image");
-                    String topBannerUrl1 = GETBANNER + bannerimage;
-                    Log.v("Top banner", topBannerUrl);
-                    Log.v("Top banner 1", topBannerUrl1);
+                    for (int i=0; i< bannerArray.length(); i++){
+                        JSONObject bannerobj = (JSONObject)bannerArray.getJSONObject(i);
+                        String bannerimage = bannerobj.optString("image");
+                        String topBannerUrl = GETBANNER + bannerimage;
+                        topBanner.add(topBannerUrl);
+                    }
+
+
+
+
+                    JSONArray midbannerArray = object.optJSONArray("mid-slider");
+                    for (int i=0; i< midbannerArray.length(); i++){
+                        JSONObject midbannerobj = new JSONObject();
+                        midbannerobj = midbannerArray.getJSONObject(i);
+                        String midbannerimage = midbannerobj.optString("image");
+                        String midBannerUrl = GETBANNER + midbannerimage;
+                        midBanner.add(midBannerUrl);
+                    }
 
                     JSONArray agentsArray = object.optJSONArray("agents");
                     for (int i=0; i < agentsArray.length(); i++){
@@ -278,16 +323,6 @@ public class GroupTeam extends AppCompatActivity {
                     JSONObject desobj = (JSONObject)Desarray.getJSONObject(0);
                     String companyDes = desobj.optString("value");
 
-                    JSONArray midbannerArray = object.optJSONArray("mid-slider");
-                    JSONObject midbannerobj1 = (JSONObject) midbannerArray.getJSONObject(0);
-                    String midbannerimage1 = midbannerobj1.optString("image");
-                    JSONObject midbannerobj2 = (JSONObject) midbannerArray.getJSONObject(1);
-                    String midbannerimage2 = midbannerobj2.optString("image");
-                    String midBannerUrl1 = GETBANNER + midbannerimage1;
-                    String midBannerUrl2 = GETBANNER + midbannerimage2;
-                    Log.v("Mid banner 1", midBannerUrl1);
-                    Log.v("Mid banner 2", midBannerUrl2);
-
                     JSONArray RecruitArray = object.optJSONArray("company_recruitment");
                     JSONObject recruobj = (JSONObject)RecruitArray.getJSONObject(0);
                     String companyRecruit = recruobj.optString("value");
@@ -308,9 +343,11 @@ public class GroupTeam extends AppCompatActivity {
                     groupModel.setContact_name(contactname);
                     groupModel.setContact_number(contactphone);
                     groupModel.setContact_pic(contactImageUrl);
-                    groupModel.setTop_banner(topBannerUrl);
-                    groupModel.setMid_banner1(midBannerUrl1);
-                    groupModel.setMid_banner2(midBannerUrl2);
+                    groupModel.setTopBanner(topBanner);
+                    Log.v("TopBanner : ",topBanner.toString());
+                    groupModel.setMidBanner(midBanner);
+                    Log.v("MidBanner : ",midBanner.toString());
+
                     groupModelList.add(groupModel);
 
                     layoutManager = new LinearLayoutManager(getApplicationContext());

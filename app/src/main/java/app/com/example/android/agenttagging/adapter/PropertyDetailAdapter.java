@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import app.com.example.android.agenttagging.FullscreenView;
 import app.com.example.android.agenttagging.R;
 import app.com.example.android.agenttagging.ViewProfile;
 import app.com.example.android.agenttagging.model.PropertyDetailModel;
@@ -39,6 +41,9 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
         ImageView propertyUserPic,propertyDetailPic,videoThumbnail;
         Button show_more,show_less,call_agent;
         LinearLayout show_more_layout, blockll, districtll,thisIsMyProperty;
+        int imageCount = 0;
+        Handler h = new Handler();
+        int delay = 5000;
         //YouTubePlayerView youTubePlayerView;
        // Context context;
         View blockLine,districtLine;
@@ -165,7 +170,48 @@ public class PropertyDetailAdapter extends RecyclerView.Adapter<PropertyDetailAd
         holder.pdoispace.setText(propertyDetailModel.getPdoispace());
         holder.propertyDetailFacilities.setText(propertyDetailModel.getPropertyDetailFacilities());
         Picasso.with(context).load(propertyDetailModel.getPropertyUserPic()).fit().into(holder.propertyUserPic);
-        Picasso.with(context).load(propertyDetailModel.getPropertyDetailPic()).fit().into(holder.propertyDetailPic);
+
+
+        holder.propertyDetailPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FullscreenView.class);
+                intent.putStringArrayListExtra("Images",propertyDetailModel.getPropertyDetailImages());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
+        /*holder.propertyDetailPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.imageCount == propertyDetailModel.getPropertyDetailImages().size()-1){
+                    holder.imageCount = 0;
+                }
+                else holder.imageCount++;
+
+                Picasso.with(context).load(propertyDetailModel.getPropertyDetailImages().get(holder.imageCount)).fit().into(holder.propertyDetailPic);
+            }
+        });*/
+
+
+
+        holder.h.postDelayed(new Runnable(){
+            public void run(){
+                if (holder.imageCount == propertyDetailModel.getPropertyDetailImages().size()-1){
+                    holder.imageCount = 0;
+                }
+                else holder.imageCount++;
+
+                Picasso.with(context).load(propertyDetailModel.getPropertyDetailImages().get(holder.imageCount)).fit().into(holder.propertyDetailPic);
+
+                holder.h.postDelayed(this, holder.delay);
+            }
+        }, holder.delay);
+
+
+
+        //Picasso.with(context).load(propertyDetailModel.getPropertyDetailPic()).fit().into(holder.propertyDetailPic);
         holder.call_agent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

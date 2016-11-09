@@ -51,6 +51,7 @@ public class PropertyDetails extends AppCompatActivity {
     private String loggedUserId;
     private Boolean isMyproperty = false;
     private String videoUrl = null;
+    private ArrayList<String> propertyDetailImages = new ArrayList<String>();
 
     public static final String UserPREFERENCES = "UserPrefs" ;
     private SharedPreferences sharedPreferences;
@@ -132,14 +133,17 @@ public class PropertyDetails extends AppCompatActivity {
                     PropertyDetailModel propertyDetailModel = new PropertyDetailModel();
                     JSONObject mObject = mObject1.optJSONObject("data");
                     JSONArray topSliderArray = mObject.optJSONArray("top-slider");
-                    Log.v("topSliderArrayValue : ",topSliderArray.toString());
                     JSONObject topSlider = (JSONObject)topSliderArray.getJSONObject(0);
                     String tsgString = topSlider.optString("gallery");
                     if (!tsgString.isEmpty()){
                         try {
                             JSONArray tsgArray = new JSONArray(tsgString);
-                            topSlider1 = tsgArray.getString(0);
-                            topSlider2 = tsgArray.getString(1);
+                            for (int i=0; i<tsgArray.length();i++){
+                                String images = tsgArray.optString(i);
+                                String imageUrl = GETPROPERTYDETAILPIC + images;
+                                propertyDetailImages.add(imageUrl);
+                               // Log.v("propertyDetailImages : ",propertyDetailImages.toString());
+                            }
                         }
                         catch (Exception e){
                             Log.e("GalleryException",e.toString());
@@ -282,7 +286,9 @@ public class PropertyDetails extends AppCompatActivity {
                     propertyDetailModel.setPropertyDetailArea(floorArea);
                     propertyDetailModel.setPropertyDetailUnitNo(unitNO);
                     propertyDetailModel.setPropertyDetailTenure(tenure);
-                    propertyDetailModel.setPropertyDetailPic(pro_img_url);
+                   // propertyDetailModel.setPropertyDetailPic(pro_img_url);
+                    propertyDetailModel.setPropertyDetailImages(propertyDetailImages);
+
                     propertyDetailModel.setPropertyUserPic(pro_user_pic_url);
                     propertyDetailModel.setPropertyDetailFacilities(facilities);
                     propertyDetailModel.setAgentnumber(userPhone);

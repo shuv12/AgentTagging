@@ -3,6 +3,7 @@ package app.com.example.android.agenttagging;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +52,12 @@ public class Home extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     public LinearLayout quick, quicksearchlayout, viewmyprofile;
     private RecyclerView recyclerView;
+    private PropertyAdapter propertyAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<PropertyModel> propertyModelList;
     private NavigationView nvDrawer;
-    private Button createListing;
-    private ImageView alwaysHome1,alwaysHome2,userImageview;
+    private Button createListing, quickSearchButton;
+    private ImageView alwaysHome1, alwaysHome2, userImageview;
     private TextView userTextview;
     private View header, headerlayout;
     private SearchView mSearchView;
@@ -65,13 +69,27 @@ public class Home extends AppCompatActivity {
     private Boolean isLogged;
     private String loggedUserName;
     private String loggedUserPic;
+    private LinearLayout drawertoMsg, drawertoNoti;
+    private CheckableImageView HBD, Landed, Condo, BankSale;
+    //private Boolean isHBD,isLanded,isCondo,isBankSale;
+    private RadioGroup purpose;
+    private String getPurpose;
+
+    private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
+
 
     private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
     public static final String ISLOGGED = "islogged";
     public static final String LOGGEDUSERNAME = "loggedusername";
     public static final String LOGGEDUSERPIC = "loggeduserpic";
-    public static final String UserPREFERENCES = "UserPrefs" ;
+    public static final String UserPREFERENCES = "UserPrefs";
 
+
+    public static final String LOCATION = "location";
+    public static final String PURPOSE = "purpose";
+    public static final String TYPE = "type";
+
+    private String locationValue = "", purposeValue = "", typeValue = "";
 
     private static final String GETPROPERTYURL = "http://realthree60.com/dev/apis/GetPosts";
     private static final String GETPROPERTYTYPEURL = "http://realthree60.com/dev/apis/GetPostsType";
@@ -87,10 +105,10 @@ public class Home extends AppCompatActivity {
 
         new GetAllProperty().execute();
 
-        sharedPreferences = getSharedPreferences(UserPREFERENCES,MODE_PRIVATE);
-        isLogged = sharedPreferences.getBoolean(ISLOGGED,false);
-        loggedUserName = sharedPreferences.getString(LOGGEDUSERNAME,null);
-        loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC,null);
+        sharedPreferences = getSharedPreferences(UserPREFERENCES, MODE_PRIVATE);
+        isLogged = sharedPreferences.getBoolean(ISLOGGED, false);
+        loggedUserName = sharedPreferences.getString(LOGGEDUSERNAME, null);
+        loggedUserPic = sharedPreferences.getString(LOGGEDUSERPIC, null);
         String userImageUrl = GETLOGGEDUSERPICURL + loggedUserPic;
 
 
@@ -106,10 +124,11 @@ public class Home extends AppCompatActivity {
             searchField = SearchView.class.getDeclaredField("mSearchPlate");
             searchPlate = (LinearLayout) searchField.get(mSearchView);
             searchPlate.setBackgroundResource(R.drawable.searchviewbg);
+
         } catch (NoSuchFieldException e) {
             Log.e("error", e.getMessage(), e);
-        } catch (IllegalAccessException e) {
-            Log.e("error", e.getMessage(), e);
+        } catch (Exception e) {
+            Log.e("Unknown Error", e.getMessage(), e);
         }
 
 
@@ -135,19 +154,81 @@ public class Home extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
-       /* header = nvDrawer.getHeaderView(0);
-        alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
-        alwaysHome1.setOnClickListener(new View.OnClickListener() {
+
+        HBD = (CheckableImageView) findViewById(R.id.HBD);
+        Condo = (CheckableImageView) findViewById(R.id.Condo);
+        Landed = (CheckableImageView) findViewById(R.id.landed);
+        BankSale = (CheckableImageView) findViewById(R.id.banksale);
+
+       /* isHBD = HBD.isChecked();
+        isBankSale = BankSale.isChecked();
+        isCondo = Condo.isChecked();
+        isLanded = Landed.isChecked();*/
+
+
+        purpose = (RadioGroup) findViewById(R.id.purpose);
+        purpose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId = purpose.getCheckedRadioButtonId();
+                View radioButton = purpose.findViewById(selectedId);
+                int idx = purpose.indexOfChild(radioButton);
+                Log.i("ID", String.valueOf(selectedId));
+                RadioButton r = (RadioButton) purpose.getChildAt(idx);
+                getPurpose = r.getText().toString();
+                Log.i("Value", getPurpose);
+                if (getPurpose.equals("For Sale")) {
+                    getPurpose = "Sale";
+                } else getPurpose = "Rent";
+                purposeValue = getPurpose;
+            }
+        });
+
+
+        quickSearchButton = (Button) findViewById(R.id.search_btn);
+        quickSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home.this, FrontPage.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawer(GravityCompat.START);
+                if (HBD.isChecked()) typeValue = "HDB";
+                else if (BankSale.isChecked()) typeValue = "Banksale";
+                else if (Condo.isChecked()) typeValue = "Condo";
+                else if (Landed.isChecked()) typeValue = "Landed";
+                else typeValue = "";
+
+                locationValue =  mSearchView.getQuery().toString();
+
+
+                quicksearchlayout.setVisibility(View.GONE);
+                quick.setVisibility(View.VISIBLE);
+                recyclerView.removeOnItemTouchListener(disabler);
+
+                try {
+                    Uri.Builder builder = new Uri.Builder();
+                    builder.scheme("http")
+                            .authority("www.realthree60.com")
+                            .appendPath("dev")
+                            .appendPath("apis")
+                            .appendPath("searchApi")
+                            .appendQueryParameter(LOCATION, locationValue)
+                            .appendQueryParameter(PURPOSE, purposeValue)
+                            .appendQueryParameter(TYPE, typeValue);
+                    String url = builder.build().toString();
+
+                    Log.v("sendQuery",url);
+
+                    Intent intent = new Intent(Home.this,SearchProperty.class);
+                    intent.putExtra("URL",url);
+                    startActivity(intent);
+
+                } catch (Exception e) {
+                    Log.v("Error in search",e.getMessage(),e);
+                }
             }
-        });*/
+        });
 
 
-        if (isLogged){
+
+        if (isLogged) {
             nvDrawer.getHeaderView(0).setVisibility(View.GONE);
             headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
 
@@ -165,8 +246,30 @@ public class Home extends AppCompatActivity {
                     Intent intent = new Intent(Home.this, FrontPage.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
+                    finish();
                 }
             });
+
+            drawertoMsg = (LinearLayout) headerlayout.findViewById(R.id.drawermessage);
+            drawertoMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Home.this, MessagePage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            drawertoNoti = (LinearLayout) headerlayout.findViewById(R.id.drawernotification);
+            drawertoNoti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Home.this, Notify.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
             viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -174,6 +277,7 @@ public class Home extends AppCompatActivity {
                     Intent intent = new Intent(Home.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
+                    finish();
                 }
             });
             createListing.setOnClickListener(new View.OnClickListener() {
@@ -183,9 +287,7 @@ public class Home extends AppCompatActivity {
                     startActivity(intent1);
                 }
             });
-        }
-        else {
-           // headerlayout.setVisibility(View.GONE);
+        } else {
             header = nvDrawer.getHeaderView(0);
             alwaysHome1 = (ImageView) header.findViewById(R.id.alwayshome);
             alwaysHome1.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +296,7 @@ public class Home extends AppCompatActivity {
                     Intent intent = new Intent(Home.this, FrontPage.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
+                    finish();
                 }
             });
 
@@ -204,45 +307,12 @@ public class Home extends AppCompatActivity {
                     Intent intent = new Intent(Home.this, Login.class);
                     startActivity(intent);
                     mDrawerLayout.closeDrawer(GravityCompat.START);
+                    finish();
                 }
             });
 
         }
 
-        /*TextView textView = (TextView) header.findViewById(R.id.logintext);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nvDrawer.getHeaderView(0).setVisibility(View.GONE);
-                headerlayout = nvDrawer.inflateHeaderView(R.layout.drawerview);
-                createListing.setVisibility(View.VISIBLE);
-                alwaysHome2 = (ImageView) headerlayout.findViewById(R.id.alwayshome);
-                alwaysHome2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Home.this, FrontPage.class);
-                        startActivity(intent);
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-                    }
-                });
-                viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
-                viewmyprofile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Home.this, ViewProfile.class);
-                        intent.putExtra("myprofile", true);
-                        startActivity(intent);
-                    }
-                });
-                createListing.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent1 = new Intent(Home.this, NewListingPageOne.class);
-                        startActivity(intent1);
-                    }
-                });
-            }
-        });*/
 
 
         disabler = new RecyclerViewDisabler();
@@ -292,26 +362,31 @@ public class Home extends AppCompatActivity {
                         if (id == R.id.property) {
                             Intent intent = new Intent(Home.this, Home.class);
                             startActivity(intent);
+                            finish();
                         }
 
                         if (id == R.id.groupteam) {
                             Intent intent2 = new Intent(Home.this, GroupTeam.class);
                             startActivity(intent2);
+                            finish();
                         }
 
                         if (id == R.id.upcoming) {
                             Intent intent1 = new Intent(Home.this, UpcomingEvent.class);
                             startActivity(intent1);
+                            finish();
                         }
 
                         if (id == R.id.setting) {
                             Intent intent3 = new Intent(Home.this, SettingPage.class);
                             startActivity(intent3);
+                            finish();
                         }
 
                         if (id == R.id.agents) {
                             Intent intent = new Intent(Home.this, Agent.class);
                             startActivity(intent);
+                            finish();
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;
@@ -359,7 +434,7 @@ public class Home extends AppCompatActivity {
                         String streetName = object.optString("street_name");
                         String askingPrice = object.optString("asking_price");
                         String floorArea = object.optString("floor_area");
-                       // String priceperunit = String.valueOf(Integer.parseInt(askingPrice) / Integer.parseInt(floorArea));
+                        // String priceperunit = String.valueOf(Integer.parseInt(askingPrice) / Integer.parseInt(floorArea));
                         //String faUnit = object.optString("floor_area_unit");
                         String pro_img_url = GETPROPERTYPIC + img;
 
@@ -379,13 +454,12 @@ public class Home extends AppCompatActivity {
 
                         layoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView = (RecyclerView) findViewById(R.id.recycleviewpost);
-                        final PropertyAdapter propertyAdapter = new PropertyAdapter(getApplicationContext(), propertyModelList);
+                        propertyAdapter = new PropertyAdapter(getApplicationContext(), propertyModelList);
                         recyclerView.setAdapter(propertyAdapter);
                         recyclerView.setLayoutManager(layoutManager);
                     }
-                }
-                else {
-                    Toast.makeText(Home.this,"Error in fetching data",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Home.this, "Error in fetching data", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 Log.e("PropertyListing", "JSON exception", e);
@@ -396,10 +470,9 @@ public class Home extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                if (listingType == null){
+                if (listingType == null) {
                     url = new URL(GETPROPERTYURL);
-                }
-                else {
+                } else {
                     String propertyUrlWType = GETPROPERTYTYPEURL + "/" + listingType;
                     //Log.v("PropertyUrl",propertyUrlWType);
                     url = new URL(propertyUrlWType);
@@ -441,7 +514,7 @@ public class Home extends AppCompatActivity {
                     }
 
 
-                    //Log.v("Result",result.toString());
+                  //  Log.v("Result", result.toString());
                     // Pass data to onPostExecute method
                     return (result.toString());
                     //return (result.toString().substring(0,result.toString().length()-1));
@@ -460,4 +533,5 @@ public class Home extends AppCompatActivity {
 
         }
     }
+
 }

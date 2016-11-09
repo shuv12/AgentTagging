@@ -144,7 +144,6 @@ public class PropertyFragRent extends Fragment {
                         String streetName = object.optString("street_name");
                         String askingPrice = object.optString("asking_price");
                         String floorArea = object.optString("floor_area");
-                        //String priceperunit = String.valueOf(Integer.parseInt(askingPrice) / Integer.parseInt(floorArea));
                         String faUnit = object.optString("floor_area_unit");
                         String pro_img_url = GETPROPERTYPIC + img;
 
@@ -157,7 +156,6 @@ public class PropertyFragRent extends Fragment {
                         propertyModel.setPropertyType(type);
                         propertyModel.setPropertyArea(floorArea);
                         propertyModel.setPropertyAreaUnit(faUnit);
-                       // propertyModel.setPropertyPricePerUnit(priceperunit);
                         propertyModelList.add(propertyModel);
 
 

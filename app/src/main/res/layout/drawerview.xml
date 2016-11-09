@@ -20,9 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/viewmyprofile"
@@ -34,8 +32,8 @@
 
             <ImageView
                 android:id="@+id/loggeduserpic"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/imagesize"
+                android:layout_height="@dimen/imagesize"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:src="@drawable/agentpic" />
 
@@ -45,14 +43,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userprofilename"
                 android:textColor="@android:color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/white" />
+            android:background="@android:color/white"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,8 +69,8 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:background="@drawable/message">
 
                     <TextView
@@ -80,7 +80,9 @@
                         android:layout_alignParentTop="true"
                         android:background="@drawable/counticon"
                         android:padding="@dimen/marginlow"
-                        android:text="99" />
+                        android:text="99"
+                        android:textStyle="bold"
+                        android:textSize="8sp"/>
                     <!--<ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
@@ -88,18 +90,21 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="Message"
+                    android:text="@string/message"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:maxLines="1"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/box_padding"
-                android:layout_marginRight="@dimen/box_padding"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:background="@android:color/white" />
 
             <LinearLayout
@@ -111,8 +116,8 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:background="@drawable/notification">
                     <!-- <ImageView
                          android:layout_width="32dp"
@@ -125,15 +130,20 @@
                         android:layout_alignParentTop="true"
                         android:background="@drawable/counticon"
                         android:padding="@dimen/marginlow"
-                        android:text="88" />
+                        android:text="88"
+                        android:textStyle="bold"
+                        android:textSize="8sp"/>
                 </RelativeLayout>
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:text="Notification"
+                    android:text="@string/noti"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:maxLines="1"
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
@@ -141,7 +151,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/white" />
+            android:background="@android:color/white"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
     </LinearLayout>
 
 </LinearLayout>

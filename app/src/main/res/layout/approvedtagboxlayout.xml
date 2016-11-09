@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="@drawable/editboxnormal"
         android:gravity="start"
+        android:textColor="@android:color/white"
         android:hint="@string/input_hint"
+        android:textColorHint="@android:color/white"
         android:padding="@dimen/activity_horizontal_margin" />
 
     <Button

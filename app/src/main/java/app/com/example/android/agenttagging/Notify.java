@@ -26,6 +26,9 @@ public class Notify extends AppCompatActivity {
     private Button createListing;
     private LinearLayout viewmyprofile;
     private ImageView alwaysHome1,alwaysHome2;
+    private LinearLayout drawertoMsg,drawertoNoti;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     private View header, headerlayout;
     private ImageView userImageview;
@@ -87,9 +90,31 @@ public class Notify extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(Notify.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
+
+            drawertoMsg = (LinearLayout) headerlayout.findViewById(R.id.drawermessage);
+            drawertoMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notify.this, MessagePage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            drawertoNoti = (LinearLayout) headerlayout.findViewById(R.id.drawernotification);
+            drawertoNoti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notify.this, Notify.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
             viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,6 +122,7 @@ public class Notify extends AppCompatActivity {
                     Intent intent = new Intent(Notify.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
+                    finish();
                 }
             });
             createListing.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +130,7 @@ public class Notify extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent1 = new Intent(Notify.this, NewListingPageOne.class);
                     startActivity(intent1);
+                    finish();
                 }
             });
         }
@@ -116,6 +143,7 @@ public class Notify extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(Notify.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -126,17 +154,18 @@ public class Notify extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(Notify.this, Login.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
         }
 
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
                 Notify.this));
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
     }
@@ -151,26 +180,31 @@ public class Notify extends AppCompatActivity {
                         if (id == R.id.property) {
                             Intent intent = new Intent(Notify.this, Home.class);
                             startActivity(intent);
+                            finish();
                         }
 
                         if (id == R.id.groupteam) {
                             Intent intent2 = new Intent(Notify.this, GroupTeam.class);
                             startActivity(intent2);
+                            finish();
                         }
 
                         if (id == R.id.upcoming) {
                             Intent intent1 = new Intent(Notify.this, UpcomingEvent.class);
                             startActivity(intent1);
+                            finish();
                         }
 
                         if (id == R.id.setting) {
                             Intent intent3 = new Intent(Notify.this, SettingPage.class);
                             startActivity(intent3);
+                            finish();
                         }
 
                         if (id == R.id.agents) {
                             Intent intent = new Intent(Notify.this, Agent.class);
                             startActivity(intent);
+                            finish();
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;

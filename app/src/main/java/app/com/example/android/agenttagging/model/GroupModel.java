@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class GroupModel implements Serializable {
     private static final long serialVersionUID = 1;
-    private String top_banner;
-    private String mid_banner1,mid_banner2;
-    private ArrayList<String> agentsName,agentsImage,agentsPhone;
+    //private String top_banner;
+    //private String mid_banner1,mid_banner2;
+    private ArrayList<String> agentsName,agentsImage,agentsPhone,topBanner,midBanner;
     private String company_des;
     private String company_recruit;
     private String contact_name;
@@ -39,29 +39,14 @@ public class GroupModel implements Serializable {
     public void setAgentsPhone(ArrayList<String> agentsPhone){this.agentsPhone = agentsPhone;}
 
 
-    public String getTop_banner() {
-        return top_banner;
-    }
+    public ArrayList<String> getTopBanner(){return topBanner;}
 
-    public void setTop_banner(String top_banner) {
-        this.top_banner = top_banner;
-    }
+    public void setTopBanner(ArrayList<String> topBanner){this.topBanner = topBanner;}
 
-    public String getMid_banner1() {
-        return mid_banner1;
-    }
+    public ArrayList<String> getMidBanner(){return midBanner;}
 
-    public void setMid_banner1(String mid_banner1) {
-        this.mid_banner1 = mid_banner1;
-    }
+    public void setMidBanner(ArrayList<String> midBanner){this.midBanner = midBanner;}
 
-    public String getMid_banner2() {
-        return mid_banner2;
-    }
-
-    public void setMid_banner2(String mid_banner2) {
-        this.mid_banner2 = mid_banner2;
-    }
 
     public String getCompany_des() {
         return company_des;

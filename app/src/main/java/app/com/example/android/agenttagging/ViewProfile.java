@@ -516,6 +516,10 @@ public class ViewProfile extends AppCompatActivity {
                     Toast.makeText(ViewProfile.this,"Error in fetching data",Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
+                Toast.makeText(ViewProfile.this,"Please login again",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ViewProfile.this,Login.class);
+                startActivity(intent);
+                finish();
                 Log.e("ViewProfile", "JSON exception", e);
             }
 

@@ -1,13 +1,13 @@
 package app.com.example.android.agenttagging.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by shuvam on 04-10-2016.
  */
 
 public class PropertyDetailModel implements Serializable {
-    private String propertyDetailPic;
     private String propertyUserPic;
     private String propertyDetailtitle;
     private String propertyDetailAddress;
@@ -38,6 +38,11 @@ public class PropertyDetailModel implements Serializable {
     private String userId;
     private Boolean isMyproperty;
     private String videoID;
+    private ArrayList<String> propertyDetailImages;
+
+    public ArrayList<String> getPropertyDetailImages(){return propertyDetailImages;}
+
+    public void setPropertyDetailImages(ArrayList<String> propertyDetailImages){this.propertyDetailImages = propertyDetailImages;}
 
     public String getVideoID() {
         return this.videoID;
@@ -197,14 +202,6 @@ public class PropertyDetailModel implements Serializable {
 
     public void setPropertyDetailPurpose(String propertyDetailPurpose) {
         this.propertyDetailPurpose = propertyDetailPurpose;
-    }
-
-    public String getPropertyDetailPic() {
-        return this.propertyDetailPic;
-    }
-
-    public void setPropertyDetailPic(String propertyDetailPic) {
-        this.propertyDetailPic = propertyDetailPic;
     }
 
     public String getPropertyUserPic() {

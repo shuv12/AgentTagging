@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +36,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         ImageView top_banner,mid_banner,contact_pic,callgroupagent;
         TextView company_des,company_recruit,contact_name,contact_number;
         LinearLayout addAgent;
+        int imagecount = 0;
+        int midImageCount = 0;
+        Handler h = new Handler();
+        int delay = 5000;
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -59,7 +64,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.group_item, parent, false));
     }
 
-    public void onBindViewHolder(ViewHolder holder,int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final GroupModel groupModel = (GroupModel) this.groupModelList.get(position);
         holder.company_des.setText(groupModel.getCompany_des());
         holder.company_recruit.setText(groupModel.getCompany_recruit());
@@ -105,8 +110,57 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         }
 
 
-        Picasso.with(context).load(groupModel.getTop_banner()).fit().into(holder.top_banner);
-        Picasso.with(context).load(groupModel.getMid_banner2()).fit().into(holder.mid_banner);
+
+
+        holder.top_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.imagecount == groupModel.getTopBanner().size()-1){
+                    holder.imagecount = 0;
+                }
+                else holder.imagecount++;
+
+                Picasso.with(context).load(groupModel.getTopBanner().get(holder.imagecount)).fit().into(holder.top_banner);
+            }
+        });
+
+
+
+        holder.h.postDelayed(new Runnable(){
+            public void run(){
+                if (holder.imagecount == groupModel.getTopBanner().size()-1){
+                    holder.imagecount = 0;
+                }
+                else holder.imagecount++;
+
+                if (holder.midImageCount == groupModel.getMidBanner().size()-1){
+                    holder.midImageCount = 0;
+                }
+                else holder.midImageCount++;
+
+                Picasso.with(context).load(groupModel.getMidBanner().get(holder.midImageCount)).fit().into(holder.mid_banner);
+                Picasso.with(context).load(groupModel.getTopBanner().get(holder.imagecount)).fit().into(holder.top_banner);
+
+                holder.h.postDelayed(this, holder.delay);
+            }
+        }, holder.delay);
+
+
+        holder.mid_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.midImageCount == groupModel.getMidBanner().size()-1){
+                    holder.midImageCount = 0;
+                }
+                else holder.midImageCount++;
+
+                Picasso.with(context).load(groupModel.getMidBanner().get(holder.midImageCount)).fit().into(holder.mid_banner);
+            }
+        });
+
+
+        //Picasso.with(context).load(groupModel.getTopBanner().get(holder.imagecount)).fit().into(holder.top_banner);
+       // Picasso.with(context).load(groupModel.getMidBanner().get(holder.midImageCount)).fit().into(holder.mid_banner);
         Picasso.with(context).load(groupModel.getContact_pic()).fit().into(holder.contact_pic);
         holder.callgroupagent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,4 +176,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
     public int getItemCount() {
         return groupModelList.size();
     }
+
+
 }

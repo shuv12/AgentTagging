@@ -100,8 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginTop="@dimen/image_margin"
-                android:elevation="@dimen/card_margin">
+                android:layout_marginTop="@dimen/image_margin">
 
                 <FrameLayout
                     android:id="@+id/recycleframe"

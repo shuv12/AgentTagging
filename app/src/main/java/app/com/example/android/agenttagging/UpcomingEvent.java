@@ -58,6 +58,7 @@ public class UpcomingEvent extends AppCompatActivity {
     private NavigationView nvDrawer;
     private LinearLayout viewmyprofile;
     private ImageView alwaysHome1,alwaysHome2;
+    private LinearLayout drawertoMsg,drawertoNoti;
 
 
     private View header, headerlayout;
@@ -127,9 +128,31 @@ public class UpcomingEvent extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(UpcomingEvent.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
+
+            drawertoMsg = (LinearLayout) headerlayout.findViewById(R.id.drawermessage);
+            drawertoMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(UpcomingEvent.this, MessagePage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            drawertoNoti = (LinearLayout) headerlayout.findViewById(R.id.drawernotification);
+            drawertoNoti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(UpcomingEvent.this, Notify.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
             viewmyprofile = (LinearLayout) headerlayout.findViewById(R.id.viewmyprofile);
             viewmyprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,6 +160,7 @@ public class UpcomingEvent extends AppCompatActivity {
                     Intent intent = new Intent(UpcomingEvent.this, ViewProfile.class);
                     intent.putExtra("myprofile", true);
                     startActivity(intent);
+                    finish();
                 }
             });
             createListing.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +180,7 @@ public class UpcomingEvent extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(UpcomingEvent.this, FrontPage.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -166,6 +191,7 @@ public class UpcomingEvent extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(UpcomingEvent.this, Login.class);
                     startActivity(intent);
+                    finish();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -175,6 +201,7 @@ public class UpcomingEvent extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEvent.this, Notify.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -191,11 +218,13 @@ public class UpcomingEvent extends AppCompatActivity {
                         if (id == R.id.property) {
                             Intent intent = new Intent(UpcomingEvent.this, Home.class);
                             startActivity(intent);
+                            finish();
                         }
 
                         if (id == R.id.groupteam) {
                             Intent intent2 = new Intent(UpcomingEvent.this, GroupTeam.class);
                             startActivity(intent2);
+                            finish();
                         }
 
                         if (id == R.id.upcoming) {
@@ -205,11 +234,13 @@ public class UpcomingEvent extends AppCompatActivity {
                         if (id == R.id.setting) {
                             Intent intent3 = new Intent(UpcomingEvent.this, SettingPage.class);
                             startActivity(intent3);
+                            finish();
                         }
 
                         if (id == R.id.agents) {
                             Intent intent1 = new Intent(UpcomingEvent.this, Agent.class);
                             startActivity(intent1);
+                            finish();
                         }
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         return true;

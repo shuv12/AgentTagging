@@ -16,10 +16,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
-            android:theme="@style/AppTheme.noTheme"/>
+            android:theme="@style/AppTheme.noTheme" />
         <activity
             android:name=".Home"
-            android:theme="@style/AppTheme.noTheme"/>
+            android:theme="@style/AppTheme.noTheme" />
         <activity
             android:name=".Agent"
             android:theme="@style/AppTheme.noTheme" />
@@ -62,8 +62,20 @@
         <activity
             android:name=".DisplayUploadingPhoto"
             android:theme="@style/AppTheme.noTheme" />
-        <activity android:name=".SettingPage"
-            android:theme="@style/AppTheme.noTheme"></activity>
+        <activity
+            android:name=".SettingPage"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity
+            android:name=".MessagePage"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity
+            android:name=".FullscreenView"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity
+            android:name=".SearchAgent"
+            android:theme="@style/AppTheme.noTheme" />
+        <activity android:name=".SearchProperty"
+            android:theme="@style/AppTheme.noTheme"/>
     </application>
 
 </manifest>

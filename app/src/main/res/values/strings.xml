@@ -6,6 +6,7 @@
     <string name="password">PASSWORD</string>
     <string name="passwordRem">Remember Password</string>
     <string name="login">Login</string>
+    <string name="msg">Messages</string>
     <string name="passwordForget">Forget Password?</string>
     <string name="property_headline">55 Strathmore Avenue</string>
     <string name="property_price">S$ 1,545,000/mo</string>
@@ -143,7 +144,7 @@
     <string name="input_prefill"></string>
     <string name="requestsentitle">Request for the tag is successfully sent.</string>
     <string name="requestcontent">You will be notified once approved.</string>
-    <string name="searchint">Search property</string>
+    <string name="searchint">Search Agents</string>
     <string name="titleagenttagged">AGENTS TAGGED</string>
     <string name="taptoaddpv">Tap to add photos/videos</string>
     <string name="setting">Settings</string>
@@ -153,6 +154,16 @@
     <string name="logout">Log Out</string>
     <string name="delete">DELETE</string>
     <string name="update">UPDATE</string>
+    <string name="enteremail">Enter Email Address</string>
+    <string name="agree">SEND</string>
+    <string name="disagree">CANCEL</string>
+    <string name="checkemail">Please check your email for new password</string>
+    <string name="ok">OK</string>
+    <string name="emailhint">Your Email Address</string>
+    <string name="a"></string>
+    <string name="noti">Notification</string>
+    <string name="message">Message</string>
+    <string name="searchresult">Search Result</string>
 
 
     <array name="tagged_agents">

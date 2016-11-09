@@ -43,7 +43,7 @@
                         android:id="@+id/backbtnfromagent"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_margin="16dp"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
                         android:src="@drawable/ic_arrow_back_white_36dp" />
 
                     <TextView
