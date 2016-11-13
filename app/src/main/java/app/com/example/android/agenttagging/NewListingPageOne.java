@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -21,14 +22,15 @@ public class NewListingPageOne extends AppCompatActivity {
     private CheckableLinearLayout lhbd, lcondo, llanded, lbanksale;
     private Button toPageTwo;
     private ImageView backBtn1;
-    private TextView textnob, taggingLimit;
+    private TextView textnob, taggingLimit, subTypeHDB, subTypeCondo, subTypeLaned;
     private RadioGroup purpose;
     private RadioButton isForRent,isForSale;
-    private EditText newName,newDistrict,newBlockNo,newStreetName,newPostCode,leftUnit,rightUnit,newAskingPrice,BankValue,floorArea,addDescription;
+    private EditText newName,newDistrict,newBlockNo,newStreetName,newPostCode,leftUnit,rightUnit,newAskingPrice,BankValue,floorArea,landArea,addDescription;
     private String type = null;
     private String tglimit,nobed,pur,purr;
     private Spinner areaUnit;
     private String text;
+    private LinearLayout onlyLanded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class NewListingPageOne extends AppCompatActivity {
         setContentView(R.layout.activity_new_listing_page_one);
 
 
+        subTypeCondo = (TextView) findViewById(R.id.subtypecondo);
+        subTypeHDB = (TextView) findViewById(R.id.subtypehdb);
+        subTypeLaned = (TextView) findViewById(R.id.subtypelanded);
 
         newName = (EditText) findViewById(R.id.new_name);
         newDistrict = (EditText) findViewById(R.id.new_district);
@@ -47,9 +52,11 @@ public class NewListingPageOne extends AppCompatActivity {
         newAskingPrice = (EditText) findViewById(R.id.new_ap);
         BankValue = (EditText) findViewById(R.id.new_obv);
         floorArea = (EditText) findViewById(R.id.new_fa);
+        landArea = (EditText) findViewById(R.id.new_la);
         addDescription = (EditText) findViewById(R.id.new_addes);
         areaUnit = (Spinner) findViewById(R.id.floorareaunit);
         text = areaUnit.getSelectedItem().toString();
+        onlyLanded = (LinearLayout) findViewById(R.id.onlyinland);
 
 
 
@@ -172,6 +179,29 @@ public class NewListingPageOne extends AppCompatActivity {
                     lcondo.setChecked(false);
                     lbanksale.setChecked(false);
                     type = "Landed";
+
+                    onlyLanded.setVisibility(View.VISIBLE);
+                    subTypeHDB.setVisibility(View.GONE);
+                    subTypeLaned.setVisibility(View.VISIBLE);
+                    subTypeCondo.setVisibility(View.GONE);
+
+                    subTypeLaned.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new MaterialDialog.Builder(NewListingPageOne.this)
+                                    .title(R.string.lst)
+                                    .items(R.array.landedsubtypearray)
+                                    .itemsCallback(new MaterialDialog.ListCallback() {
+                                        @Override
+                                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                            String subLanded = getResources().getString(R.string.lst) + " : " +"<b>" + text + "</b>";
+                                            subTypeLaned.setText(Html.fromHtml(subLanded));
+                                            //  furnishedValue = text.toString();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    });
                 }
             }
         });
@@ -184,6 +214,30 @@ public class NewListingPageOne extends AppCompatActivity {
                     llanded.setChecked(false);
                     lbanksale.setChecked(false);
                     type = "Condo";
+
+
+                    onlyLanded.setVisibility(View.GONE);
+                    subTypeHDB.setVisibility(View.GONE);
+                    subTypeLaned.setVisibility(View.GONE);
+                    subTypeCondo.setVisibility(View.VISIBLE);
+
+                    subTypeCondo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new MaterialDialog.Builder(NewListingPageOne.this)
+                                    .title(R.string.cst)
+                                    .items(R.array.condosubtypearray)
+                                    .itemsCallback(new MaterialDialog.ListCallback() {
+                                        @Override
+                                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                            String subCondo = getResources().getString(R.string.cst) + " : " +"<b>" + text + "</b>";
+                                            subTypeCondo.setText(Html.fromHtml(subCondo));
+                                            //  furnishedValue = text.toString();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    });
                 }
             }
         });
@@ -196,6 +250,29 @@ public class NewListingPageOne extends AppCompatActivity {
                     lcondo.setChecked(false);
                     lbanksale.setChecked(false);
                     type = "HDB";
+
+                    onlyLanded.setVisibility(View.GONE);
+                    subTypeHDB.setVisibility(View.VISIBLE);
+                    subTypeLaned.setVisibility(View.GONE);
+                    subTypeCondo.setVisibility(View.GONE);
+
+                    subTypeHDB.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new MaterialDialog.Builder(NewListingPageOne.this)
+                                    .title(R.string.hdbst)
+                                    .items(R.array.hdbsubtypearray)
+                                    .itemsCallback(new MaterialDialog.ListCallback() {
+                                        @Override
+                                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                            String subHBD = getResources().getString(R.string.hdbst) + " : " +"<b>" + text + "</b>";
+                                            subTypeHDB.setText(Html.fromHtml(subHBD));
+                                          //  furnishedValue = text.toString();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    });
                 }
             }
         });
@@ -208,6 +285,11 @@ public class NewListingPageOne extends AppCompatActivity {
                     lcondo.setChecked(false);
                     llanded.setChecked(false);
                     type = "Bank Sale";
+
+                    onlyLanded.setVisibility(View.GONE);
+                    subTypeHDB.setVisibility(View.GONE);
+                    subTypeLaned.setVisibility(View.GONE);
+                    subTypeCondo.setVisibility(View.GONE);
                 }
             }
         });

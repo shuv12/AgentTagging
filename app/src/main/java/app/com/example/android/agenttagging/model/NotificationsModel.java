@@ -6,13 +6,22 @@ import java.io.Serializable;
  * Created by shuvam on 08-09-2016.
  */
 public class NotificationsModel implements Serializable {
-    private static final long serialVersionUID = 1;
     private String notiPic;
-    private String notiUser;
-    private String notiproType;
+    private String notiText;
     private String notiforType;
-    private String notiproadd;
+    private String notiproid;
+    private String notiID;
     private String notiStatus;
+    private String accessToken;
+
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
 
     public String getNotiPic() {
@@ -23,20 +32,12 @@ public class NotificationsModel implements Serializable {
         this.notiPic = notiPic;
     }
 
-    public String getNotiUser() {
-        return notiUser;
+    public String getNotiText() {
+        return notiText;
     }
 
-    public void setNotiUser(String notiUser) {
-        this.notiUser = notiUser;
-    }
-
-    public String getNotiproType() {
-        return notiproType;
-    }
-
-    public void setNotiproType(String notiproType) {
-        this.notiproType = notiproType;
+    public void setNotiText(String notiText) {
+        this.notiText = notiText;
     }
 
     public String getNotiforType() {
@@ -55,12 +56,20 @@ public class NotificationsModel implements Serializable {
         this.notiStatus = notiStatus;
     }
 
-    public String getNotiproadd() {
-        return notiproadd;
+    public String getNotiproid() {
+        return notiproid;
     }
 
-    public void setNotiproadd(String notiproadd) {
-        this.notiproadd = notiproadd;
+    public void setNotiproid(String notiproid) {
+        this.notiproid = notiproid;
+    }
+
+    public String getNotiID() {
+        return notiID;
+    }
+
+    public void setNotiID(String notiID) {
+        this.notiID = notiID;
     }
 }
 

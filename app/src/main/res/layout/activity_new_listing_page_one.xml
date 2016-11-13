@@ -285,6 +285,42 @@
                             android:textColor="@color/textmain"
                             android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/subtypehdb"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextboxview"
+                            android:padding="@dimen/text_margin"
+                            android:text="@string/hdbst"
+                            android:layout_marginBottom="@dimen/card_margin"
+                            android:textColor="@color/textmain"
+                            android:textSize="14sp"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:id="@+id/subtypecondo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextboxview"
+                            android:padding="@dimen/text_margin"
+                            android:text="@string/cst"
+                            android:layout_marginBottom="@dimen/card_margin"
+                            android:textColor="@color/textmain"
+                            android:textSize="14sp"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:id="@+id/subtypelanded"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextboxview"
+                            android:padding="@dimen/text_margin"
+                            android:text="@string/lst"
+                            android:layout_marginBottom="@dimen/card_margin"
+                            android:textColor="@color/textmain"
+                            android:textSize="14sp"
+                            android:visibility="gone"/>
+
                         <EditText
                             android:id="@+id/new_name"
                             android:layout_width="match_parent"
@@ -457,6 +493,38 @@
 
                             <Spinner
                                 android:id="@+id/floorareaunit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:entries="@array/unit_area" />
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            android:id="@+id/onlyinland">
+
+                            <EditText
+                                android:id="@+id/new_la"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/card_margin"
+                                android:layout_weight="1"
+                                android:background="@drawable/edittextboxview"
+                                android:hint="@string/la"
+                                android:inputType="number"
+                                android:padding="@dimen/text_margin"
+                                android:textColorHint="@color/textmain"
+                                android:textSize="14sp" />
+
+                            <Spinner
+                                android:id="@+id/landareaunit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"

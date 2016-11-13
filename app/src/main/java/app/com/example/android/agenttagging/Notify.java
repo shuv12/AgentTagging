@@ -38,6 +38,8 @@ public class Notify extends AppCompatActivity {
     private String loggedUserName;
     private String loggedUserPic;
 
+
+
     private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
     public static final String ISLOGGED = "islogged";
     public static final String LOGGEDUSERNAME = "loggedusername";

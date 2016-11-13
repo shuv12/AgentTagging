@@ -75,6 +75,9 @@ public class Home extends AppCompatActivity {
     private RadioGroup purpose;
     private String getPurpose;
 
+
+    private JSONArray typeSearchArray;
+
     private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
 
 
@@ -189,11 +192,13 @@ public class Home extends AppCompatActivity {
         quickSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (HBD.isChecked()) typeValue = "HDB";
-                else if (BankSale.isChecked()) typeValue = "Banksale";
-                else if (Condo.isChecked()) typeValue = "Condo";
-                else if (Landed.isChecked()) typeValue = "Landed";
-                else typeValue = "";
+                typeSearchArray = new JSONArray();
+                if (HBD.isChecked()) typeSearchArray.put("HDB");
+                if (BankSale.isChecked()) typeSearchArray.put("BankSale");
+                if (Condo.isChecked()) typeSearchArray.put("Condo");
+                if (Landed.isChecked()) typeSearchArray.put("Landed");
+
+                Log.v("TypeSearchArray",typeSearchArray.toString());
 
                 locationValue =  mSearchView.getQuery().toString();
 
@@ -211,7 +216,7 @@ public class Home extends AppCompatActivity {
                             .appendPath("searchApi")
                             .appendQueryParameter(LOCATION, locationValue)
                             .appendQueryParameter(PURPOSE, purposeValue)
-                            .appendQueryParameter(TYPE, typeValue);
+                            .appendQueryParameter(TYPE, typeSearchArray.toString());
                     String url = builder.build().toString();
 
                     Log.v("sendQuery",url);

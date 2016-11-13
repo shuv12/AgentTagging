@@ -62,6 +62,7 @@
     <string name="fpi">Floor Plan Info</string>
     <string name="nob">No. of Bedrooms</string>
     <string name="fa">Floor Area</string>
+    <string name="la">Land Area</string>
     <string name="sqft">sqft</string>
     <string name="addes">Add Description</string>
     <string name="next">Next</string>
@@ -164,6 +165,9 @@
     <string name="noti">Notification</string>
     <string name="message">Message</string>
     <string name="searchresult">Search Result</string>
+    <string name="hdbst">HBD Sub Type</string>
+    <string name="cst">Condo Sub Type</string>
+    <string name="lst">Landed Sub Type</string>
 
 
     <array name="tagged_agents">
@@ -184,6 +188,57 @@
         <item>sq ft.</item>
         <item>sq mt.</item>
     </string-array>
+    
+    
+    
+    
+    <array name="hdbsubtypearray">
+        <item>2I (Improved)</item>
+        <item>2S (standard)</item>
+        <item>3A</item>
+        <item>3NG (New Generation)</item>
+        <item>3I (Improved)</item>
+        <item>3S (Simplified)</item>
+        <item>3STD (Standard)</item>
+        <item>4A</item>
+        <item>4NG (New Generation)</item>
+        <item>4I (Improved)</item>
+        <item>4STD</item>
+        <item>4S</item>
+        <item>5A</item>
+        <item>5I</item>
+        <item>5S</item>
+        <item>Jumbo</item>
+        <item>EA (Exec Apartment)</item>
+        <item>EM (Exec Maisonette)</item>
+        <item>Terrace</item>
+        <item>Premium Apartment</item>
+        <item>Adjoined Flat</item>
+        <item>Model A Maisonette</item>
+    </array>
+    
+    
+    <array name="condosubtypearray">
+        <item>Terraced House</item>
+        <item>Detached House</item>
+        <item>Semi Detached House</item>
+        <item>Corner Terrace</item>
+        <item>Bungalow House</item>
+    </array>
+
+    <array name="landedsubtypearray">
+        <item>Terraced House</item>
+        <item>Detached House</item>
+        <item>Semi Detached House</item>
+        <item>Corner Terrace</item>
+        <item>Bungalow House</item>
+        <item>Good Class House</item>
+        <item>Shop House</item>
+        <item>Land Only</item>
+        <item>Town House</item>
+        <item>Conservation House</item>
+        <item>Cluster House</item>
+    </array>
 
     <array name="furnishedarray">
         <item>Unfurnished</item>

@@ -3,6 +3,7 @@ package app.com.example.android.agenttagging;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -48,6 +49,8 @@ public class FrontPage extends AppCompatActivity {
     private ImageView alwaysHome1,alwaysHome2;
     private LinearLayout frontHBD,frontCondo,frontLanded,frontBankSale;
    // private LinearLayout bannerBk;
+
+    public static final String LOCATION = "location";
     private ImageView bannerDisplay;
 
     private View header, headerlayout;
@@ -67,6 +70,8 @@ public class FrontPage extends AppCompatActivity {
     private int imageCount = 0;
     private android.os.Handler handler = new android.os.Handler();
 
+
+    private String locationSearchString;
 
     private static final String GETLOGGEDUSERPICURL = "http://www.realthree60.com/dev/apis/assets/users/";
     public static final String ISLOGGED = "islogged";
@@ -164,11 +169,45 @@ public class FrontPage extends AppCompatActivity {
 
 
         searchView = (SearchView) findViewById(R.id.searchview);
-        searchView.setQueryHint("Search by agent, property, location etc");
+        searchView.setQueryHint("Search property by name");
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchView.setIconified(false);
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                locationSearchString = searchView.getQuery().toString();
+                try {
+                    Uri.Builder builder = new Uri.Builder();
+                    builder.scheme("http")
+                            .authority("www.realthree60.com")
+                            .appendPath("dev")
+                            .appendPath("apis")
+                            .appendPath("searchApi")
+                            .appendQueryParameter(LOCATION, locationSearchString);
+                            //.appendQueryParameter(PURPOSE, purposeValue)
+                            //.appendQueryParameter(TYPE, typeSearchArray.toString());
+                    String url = builder.build().toString();
+
+                    Log.v("sendQuery",url);
+
+                    Intent intent = new Intent(FrontPage.this,SearchProperty.class);
+                    intent.putExtra("URL",url);
+                    startActivity(intent);
+
+                } catch (Exception e) {
+                    Log.v("Error in search",e.getMessage(),e);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
             }
         });
 
